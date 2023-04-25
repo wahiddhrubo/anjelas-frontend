@@ -11,7 +11,7 @@
 
 @font-face {
   font-family: "Gilroy";
-  src: url("/fonts/Gilroy/Gilroy-ExtraBold.otf");
+  src: url("/fonts/Gilroy/Gilroy-Bold.ttf");
   font-weight: bold;
   font-style: normal;
 }
@@ -46,4 +46,22 @@ body {
 .ReactModalPortal {
   z-index: 100;
   position: relative;
+}
+
+.numSlider {
+  margin: 25px 0px;
+
+  height: 4px;
+}
+.numSlider .range-slider__range {
+  background-color: #fe7502;
+}
+.numSlider .range-slider__thumb {
+  background-color: #fe7502;
+  height: 16px;
+  width: 4px;
+  border-radius: 0;
+}
+.numSlider .range-slider__thumb:hover {
+  width: 8px;
 }
