@@ -1,14 +1,13 @@
-import styles from "./Slider.module.css";
 import Image from "next/image";
 import Slider from "react-slick";
-export default function SliderComp({ productGallery }) {
+export default function SliderComp({ gallery }) {
   const settings = {
     customPaging: function (i) {
       return (
         <a className="mb-5 h-[100px] w-[100px]">
           <Image
-            loader={() => productGallery[i].url}
-            src={productGallery[i].url}
+            loader={() => gallery[i].url}
+            src={gallery[i].url}
             width={100}
             height={100}
             className="rounded-md w-full h-full"
@@ -17,11 +16,12 @@ export default function SliderComp({ productGallery }) {
       );
     },
     dots: true,
-    dotsClass: "w-fit absolute top-0 bottom-0 my-auto h-fit cursor-pointer",
+    dotsClass:
+      "w-fit absolute inset-x-0 mx-auto bottom-[-120px] h-fit cursor-pointer",
     appendDots: (dots) => {
       return (
         <div>
-          <ul style={{ listStyle: "none" }}>
+          <ul className=" flex list-none gap-2">
             {dots.map((item, index) => {
               return (
                 <li key={index} className="mb-5 w-[100px] h-[100px] ">
@@ -41,17 +41,11 @@ export default function SliderComp({ productGallery }) {
   };
 
   return (
-    <div className="w-[40%] relative">
+    <div className="w-[45%] relative">
       <Slider {...settings}>
-        {productGallery.map((i, index) => (
-          <div className={styles.imgDiv} key={i._id}>
-            <Image
-              src={i.url}
-              loader={() => i.url}
-              width={500}
-              height={500}
-              className={styles.img}
-            />
+        {gallery.map((i, index) => (
+          <div key={i._id}>
+            <Image src={i.url} loader={() => i.url} width={600} height={600} />
           </div>
         ))}
       </Slider>

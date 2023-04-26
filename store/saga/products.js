@@ -2,6 +2,11 @@ import { PRODUCTS_FAIL, PRODUCTS_SUCCESS } from "./actions";
 import { put, call } from "redux-saga/effects";
 import { axiosCall } from "./call";
 import { productSuccess, productFail } from "../slice/products";
+import {
+  singleProductSuccess,
+  singleproductFail,
+} from "../slice/singleProduct";
+
 import { data } from "autoprefixer";
 export function* fetchProducts(action) {
   const {
@@ -41,5 +46,18 @@ export function* fetchProducts(action) {
   } catch (error) {
     console.log(error);
     yield put(productFail(error));
+  }
+}
+export function* fetchSingleProducts(action) {
+  const { id } = action;
+  const baseUrl = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
+
+  try {
+    const result = yield call(() => axiosCall({ url: baseUrl, method: "get" }));
+    console.log(result);
+    yield put(singleProductSuccess(result.data.drinks[0]));
+  } catch (error) {
+    console.log(error);
+    yield put(singleproductFail(error));
   }
 }

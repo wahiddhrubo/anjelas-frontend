@@ -4,6 +4,7 @@ import { AiTwotoneStar } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCartNonUser } from "../../store/slice/cart";
 import Link from "next/link";
+import Button from "./buttons";
 
 export default function ProductCard({
   img,
@@ -26,9 +27,8 @@ export default function ProductCard({
     );
   };
   const checkCart = (id) => {
-    const r = cart.filter((c) => c.id === id);
-    console.log(r[0]);
-    return r[0];
+    const r = cart?.filter((c) => c.id === id);
+    return r ? r[0] : r;
   };
   const decimalStr = (num) => [Math.round(num), 5 - Math.round(num)];
   const [intPart, remainingPart] = decimalStr(review);
@@ -37,15 +37,17 @@ export default function ProductCard({
     <div className="lg:w-[350px] p-2  my-[5%] text-center ">
       <div className="w-fit mx-auto relative group/div ">
         <div className="absolute w-[80%] h-[80%] grid place-items-center inset-0 rounded-[5px] transition-all origin-top scale-y-0 group-hover/div:scale-y-100 m-auto z-10 bg-white">
-          <div
-            onClick={addToCartHandler}
-            className="px-[45px] cursor-pointer group/button overflow-hidden relative font-semibold border-2 border-primary  py-[12px] bg-transparent text-primary "
-          >
-            <div className="absolute transition-all duration-150 h-full scale-y-0 group-hover/button:scale-y-100 top-0 rotate-45 origin-top left-8 bg-primary w-[1.5px]"></div>
-            <div className="absolute transition-all duration-150 h-full scale-y-0 group-hover/button:scale-y-100  rotate-45 origin-bottom right-8 bg-primary w-[1.5px]"></div>
-
-            {checkCart(id) ? "View Cart" : "Add To Cart"}
-          </div>
+          {checkCart(id) ? (
+            <Link href="/cart">
+              <Button type="primary" onClick={addToCartHandler}>
+                View Cart
+              </Button>
+            </Link>
+          ) : (
+            <Button type="primary" onClick={addToCartHandler}>
+              Add To Cart
+            </Button>
+          )}
         </div>
         <Image
           loader={() => img}

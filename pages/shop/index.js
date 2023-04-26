@@ -30,6 +30,7 @@ export default function Products() {
   ];
   const dispatch = useDispatch();
   const { items } = useSelector((state) => state.products);
+  console.log(items);
   useEffect(() => {
     dispatch({ type: "GET_PRODUCTS_LOADING" });
   }, [dispatch]);

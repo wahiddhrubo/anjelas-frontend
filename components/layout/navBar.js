@@ -2,11 +2,14 @@ import { SignUpBtn } from "../layout/button.js";
 import { MdShoppingCart } from "react-icons/md";
 import { useState } from "react";
 import SignUpModal from "../login/signUpModal.js";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Cart from "../ui/cart.js";
 import Link from "next/link.js";
+import { useEffect } from "react";
+import { getPriceAndQuantity } from "../../store/slice/cart.js";
 
 export default function Navbar({ menu }) {
+  const dispatch = useDispatch();
   const [isOpen, setIsopen] = useState(false);
   const styles = {
     wrapper:
@@ -18,6 +21,9 @@ export default function Navbar({ menu }) {
     icon: "w-[42px] h-[42px] text-black",
   };
   const { items, quantity } = useSelector((state) => state.cart);
+  useEffect(() => {
+    dispatch(getPriceAndQuantity());
+  }, [items]);
   console.log(quantity);
   const SignUpBtnHandler = () => {
     setIsopen(true);
