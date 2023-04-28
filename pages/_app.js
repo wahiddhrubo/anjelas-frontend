@@ -3,8 +3,10 @@ import "../styles/globals.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Navbar from "../components/layout/navBar.js";
-import { Provider } from "react-redux";
+import { Provider, useDispatch } from "react-redux";
 import store from "../store/store";
+import { useEffect } from "react";
+import { LOAD_USER } from "../store/saga/actions";
 
 function MyApp({ Component, pageProps }) {
   const navMenu = [
@@ -14,6 +16,7 @@ function MyApp({ Component, pageProps }) {
     { text: "Catering", link: "/catering" },
     { text: "About Us", link: "/about-Us" },
   ];
+
   return (
     <Provider store={store}>
       <div className="px-[100px] text-body-md static">

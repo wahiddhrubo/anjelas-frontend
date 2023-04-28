@@ -42,6 +42,7 @@ export default function Filter({ categories, featuredProducts }) {
 
         {featuredProducts?.map((fea) => (
           <ListProduct
+            key={fea.idDrink}
             name={fea.strDrink}
             price={15}
             review={4.8}

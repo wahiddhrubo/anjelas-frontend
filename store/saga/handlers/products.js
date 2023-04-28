@@ -1,11 +1,11 @@
-import { PRODUCTS_FAIL, PRODUCTS_SUCCESS } from "./actions";
+import { PRODUCTS_FAIL, PRODUCTS_SUCCESS } from "../actions";
 import { put, call } from "redux-saga/effects";
-import { axiosCall } from "./call";
-import { productSuccess, productFail } from "../slice/products";
+import { axiosCall } from "../call";
+import { productSuccess, productFail } from "../../slice/products";
 import {
   singleProductSuccess,
   singleproductFail,
-} from "../slice/singleProduct";
+} from "../../slice/singleProduct";
 
 import { data } from "autoprefixer";
 export function* fetchProducts(action) {

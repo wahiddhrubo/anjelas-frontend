@@ -43,6 +43,7 @@ export default function Products() {
         </div>
         {items?.slice(1, 10).map((i) => (
           <ProductCard
+            key={i.idDrink}
             name={i.strDrink}
             id={i.idDrink}
             review={4.2}

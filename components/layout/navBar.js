@@ -7,9 +7,12 @@ import Cart from "../ui/cart.js";
 import Link from "next/link.js";
 import { useEffect } from "react";
 import { getPriceAndQuantity } from "../../store/slice/cart.js";
-
+import { LOAD_USER } from "../../store/saga/actions.js";
 export default function Navbar({ menu }) {
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch({ type: LOAD_USER });
+  }, [dispatch]);
   const [isOpen, setIsopen] = useState(false);
   const styles = {
     wrapper:
@@ -21,6 +24,7 @@ export default function Navbar({ menu }) {
     icon: "w-[42px] h-[42px] text-black",
   };
   const { items, quantity } = useSelector((state) => state.cart);
+  const { isAuthenticated } = useSelector((state) => state.user);
   useEffect(() => {
     dispatch(getPriceAndQuantity());
   }, [items]);
@@ -39,10 +43,8 @@ export default function Navbar({ menu }) {
           <div className={styles.menu}>
             <div className={styles.menuItems}>
               {menu.map((m, index) => (
-                <Link href={m.link}>
-                  <div key={index} className={styles.menuItm}>
-                    {m.text}
-                  </div>
+                <Link key={index} href={m.link}>
+                  <div className={styles.menuItm}>{m.text}</div>
                 </Link>
               ))}
             </div>
@@ -53,7 +55,9 @@ export default function Navbar({ menu }) {
                 {quantity ? quantity : 0}
               </div>
             </div>
-            <SignUpBtn text="Sign In" onClick={SignUpBtnHandler} />
+            {!isAuthenticated && (
+              <SignUpBtn text="Sign In" onClick={SignUpBtnHandler} />
+            )}
           </div>
         </div>
       )}
