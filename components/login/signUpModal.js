@@ -15,10 +15,7 @@ import { useEffect } from "react";
 export default function SignUpModal({ isOpen, setIsopen }) {
   const [formState, setFormState] = useState("login");
 
-  const { isAuthenticated } = useSelector((state) => state.user);
-  useEffect(() => {
-    setIsopen(!isAuthenticated);
-  }, [isAuthenticated]);
+  const { user } = useSelector((state) => state.user);
 
   const styles = {
     wrapper:
@@ -33,38 +30,42 @@ export default function SignUpModal({ isOpen, setIsopen }) {
     btnDiv: "space-y-[16px] text-center mt-[40px]",
   };
   return (
-    <Modal
-      isOpen={isOpen}
-      className="border-0 absolute h-screen flex flex-wrap content-center inset-0 m-auto bg-[#00000099] "
-    >
-      <div className={styles.wrapper}>
-        <AiOutlineClose
-          onClick={() => {
-            setIsopen(false);
-          }}
-          className={styles.close}
-        />
-        <div className={styles.imgDiv}>
-          <Image
-            src="/images/login.png"
-            alt=""
-            width={700}
-            height={700}
-            className={styles.img}
-          />
-        </div>
-        {formState === "signUp" ? (
-          <SignUp setFormState={setFormState} />
-        ) : formState === "login" ? (
-          <Login setFormState={setFormState} />
-        ) : formState === "mobileSignIn" ? (
-          <MobileSignIn setFormState={setFormState} />
-        ) : formState === "forgotPassword" ? (
-          <ForgotPassword setFormState={setFormState} />
-        ) : (
-          ""
-        )}
-      </div>
-    </Modal>
+    <>
+      {!user && (
+        <Modal
+          isOpen={isOpen}
+          className="border-0 absolute h-screen flex flex-wrap content-center inset-0 m-auto bg-[#00000099] "
+        >
+          <div className={styles.wrapper}>
+            <AiOutlineClose
+              onClick={() => {
+                setIsopen(false);
+              }}
+              className={styles.close}
+            />
+            <div className={styles.imgDiv}>
+              <Image
+                src="/images/login.png"
+                alt=""
+                width={700}
+                height={700}
+                className={styles.img}
+              />
+            </div>
+            {formState === "signUp" ? (
+              <SignUp setFormState={setFormState} />
+            ) : formState === "login" ? (
+              <Login setFormState={setFormState} />
+            ) : formState === "mobileSignIn" ? (
+              <MobileSignIn setFormState={setFormState} />
+            ) : formState === "forgotPassword" ? (
+              <ForgotPassword setFormState={setFormState} />
+            ) : (
+              ""
+            )}
+          </div>
+        </Modal>
+      )}
+    </>
   );
 }

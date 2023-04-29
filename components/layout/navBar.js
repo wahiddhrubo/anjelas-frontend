@@ -5,14 +5,12 @@ import SignUpModal from "../login/signUpModal.js";
 import { useDispatch, useSelector } from "react-redux";
 import Cart from "../ui/cart.js";
 import Link from "next/link.js";
+import Image from "next/image.js";
 import { useEffect } from "react";
 import { getPriceAndQuantity } from "../../store/slice/cart.js";
-import { LOAD_USER } from "../../store/saga/actions.js";
+import { GET_CART, LOAD_USER, LOGOUT } from "../../store/saga/actions.js";
 export default function Navbar({ menu }) {
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch({ type: LOAD_USER });
-  }, [dispatch]);
   const [isOpen, setIsopen] = useState(false);
   const styles = {
     wrapper:
@@ -28,7 +26,12 @@ export default function Navbar({ menu }) {
   useEffect(() => {
     dispatch(getPriceAndQuantity());
   }, [items]);
-  console.log(quantity);
+  useEffect(() => {
+    dispatch({ type: LOAD_USER });
+  }, [isAuthenticated]);
+  const logoutHandler = () => {
+    dispatch({ type: LOGOUT });
+  };
   const SignUpBtnHandler = () => {
     setIsopen(true);
   };
@@ -39,7 +42,11 @@ export default function Navbar({ menu }) {
         <SignUpModal isOpen={isOpen} setIsopen={setIsopen} />
       ) : (
         <div className={styles.wrapper}>
-          <div className={styles.logo}>Anjelas Kitchen</div>
+          <div className={styles.logo}>
+            <Link href={"/"}>
+              <Image src="/images/logo.svg" width={150} height={80} />
+            </Link>
+          </div>
           <div className={styles.menu}>
             <div className={styles.menuItems}>
               {menu.map((m, index) => (
@@ -48,15 +55,19 @@ export default function Navbar({ menu }) {
                 </Link>
               ))}
             </div>
-            <div className="relative group">
-              <Cart cart={items} />
-              <MdShoppingCart className={styles.icon} />
-              <div className="w-8 h-8 group-hover:scale-0 transition-all duration-300 text-[12px] bottom-[0] right-[-16px] rounded-full font-light grid place-items-center absolute bg-primary text-white ">
-                {quantity ? quantity : 0}
+            <Link href={"/cart"}>
+              <div className="relative group">
+                <Cart cart={items} />
+                <MdShoppingCart className={styles.icon} />
+                <div className="w-8 h-8 group-hover:scale-0 transition-all duration-300 text-[12px] bottom-[-8px] right-[-16px] rounded-full font-light grid place-items-center absolute bg-primary text-white ">
+                  {quantity ? quantity : 0}
+                </div>
               </div>
-            </div>
-            {!isAuthenticated && (
+            </Link>
+            {!isAuthenticated ? (
               <SignUpBtn text="Sign In" onClick={SignUpBtnHandler} />
+            ) : (
+              <SignUpBtn text="Log Out" onClick={logoutHandler} />
             )}
           </div>
         </div>

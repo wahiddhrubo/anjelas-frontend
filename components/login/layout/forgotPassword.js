@@ -51,8 +51,8 @@ export default function ForgotPassword({ setFormState, googleSignIn }) {
           text="Log in or Sign Up With Phone"
           Icon={BsFillTelephoneFill}
         />
-        <div>
-          Have An Account?{" "}
+        <div className="font-semibold">
+          Already Have An Account?{" "}
           <span
             onClick={() => setFormState("login")}
             className=" underline hover:text-primary font-sm font-bold cursor-pointer"

@@ -18,6 +18,9 @@ const cartSlice = createSlice({
     addToCartUser: (state, action) => {
       state.items = [...state.items, ...action.payload.items];
     },
+    updateCart: (state, action) => {
+      state.cart = action.payload.cart;
+    },
     addToCartNonUser: (state, action) => {
       const match = state.items?.findIndex((i) => i.id === action.payload.id);
       if (match >= 0) {
@@ -60,5 +63,6 @@ export const {
   removeFromCartNonUser,
   updateCartNonUser,
   getPriceAndQuantity,
+  updateCart,
 } = cartSlice.actions;
 export default cartSlice.reducer;

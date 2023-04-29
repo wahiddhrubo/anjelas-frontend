@@ -21,7 +21,7 @@ export default function ProductCard({
       addToCartNonUser({
         id,
         item: { name: name, featuredImage: img },
-        pricePerUnit: price,
+        pricePerUnit: price.min,
         quantity: 1,
       })
     );
@@ -60,7 +60,10 @@ export default function ProductCard({
       <div>
         <Link href={`/shop/${id}`}>
           <div className="font-semibold mt-3">{name}</div>
-          <div className="text-primary">৳ {price}</div>
+          <div className="text-primary">
+            ৳{" "}
+            {price.min === price.max ? price.min : `${price.min}-${price.max}`}
+          </div>
 
           <div className="flex  justify-center flex-wrap content-center">
             {[...Array(intPart)].map((i, index) => (

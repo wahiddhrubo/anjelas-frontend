@@ -2,7 +2,7 @@ import React from "react";
 import SliderComp from "../ui/slider";
 import { AiOutlinePieChart } from "react-icons/ai";
 import { ImSpoonKnife } from "react-icons/im";
-import { IconsDiv } from "../icons";
+import { IconsDiv } from "../../lib/constants";
 import { useState } from "react";
 import { addToCartNonUser } from "../../store/slice/cart";
 import { useDispatch } from "react-redux";
@@ -17,27 +17,32 @@ export default function Hero({
   price,
   stock,
   category,
+  skus,
+  setSku,
+  sku,
 }) {
   const dispatch = useDispatch();
+
   const sliderGallery = [featuredImg, featuredImg, featuredImg, ...gallery].map(
     (i) => {
       return { url: i, id: i.idDrink };
     }
   );
+
   const [itemNum, setItemNum] = useState(1);
+
   const addToCartHandler = () => {
     dispatch(
       addToCartNonUser({
         id,
         item: { name, featuredImage: featuredImg },
-        pricePerUnit: price,
+        pricePerUnit: sku.price,
         quantity: parseInt(itemNum),
       })
     );
     setItemNum(1);
   };
 
-  console.log(sliderGallery);
   return (
     <div className="flex gap-[68px]">
       <SliderComp gallery={sliderGallery} />
@@ -45,13 +50,30 @@ export default function Hero({
       <div className="w-full">
         <div className="font-semibold text-[48px] ">{name}</div>
         <div className="text-primary my-5 font-semibold text-xl  ">
-          ৳ {price}
+          ৳ {sku.price}
+        </div>
+        <div className="flex gap-10">
+          <div className="my-2 flex flex-wrap gap-5">
+            {skus.map((s) => (
+              <div
+                className="w-[145px] transition-all duration-300 cursor-pointer hover:scale-110 rounded-md border-2 border-primary p-2 text-center text-[16px] font-semibold "
+                key={s}
+                onClick={() => setSku(s)}
+                style={{
+                  background: s.sku === sku.sku ? "#FE7502" : "#fff",
+                  color: s.sku === sku.sku ? "#fff" : "#000",
+                }}
+              >
+                {s.name}
+              </div>
+            ))}
+          </div>
         </div>
         <div className="font-medium my-5 ">{description}</div>
-        <div className="flex py-5 text-[20px] border-[1px] border-primary justify-between w-[100%] ">
-          <div className="px-10 flex flex-wrap gap-2 content-center">
+        <div className="flex py-5 font-semibold text-primary border-[1px] border-primary justify-between w-[100%] ">
+          <div className="px-10  flex flex-wrap gap-2 content-center">
             <AiOutlinePieChart className="my-auto text-primary text-[25px]" />
-            Serves {serving}
+            Serves {sku.serving}
           </div>
           <div className="border-x-2 px-10 flex flex-wrap gap-2 content-center border-primary">
             <ImSpoonKnife className="my-auto text-primary text-[25px]" />

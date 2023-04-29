@@ -7,7 +7,7 @@ import { Provider, useDispatch } from "react-redux";
 import store from "../store/store";
 import { useEffect } from "react";
 import { LOAD_USER } from "../store/saga/actions";
-
+import Head from "next/head";
 function MyApp({ Component, pageProps }) {
   const navMenu = [
     { text: "Packages", link: "/packages" },
@@ -19,6 +19,12 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <Provider store={store}>
+      <Head>
+        <link rel="shortcut icon" href="/favicon.svg" />
+
+        <title>Anjela's Kitchen</title>
+        <meta name="description" content="Home Food Delivery Store" />
+      </Head>
       <div className="px-[100px] text-body-md static">
         <Navbar menu={navMenu} />
         <Component {...pageProps} />

@@ -5,6 +5,7 @@ import {
   loginFail,
   forgotPasswordSuccess,
   loadSuccess,
+  logoutSuccess,
 } from "../../slice/user";
 
 export function* login(action) {
@@ -43,7 +44,7 @@ export function* loadUser(action) {
 }
 export function* logout(action) {
   try {
-    const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/user/logout`;
+    const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/logout`;
     console.log(url);
     const { data } = yield call(() =>
       axiosCredentialsCall({ url, method: "get" })
@@ -118,5 +119,24 @@ export function* resetPassword(action) {
   } catch (error) {
     console.log(error);
     yield put(loginFail(error.response.data.message));
+  }
+}
+
+export function* addLocation(action) {
+  const { floorNo, apartmentNo, streetAddress, area, phone, locType } = action;
+  const data = { floorNo, apartmentNo, streetAddress, area, phone };
+  const slug = locType ? locType : "";
+  try {
+    const fetchUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/user/locations/${slug}`;
+    const result = yield call(() =>
+      axiosCredentialsCall({
+        url: fetchUrl,
+        method: "post",
+        data,
+      })
+    );
+    console.log(result);
+  } catch (error) {
+    console.log(error.response.data.message);
   }
 }

@@ -9,6 +9,8 @@ import {
   LOGIN,
   SINGLE_PRODUCTS_LOADING,
   LOAD_USER,
+  GET_CART,
+  ADD_LOCATION,
 } from "./actions";
 import {
   login,
@@ -17,7 +19,9 @@ import {
   resetPassword,
   register,
   loadUser,
+  addLocation,
 } from "./handlers/user";
+import { fetchCart } from "./handlers/cart";
 
 export default function* rootSaga() {
   yield takeLatest(PRODUCTS_LOADING, fetchProducts);
@@ -28,4 +32,6 @@ export default function* rootSaga() {
   yield takeLatest(RESET_PASSWORD, resetPassword);
   yield takeLatest(REGISTER, register);
   yield takeLatest(LOAD_USER, loadUser);
+  yield takeLatest(GET_CART, fetchCart);
+  yield takeLatest(ADD_LOCATION, addLocation);
 }

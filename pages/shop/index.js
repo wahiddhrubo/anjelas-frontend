@@ -28,6 +28,10 @@ export default function Products() {
     "Groceries",
     "Pitha",
   ];
+  const price = {
+    min: 400,
+    max: 4100,
+  };
   const dispatch = useDispatch();
   const { items } = useSelector((state) => state.products);
   console.log(items);
@@ -47,7 +51,7 @@ export default function Products() {
             name={i.strDrink}
             id={i.idDrink}
             review={4.2}
-            price={450}
+            price={price}
             img={i.strDrinkThumb}
           />
         ))}

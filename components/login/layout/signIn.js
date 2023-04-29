@@ -64,7 +64,7 @@ export default function SignUpModal({ setFormState, googleSignIn }) {
           text="Log in or Sign Up With Phone"
           Icon={BsFillTelephoneFill}
         />
-        <div>
+        <div className="font-semibold">
           Don't Have An Account?{" "}
           <span
             onClick={() => setFormState("signUp")}

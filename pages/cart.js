@@ -107,7 +107,7 @@ export default function Cart() {
           </Button>
         </div>
       </div>
-      {items && (
+      {items && items.length ? (
         <div className="my-20 ">
           <div className="font-semibold text-[48px] leading-relaxed text-primary">
             Cart Totals
@@ -136,12 +136,14 @@ export default function Cart() {
               </td>
             </tr>
           </table>
-          <div className="w-fit ml-auto mt-10">
+          <div className="my-10 w-fit ml-auto ">
             <Link href="/checkout">
               <Button type={"primary"}>Proceed To Checkout</Button>
             </Link>
           </div>
         </div>
+      ) : (
+        ""
       )}
     </div>
   );

@@ -68,7 +68,7 @@ export default function SignUp({ setFormState, googleSignIn }) {
           text="Log in or Sign Up With Phone"
           Icon={BsFillTelephoneFill}
         />
-        <div>
+        <div className="font-semibold">
           Already Have An Account?{" "}
           <span
             onClick={() => setFormState("login")}
