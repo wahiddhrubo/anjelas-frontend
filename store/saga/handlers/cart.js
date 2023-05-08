@@ -8,7 +8,7 @@ export function* fetchCart(action) {
     const { data } = yield call(() =>
       axiosCredentialsCall({ url: fetchUrl, method: "get" })
     );
-    console.log(data);
+    // console.log(data);
     yield put(updateCart(data));
   } catch (error) {
     console.log(error);
@@ -26,9 +26,30 @@ export function* addToCart(action) {
         data: { item: id, pricePerUnit, quantity },
       })
     );
-    console.log(result);
+    // console.log(result);
     yield put(updateCart(result.data));
   } catch (error) {
     console.log(error);
+  }
+}
+export function* multipleAddToCart(action) {
+  const { items } = action;
+  const baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/user/cart`;
+
+  for (let item of items) {
+    const { id, pricePerUnit, quantity } = item;
+    try {
+      const result = yield call(() =>
+        axiosCredentialsCall({
+          url: baseUrl,
+          method: "post",
+          data: { item: id, pricePerUnit, quantity },
+        })
+      );
+      // console.log(result);
+      yield put(updateCart(result.data));
+    } catch (error) {
+      console.log(error);
+    }
   }
 }

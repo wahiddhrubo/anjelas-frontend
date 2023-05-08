@@ -7,23 +7,21 @@ import {
   loadSuccess,
   logoutSuccess,
 } from "../../slice/user";
+import { MULTIPLE_ADD_TO_CART } from "../actions";
 
 export function* login(action) {
   const { email, password } = action;
+  const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/user/login`;
   const { items } = yield select((state) => state.cart);
-  if (items) {
-    items.forEach((i) => {
-      const { id, pricePerUnit, quantity } = i;
-      console.log({ item: id, pricePerUnit, quantity });
-    });
-  }
   try {
-    const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/user/login`;
     console.log(url);
     const { data } = yield call(() =>
       axiosCredentialsCall({ url, method: "post", data: { email, password } })
     );
-    console.log(data);
+    if (items) {
+      yield put({ type: MULTIPLE_ADD_TO_CART, items });
+    }
+
     yield put(loginSuccess(data));
   } catch (error) {
     console.log(error);

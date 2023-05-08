@@ -17,8 +17,8 @@ export default function NumberSlider({
   setMaxValue,
 }) {
   const rangeHandler = (e) => {
-    setMinValue(e[0]);
-    setMaxValue(e[1]);
+    setMinValue(Math.ceil(e[0]));
+    setMaxValue(Math.ceil(e[1]));
   };
   return (
     <RangeSlider

@@ -22,12 +22,10 @@ export default function Hero({
   sku,
 }) {
   const dispatch = useDispatch();
-
-  const sliderGallery = [featuredImg, featuredImg, featuredImg, ...gallery].map(
-    (i) => {
-      return { url: i, id: i.idDrink };
-    }
-  );
+  console.log([featuredImg, ...gallery]);
+  const sliderGallery = [featuredImg, ...gallery].map((i) => {
+    return { url: i.url };
+  });
 
   const [itemNum, setItemNum] = useState(1);
 
@@ -73,7 +71,7 @@ export default function Hero({
         <div className="flex py-5 font-semibold text-primary border-[1px] border-primary justify-between w-[100%] ">
           <div className="px-10  flex flex-wrap gap-2 content-center">
             <AiOutlinePieChart className="my-auto text-primary text-[25px]" />
-            Serves {sku.serving}
+            Serving {sku.serving}
           </div>
           <div className="border-x-2 px-10 flex flex-wrap gap-2 content-center border-primary">
             <ImSpoonKnife className="my-auto text-primary text-[25px]" />
@@ -82,9 +80,9 @@ export default function Hero({
           <div className="px-10 flex flex-wrap gap-2 content-center">
             <IconsDiv
               className="my-auto text-primary text-[25px]"
-              type={category}
+              type={category[0]}
             />
-            {category}
+            {category[0]}
           </div>
         </div>
         <div className="flex gap-5 my-5">

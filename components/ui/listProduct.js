@@ -17,29 +17,33 @@ export default function ListProduct({ img, name, price, review, reviewNo }) {
           src={img}
           width={100}
           height={100}
-          className=""
+          className="w-[100px] h-[100px] object-cover "
         />
       </div>
       <div>
         <div className="font-semibold mt-3">{name}</div>
-        <div className="text-primary">৳ {price}</div>
+        <div className="text-primary">
+          ৳ {price.min === price.max ? price.min : `${price.min}-${price.max}`}
+        </div>
 
-        <div className="flex  flex-wrap content-center">
-          {[...Array(intPart)].map((i, index) => (
-            <AiTwotoneStar
-              key={index}
-              className="text-primary my-auto mx-[2px]"
-            />
-          ))}
-          {remainingPart &&
-            [...Array(remainingPart)].map((i, index) => (
+        {review && (
+          <div className="flex  flex-wrap content-center">
+            {[...Array(intPart)].map((i, index) => (
               <AiTwotoneStar
                 key={index}
-                className=" text-transparent stroke-[60px] stroke-primary my-auto mx-[2px] "
+                className="text-primary my-auto mx-[2px]"
               />
             ))}
-          ({reviewNo})
-        </div>
+            {remainingPart &&
+              [...Array(remainingPart)].map((i, index) => (
+                <AiTwotoneStar
+                  key={index}
+                  className=" text-transparent stroke-[60px] stroke-primary my-auto mx-[2px] "
+                />
+              ))}
+            ({reviewNo})
+          </div>
+        )}
       </div>
     </div>
   );

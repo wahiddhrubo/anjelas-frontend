@@ -10,7 +10,7 @@ export default function SliderComp({ gallery }) {
             src={gallery[i].url}
             width={100}
             height={100}
-            className="rounded-md w-full h-full"
+            className="rounded-md object-cover w-full h-full"
           />
         </a>
       );
@@ -45,7 +45,13 @@ export default function SliderComp({ gallery }) {
       <Slider {...settings}>
         {gallery.map((i, index) => (
           <div key={i._id}>
-            <Image src={i.url} loader={() => i.url} width={600} height={600} />
+            <Image
+              className="w-[600px] h-[600px] object-cover object-center"
+              src={i.url}
+              loader={() => i.url}
+              width={600}
+              height={600}
+            />
           </div>
         ))}
       </Slider>

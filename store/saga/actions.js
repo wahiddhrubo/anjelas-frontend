@@ -7,4 +7,6 @@ export const FORGOT_PASSWORD = "FORGOT_PASSWORD";
 export const REGISTER = "REGISTER";
 export const RESET_PASSWORD = "RESET_PASSWORD";
 export const GET_CART = "GET_CART";
+export const ADD_TO_CART = "ADD_TO_CART";
+export const MULTIPLE_ADD_TO_CART = "MULTIPLE_ADD_TO_CART";
 export const ADD_LOCATION = "ADD_LOCATION";

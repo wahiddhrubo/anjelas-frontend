@@ -11,8 +11,14 @@ const productSlice = createSlice({
     },
     productSuccess: (state, action) => {
       console.log(action);
+      const { items, meta, itemPerPage } = action.payload;
+      const total = meta ? meta.total : 0;
+      const pages = meta ? Math.ceil(meta[0] / itemPerPage) : 0;
+
       state.loading = false;
-      state.items = action.payload.drinks;
+      state.items = items;
+      state.numOfProducts = total;
+      state.pages = pages;
     },
     productFail: (state, action) => {
       console.log(action);

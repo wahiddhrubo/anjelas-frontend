@@ -1,62 +1,64 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ProductCard from "../../components/ui/productCard";
 import Filter from "../../components/products/filter";
+import { useSearchParams, usePathname } from "next/navigation";
+import { useRouter } from "next/router";
 
 export default function Products() {
-  const categories = [
-    "Eid Specials",
-    "Breakfast",
-    "Express",
-    "Favourites!",
-    "Pithas",
-    "Under 250!",
-    "Healthy",
-    "Drinks",
-    "Kebab",
-    "Dessert",
-    "Baked",
-    "Cakes",
-    "Tiffin",
-    "For 1",
-    "Biryani",
-    "Curry",
-    "Platter",
-    "Spicy Foods",
-    "Dawat",
-    "Achar &amp; Sauce",
-    "Groceries",
-    "Pitha",
-  ];
-  const price = {
-    min: 400,
-    max: 4100,
-  };
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const keyword = searchParams.get("keyword");
+  const categories = searchParams.get("categories");
+  const price = searchParams.get("price");
+
+  const setQueryFilter = useCallback(
+    (name, value) => {
+      const params = new URLSearchParams(searchParams);
+      params.set(name, value);
+      router.push(pathname + "?" + params.toString());
+    },
+    [searchParams]
+  );
+
   const dispatch = useDispatch();
   const { items } = useSelector((state) => state.products);
   console.log(items);
   useEffect(() => {
-    dispatch({ type: "GET_PRODUCTS_LOADING" });
-  }, [dispatch]);
+    const prc = price ? price.split("-") : null;
+
+    dispatch({
+      type: "GET_PRODUCTS_LOADING",
+      keyword,
+      categories,
+      minPrice: prc ? prc[0] : null,
+      maxPrice: prc ? prc[1] : null,
+    });
+  }, [dispatch, keyword, categories, price]);
 
   return (
-    <div className="flex mt-20">
+    <div className="flex mt-20 gap-10">
       <div className="flex flex-wrap gap-[5%] gap-y-[5%] w-[68%] ">
         <div className="w-full  font-semibold text-[32px] mb-5">
           Our Collections
         </div>
-        {items?.slice(1, 10).map((i) => (
+        {items?.slice(0, 10).map((i) => (
           <ProductCard
-            key={i.idDrink}
-            name={i.strDrink}
-            id={i.idDrink}
-            review={4.2}
-            price={price}
-            img={i.strDrinkThumb}
+            key={i._id}
+            name={i.name}
+            id={i._id}
+            review={i.review}
+            price={i.price}
+            img={i.featuredImage.url}
           />
         ))}
       </div>
-      <Filter categories={categories} featuredProducts={items?.slice(5, 10)} />
+      <Filter
+        setQueryFilter={setQueryFilter}
+        featuredProducts={items?.slice(5, 10)}
+      />
     </div>
   );
 }

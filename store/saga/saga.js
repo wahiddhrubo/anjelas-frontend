@@ -11,6 +11,8 @@ import {
   LOAD_USER,
   GET_CART,
   ADD_LOCATION,
+  ADD_TO_CART,
+  MULTIPLE_ADD_TO_CART,
 } from "./actions";
 import {
   login,
@@ -21,7 +23,7 @@ import {
   loadUser,
   addLocation,
 } from "./handlers/user";
-import { fetchCart } from "./handlers/cart";
+import { addToCart, fetchCart, multipleAddToCart } from "./handlers/cart";
 
 export default function* rootSaga() {
   yield takeLatest(PRODUCTS_LOADING, fetchProducts);
@@ -34,4 +36,6 @@ export default function* rootSaga() {
   yield takeLatest(LOAD_USER, loadUser);
   yield takeLatest(GET_CART, fetchCart);
   yield takeLatest(ADD_LOCATION, addLocation);
+  yield takeLatest(ADD_TO_CART, addToCart);
+  yield takeLatest(MULTIPLE_ADD_TO_CART, multipleAddToCart);
 }

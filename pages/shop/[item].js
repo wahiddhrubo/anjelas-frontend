@@ -6,45 +6,41 @@ import Hero from "../../components/singleProducts/hero";
 
 function SingleItem() {
   const dispatch = useDispatch();
-  const skus = [
-    {
-      name: "Full",
-      price: 4100,
-      serving: 10,
-      sku: 1,
-    },
-    {
-      name: "Half",
-      price: 400,
-      serving: 2,
-      sku: 2,
-    },
-  ];
-  const [sku, setSku] = useState(skus[0]);
+  const defaultSku = {
+    name: "",
+    price: 0,
+    serving: "0",
+    sku: 0,
+    _id: "0",
+  };
+  const [sku, setSku] = useState(defaultSku);
   const router = useRouter();
   const { item: id } = router.query;
+  console.log(id);
   const { item } = useSelector((state) => state.singleProduct);
   useEffect(() => {
     dispatch({ type: "GET_SINGLE_PRODUCTS_LOADING", id: id });
-  }, []);
+  }, [id]);
+  useEffect(() => {
+    if (item) {
+      setSku(item.skus[0]);
+    }
+  }, [item]);
 
   return (
     <div className="mt-20">
       {item && (
         <Hero
-          featuredImg={item.strDrinkThumb}
-          category={item.strCategory}
-          name={item.strDrink}
-          id={item.idDrink}
-          stock={10}
-          description={
-            item.strInstructions +
-            item.strInstructionsDE +
-            item.strInstructionsES +
-            item.strInstructionsFR +
-            item.strInstructionsIT
-          }
-          skus={skus}
+          key={item._id}
+          name={item.name}
+          id={item._id}
+          review={item.review}
+          gallery={item.gallery}
+          featuredImg={item.featuredImage}
+          category={item.categories}
+          stock={item.stock}
+          description={item.description}
+          skus={item.skus}
           sku={sku}
           setSku={setSku}
         />

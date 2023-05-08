@@ -54,7 +54,7 @@ export default function ProductCard({
           src={img}
           width={350}
           height={350}
-          className=""
+          className="h-[350px] w-[350px] object-cover"
         />
       </div>
       <div>
@@ -65,22 +65,24 @@ export default function ProductCard({
             {price.min === price.max ? price.min : `${price.min}-${price.max}`}
           </div>
 
-          <div className="flex  justify-center flex-wrap content-center">
-            {[...Array(intPart)].map((i, index) => (
-              <AiTwotoneStar
-                key={index}
-                className="text-primary my-auto mx-[2px]"
-              />
-            ))}
-            {remainingPart &&
-              [...Array(remainingPart)].map((i, index) => (
+          {review && (
+            <div className="flex  justify-center flex-wrap content-center">
+              {[...Array(intPart)].map((i, index) => (
                 <AiTwotoneStar
                   key={index}
-                  className=" text-transparent stroke-[60px] stroke-primary my-auto mx-[2px] "
+                  className="text-primary my-auto mx-[2px]"
                 />
               ))}
-            ({reviewNo})
-          </div>
+              {remainingPart &&
+                [...Array(remainingPart)].map((i, index) => (
+                  <AiTwotoneStar
+                    key={index}
+                    className=" text-transparent stroke-[60px] stroke-primary my-auto mx-[2px] "
+                  />
+                ))}
+              ({reviewNo})
+            </div>
+          )}
         </Link>
       </div>
     </div>

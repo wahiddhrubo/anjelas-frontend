@@ -7,7 +7,6 @@ import {
   singleproductFail,
 } from "../../slice/singleProduct";
 
-import { data } from "autoprefixer";
 export function* fetchProducts(action) {
   const {
     keyword,
@@ -21,8 +20,7 @@ export function* fetchProducts(action) {
     tags,
   } = action;
   const itemPerPage = 12;
-  const baseUrl =
-    "https://www.thecocktaildb.com/api/json/v1/1/filter.php?g=Cocktail_glass#";
+  const baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/items`;
   const url = new URL(baseUrl);
   const params = new URLSearchParams(url.search);
   params.set("keyword", keyword || "");
@@ -35,14 +33,21 @@ export function* fetchProducts(action) {
   params.set("minPrice", minPrice || "");
   params.set("maxPrice", maxPrice || "");
   params.set("itemPerPage", itemPerPage);
+  console.log(categories);
 
   try {
     const fetchUrl = `${url}?${params}`;
-    const result = yield call(() =>
+    const { data } = yield call(() =>
       axiosCall({ url: fetchUrl, method: "get" })
     );
+    const { data: items, metadata } = data.items[0];
 
-    yield put(productSuccess(result.data));
+    yield put(
+      productSuccess({
+        items,
+        meta: metadata[0],
+      })
+    );
   } catch (error) {
     console.log(error);
     yield put(productFail(error));
@@ -50,12 +55,12 @@ export function* fetchProducts(action) {
 }
 export function* fetchSingleProducts(action) {
   const { id } = action;
-  const baseUrl = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
+  const baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/items/${id}`;
 
   try {
     const result = yield call(() => axiosCall({ url: baseUrl, method: "get" }));
     console.log(result);
-    yield put(singleProductSuccess(result.data.drinks[0]));
+    yield put(singleProductSuccess(result.data));
   } catch (error) {
     console.log(error);
     yield put(singleproductFail(error));
