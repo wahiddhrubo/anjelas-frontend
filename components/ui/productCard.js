@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToCartNonUser } from "../../store/slice/cart";
 import Link from "next/link";
 import Button from "./buttons";
+import { getCart } from "../../store/selectors";
+import { ADD_TO_CART } from "../../store/saga/actions";
 
 export default function ProductCard({
   img,
@@ -13,28 +15,31 @@ export default function ProductCard({
   review,
   reviewNo,
   id,
+  variant,
 }) {
   const dispatch = useDispatch();
-  const { items: cart } = useSelector((state) => state.cart);
+  const { items: cart } = useSelector(getCart);
+  console.log(cart);
   const addToCartHandler = () => {
-    dispatch(
-      addToCartNonUser({
-        id,
-        item: { name: name, featuredImage: img },
-        pricePerUnit: price.min,
-        quantity: 1,
-      })
-    );
+    dispatch({
+      type: ADD_TO_CART,
+      id,
+      name,
+      featuredImage: img,
+      pricePerUnit: price.min,
+      quantity: 1,
+      variant,
+    });
   };
   const checkCart = (id) => {
-    const r = cart?.filter((c) => c.id === id);
+    const r = cart?.filter((c) => c.id === id || c.item._id === id);
     return r ? r[0] : r;
   };
   const decimalStr = (num) => [Math.round(num), 5 - Math.round(num)];
   const [intPart, remainingPart] = decimalStr(review);
 
   return (
-    <div className="lg:w-[350px] p-2  my-[5%] text-center ">
+    <div className="lg:w-[350px] w-[155px] p-2  my-[5%] text-center ">
       <div className="w-fit mx-auto relative group/div ">
         <div className="absolute w-[80%] h-[80%] grid place-items-center inset-0 rounded-[5px] transition-all origin-top scale-y-0 group-hover/div:scale-y-100 m-auto z-10 bg-white">
           {checkCart(id) ? (
@@ -54,7 +59,7 @@ export default function ProductCard({
           src={img}
           width={350}
           height={350}
-          className="h-[350px] w-[350px] object-cover"
+          className="lg:h-[350px] w-[150px] h-[150px] lg:w-[350px] object-cover"
         />
       </div>
       <div>

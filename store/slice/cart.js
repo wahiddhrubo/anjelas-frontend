@@ -15,17 +15,18 @@ const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    addToCartUser: (state, action) => {
-      state.items = [...state.items, ...action.payload.items];
-    },
     updateCart: (state, action) => {
-      state.cart = action.payload.cart;
+      console.log(action);
+      state.items = action.payload.cart.items;
     },
     addToCartNonUser: (state, action) => {
-      const match = state.items?.findIndex((i) => i.id === action.payload.id);
+      const { id, variant, quantity } = action.payload;
+      const match = state.items?.findIndex(
+        (i) => i.id === id && i.variant === variant
+      );
       if (match >= 0) {
         state.items[match].quantity =
-          state.items[match].quantity + parseInt(action.payload.quantity);
+          state.items[match].quantity + parseInt(quantity);
       } else {
         state.items = state.items
           ? [...state.items, action.payload]
@@ -33,8 +34,10 @@ const cartSlice = createSlice({
       }
     },
     updateCartNonUser: (state, action) => {
-      const { id, quantity } = action.payload;
-      const match = state.items?.findIndex((i) => i.id === id);
+      const { id, quantity, variant } = action.payload;
+      const match = state.items?.findIndex(
+        (i) => i.id === id && i.variant === variant
+      );
       if (quantity > 0) {
         state.items[match].quantity = parseInt(quantity);
       } else {
@@ -42,7 +45,11 @@ const cartSlice = createSlice({
       }
     },
     removeFromCartNonUser: (state, action) => {
-      state.items = state.items.filter((i) => i.id !== action.payload.id);
+      const { id, variant } = action.payload;
+      console.log(variant);
+      state.items = state.items.filter((i) => {
+        return i.id !== id && i.variant !== variant;
+      });
     },
     getPriceAndQuantity: (state, action) => {
       state.quantity = state.items?.reduce(
@@ -59,7 +66,6 @@ const cartSlice = createSlice({
 
 export const {
   addToCartNonUser,
-  addToCartUser,
   removeFromCartNonUser,
   updateCartNonUser,
   getPriceAndQuantity,

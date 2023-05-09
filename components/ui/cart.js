@@ -2,10 +2,11 @@ import React from "react";
 import Image from "next/image";
 import { useDispatch } from "react-redux";
 import { removeFromCartNonUser } from "../../store/slice/cart";
+import { REMOVE_ITEM_FROM_CART } from "../../store/saga/actions";
 export default function Cart({ cart }) {
   const dispatch = useDispatch();
-  const removeHandler = (id) => {
-    dispatch(removeFromCartNonUser({ id: id }));
+  const removeHandler = (id, variant) => {
+    dispatch({ id, variant, type: REMOVE_ITEM_FROM_CART });
   };
   console.log(cart);
   return (
@@ -14,14 +15,14 @@ export default function Cart({ cart }) {
         {cart?.map((c) => (
           <div className="flex relative flex-wrap gap-3 mb-4">
             <Image
-              loader={() => c.item.featuredImage}
-              src={c.item.featuredImage}
+              loader={() => c.item.featuredImage.url || c.item.featuredImage}
+              src={c.item.featuredImage.url || c.item.featuredImage}
               height={50}
               width={50}
             />{" "}
             <div>
               <div
-                onClick={() => removeHandler(c.id)}
+                onClick={() => removeHandler(c.id, c.variant)}
                 className="font-light absolute text-[20px] top-[-10px] cursor-pointer right-10 text-red-500"
               >
                 x

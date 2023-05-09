@@ -39,8 +39,8 @@ export default function Products() {
   }, [dispatch, keyword, categories, price]);
 
   return (
-    <div className="flex mt-20 gap-10">
-      <div className="flex flex-wrap gap-[5%] gap-y-[5%] w-[68%] ">
+    <div className="flex  lg:flex-nowrap flex-wrap justify-center mt-20 gap-10">
+      <div className="flex justify-center flex-wrap gap-[5%] gap-y-[5%] lg:w-[68%] w-full ">
         <div className="w-full  font-semibold text-[32px] mb-5">
           Our Collections
         </div>
@@ -52,6 +52,7 @@ export default function Products() {
             review={i.review}
             price={i.price}
             img={i.featuredImage.url}
+            variant={i.skus[0].name}
           />
         ))}
       </div>

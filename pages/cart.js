@@ -9,6 +9,7 @@ import { useState } from "react";
 import { updateCartNonUser, removeFromCartNonUser } from "../store/slice/cart";
 import Button from "../components/ui/buttons";
 import Link from "next/link";
+import { REMOVE_ITEM_FROM_CART, UPDATE_CART } from "../store/saga/actions";
 export default function Cart() {
   const deliveryFee = 100;
   const { items, price } = useSelector((state) => state.cart);
@@ -18,25 +19,38 @@ export default function Cart() {
 
   const updateCartHandler = () => {
     cartNum.forEach((c) => {
-      dispatch(updateCartNonUser({ id: c.id, quantity: c.quantity }));
+      console.log(c);
+      dispatch({
+        type: UPDATE_CART,
+        id: c.id,
+        quantity: c.quantity,
+        variant: c.variant,
+      });
     });
   };
 
-  const removeItem = (id) => {
-    dispatch(removeFromCartNonUser({ id }));
+  const removeItem = (id, _id, variant) => {
+    dispatch({ type: REMOVE_ITEM_FROM_CART, id: id || _id, variant });
   };
 
-  const changeCart = (id, quantity) => {
-    const match = cartNum.findIndex((c) => c.id === id);
+  const changeCart = (id, quantity, variant) => {
+    const match = cartNum.findIndex(
+      (c) => c.id === id && c.variant === variant
+    );
     if (match >= 0) {
-      console.log("Matched");
       setCartNum((prev) => prev.filter((p) => p.id !== id));
-      setCartNum((prev) => [...prev, { id: id, quantity: parseInt(quantity) }]);
+      setCartNum((prev) => [
+        ...prev,
+        { id: id, variant, quantity: parseInt(quantity) },
+      ]);
     } else {
-      setCartNum((prev) => [...prev, { id: id, quantity: parseInt(quantity) }]);
+      setCartNum((prev) => [
+        ...prev,
+        { id: id, variant, quantity: parseInt(quantity) },
+      ]);
     }
   };
-  console.log(cartNum);
+  console.log(items);
   return (
     <div className="w-[80%] mx-auto">
       <table className="w-full mt-20">
@@ -60,14 +74,14 @@ export default function Cart() {
           <tr className="border-b-2 border-primary ">
             <td className="py-[25px] flex gap-2 ">
               <span
-                onClick={() => removeItem(i.id)}
+                onClick={() => removeItem(i.id, i.item._id, i.variant)}
                 className="my-auto cursor-pointer text-primary "
               >
                 x
               </span>
               <Image
-                loader={() => i.item.featuredImage}
-                src={i.item.featuredImage}
+                loader={() => i.item.featuredImage.url || i.item.featuredImage}
+                src={i.item.featuredImage.url || i.item.featuredImage}
                 width={120}
                 height={120}
               />{" "}
@@ -80,7 +94,7 @@ export default function Cart() {
               <input
                 type="number"
                 defaultValue={i.quantity}
-                onChange={(e) => changeCart(i.id, e.target.value)}
+                onChange={(e) => changeCart(i.id, e.target.value, i.variant)}
                 className="w-[52px] focus-visible:outline-none rounded-[0] mx-auto border-2 p-2 border-primary"
               />
               <div className="absolute inset-y-0 h-fit left-7 my-auto">

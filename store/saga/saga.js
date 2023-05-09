@@ -13,6 +13,9 @@ import {
   ADD_LOCATION,
   ADD_TO_CART,
   MULTIPLE_ADD_TO_CART,
+  UPDATE_CART,
+  MULTIPLE_UPDATE_CART,
+  REMOVE_ITEM_FROM_CART,
 } from "./actions";
 import {
   login,
@@ -23,7 +26,14 @@ import {
   loadUser,
   addLocation,
 } from "./handlers/user";
-import { addToCart, fetchCart, multipleAddToCart } from "./handlers/cart";
+import {
+  addToCart,
+  fetchCart,
+  multipleAddToCart,
+  multipleUpdatesToCart,
+  removeItemFormCart,
+  updateItemsInCart,
+} from "./handlers/cart";
 
 export default function* rootSaga() {
   yield takeLatest(PRODUCTS_LOADING, fetchProducts);
@@ -38,4 +48,7 @@ export default function* rootSaga() {
   yield takeLatest(ADD_LOCATION, addLocation);
   yield takeLatest(ADD_TO_CART, addToCart);
   yield takeLatest(MULTIPLE_ADD_TO_CART, multipleAddToCart);
+  yield takeLatest(UPDATE_CART, updateItemsInCart);
+  yield takeLatest(MULTIPLE_UPDATE_CART, multipleUpdatesToCart);
+  yield takeLatest(REMOVE_ITEM_FROM_CART, removeItemFormCart);
 }

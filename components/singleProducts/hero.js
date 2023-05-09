@@ -6,6 +6,9 @@ import { IconsDiv } from "../../lib/constants";
 import { useState } from "react";
 import { addToCartNonUser } from "../../store/slice/cart";
 import { useDispatch } from "react-redux";
+import Image from "next/image";
+import Button from "../ui/buttons";
+import { ADD_TO_CART } from "../../store/saga/actions";
 
 export default function Hero({
   gallery = [],
@@ -21,33 +24,47 @@ export default function Hero({
   setSku,
   sku,
 }) {
+  const [showMore, setShowMore] = useState();
+  const slicer = showMore ? -1 : 50;
   const dispatch = useDispatch();
   console.log([featuredImg, ...gallery]);
   const sliderGallery = [featuredImg, ...gallery].map((i) => {
     return { url: i.url };
   });
+  console.log(sliderGallery.length);
 
   const [itemNum, setItemNum] = useState(1);
-
+  console.log(description.split(" ").length);
   const addToCartHandler = () => {
-    dispatch(
-      addToCartNonUser({
-        id,
-        item: { name, featuredImage: featuredImg },
-        pricePerUnit: sku.price,
-        quantity: parseInt(itemNum),
-      })
-    );
+    dispatch({
+      type: ADD_TO_CART,
+      id,
+      item: { name, featuredImage: featuredImg },
+      pricePerUnit: sku.price,
+      variant: sku.name,
+      quantity: parseInt(itemNum),
+    });
     setItemNum(1);
   };
 
   return (
-    <div className="flex gap-[68px]">
-      <SliderComp gallery={sliderGallery} />
-
-      <div className="w-full">
-        <div className="font-semibold text-[48px] ">{name}</div>
-        <div className="text-primary my-5 font-semibold text-xl  ">
+    <div className="flex flex-wrap gap-[68px]">
+      {sliderGallery.length > 1 && <SliderComp gallery={sliderGallery} />}
+      {sliderGallery.length === 1 && (
+        <div className="lg:w-[45%] my-auto h-full grid place-items-center ">
+          {" "}
+          <Image
+            loader={() => featuredImg.url}
+            src={featuredImg.url}
+            width={600}
+            height={600}
+            className="w-[450px] h-[450px] object-cover"
+          />{" "}
+        </div>
+      )}
+      <div className="lg:w-[45%]">
+        <div className="font-semibold lg:text-[48px] text-[28px] ">{name}</div>
+        <div className="text-primary lg:my-5 my-2 font-semibold text-xl  ">
           ৳ {sku.price}
         </div>
         <div className="flex gap-10">
@@ -67,17 +84,27 @@ export default function Hero({
             ))}
           </div>
         </div>
-        <div className="font-medium my-5 ">{description}</div>
+        <div className="font-medium leading-6 lg:leading-8 text-[14px] lg:text-[16px] my-5 ">
+          {description.split(" ").slice(0, slicer).join(" ")}{" "}
+          {description.split(" ").length >= 50 && (
+            <span
+              className="text-primary font-semibold cursor-pointer"
+              onClick={() => setShowMore(!showMore)}
+            >
+              {showMore ? "Show Less" : "...Show More"}{" "}
+            </span>
+          )}{" "}
+        </div>
         <div className="flex py-5 font-semibold text-primary border-[1px] border-primary justify-between w-[100%] ">
-          <div className="px-10  flex flex-wrap gap-2 content-center">
+          <div className="lg:px-10 px-2 text-[10px] lg:text-[16px]  flex flex-wrap gap-2 content-center">
             <AiOutlinePieChart className="my-auto text-primary text-[25px]" />
             Serving {sku.serving}
           </div>
-          <div className="border-x-2 px-10 flex flex-wrap gap-2 content-center border-primary">
+          <div className="border-x-2 lg:px-10 px-2 text-[10px] lg:text-[16px] flex flex-wrap gap-2 content-center border-primary">
             <ImSpoonKnife className="my-auto text-primary text-[25px]" />
             Stock {stock}
           </div>
-          <div className="px-10 flex flex-wrap gap-2 content-center">
+          <div className="lg:px-10 px-2 text-[10px] lg:text-[16px] flex flex-wrap gap-2 content-center">
             <IconsDiv
               className="my-auto text-primary text-[25px]"
               type={category[0]}
@@ -91,16 +118,16 @@ export default function Hero({
             onChange={(e) => setItemNum(e.target.value)}
             value={itemNum}
             min={1}
-            className=" focus-visible:outline-none border-2 px-4 w-[12%] border-black"
+            className=" focus-visible:outline-none border-2 px-4 lg:w-[12%] w-[25%]  border-black"
           />
-          <div
+
+          <Button
+            type={"primary"}
+            className="w-full text-center"
             onClick={addToCartHandler}
-            className="px-[45px] cursor-pointer group/button overflow-hidden relative font-semibold border-2 border-primary  py-[12px] bg-transparent text-primary "
           >
-            <div className="absolute transition-all duration-150 h-full scale-y-0 group-hover/button:scale-y-100 top-0 rotate-45 origin-top left-8 bg-primary w-[1.5px]"></div>
-            <div className="absolute transition-all duration-150 h-full scale-y-0 group-hover/button:scale-y-100  rotate-45 origin-bottom right-8 bg-primary w-[1.5px]"></div>
             Add To Cart{" "}
-          </div>
+          </Button>
         </div>
       </div>
     </div>

@@ -25,8 +25,8 @@ function MyApp({ Component, pageProps }) {
         <title>Anjela's Kitchen</title>
         <meta name="description" content="Home Food Delivery Store" />
       </Head>
-      <div className="px-[100px] text-body-md static">
-        <Navbar menu={navMenu} />
+      <Navbar menu={navMenu} />
+      <div className="lg:px-[100px] px-8 text-body-md static">
         <Component {...pageProps} />
       </div>
     </Provider>

@@ -12,7 +12,7 @@ export default function Filter({ setQueryFilter, featuredProducts }) {
   const [showAllCategories, setShowAllCategories] = useState(false);
   const categoriesNo = !showAllCategories ? -8 : 0;
   return (
-    <div className="w-[25%] mt-[7.5%]">
+    <div className="w-[25%] lg:block hidden  mt-[7.5%]">
       <div>
         <div className="flex px-[24px] py-[15px] border-[2px] border-primary ">
           <input

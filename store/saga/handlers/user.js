@@ -7,12 +7,13 @@ import {
   loadSuccess,
   logoutSuccess,
 } from "../../slice/user";
-import { MULTIPLE_ADD_TO_CART } from "../actions";
+import { GET_CART, MULTIPLE_ADD_TO_CART } from "../actions";
+import { getCart } from "../../selectors";
 
 export function* login(action) {
   const { email, password } = action;
   const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/user/login`;
-  const { items } = yield select((state) => state.cart);
+  const { items } = yield select(getCart);
   try {
     console.log(url);
     const { data } = yield call(() =>
@@ -22,6 +23,7 @@ export function* login(action) {
       yield put({ type: MULTIPLE_ADD_TO_CART, items });
     }
 
+    yield put({ type: GET_CART });
     yield put(loginSuccess(data));
   } catch (error) {
     console.log(error);
@@ -35,6 +37,7 @@ export function* loadUser(action) {
     const { data } = yield call(() =>
       axiosCredentialsCall({ url, method: "get" })
     );
+    yield put({ type: GET_CART });
     yield put(loadSuccess(data));
   } catch (error) {
     yield put(loginFail(error.response.data.message));
@@ -55,13 +58,8 @@ export function* logout(action) {
 }
 export function* register(action) {
   const { email, password, username } = action;
-  const { items } = yield select((state) => state.cart);
-  if (items) {
-    items.forEach((i) => {
-      const { id, pricePerUnit, quantity } = i;
-      console.log({ item: id, pricePerUnit, quantity });
-    });
-  }
+  const { items } = yield select(getCart);
+
   try {
     const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/register`;
 
@@ -72,6 +70,10 @@ export function* register(action) {
         data: { email, password, username },
       })
     );
+    if (items) {
+      yield put({ type: MULTIPLE_ADD_TO_CART, items });
+    }
+    yield put({ type: GET_CART });
 
     yield put(loginSuccess(data));
   } catch (error) {
@@ -96,13 +98,8 @@ export function* forgotPassword(action) {
 }
 export function* resetPassword(action) {
   const { confirmPassword, token, password } = action;
-  const { items } = yield select((state) => state.cart);
-  if (items) {
-    items.forEach((i) => {
-      const { id, pricePerUnit, quantity } = i;
-      console.log({ item: id, pricePerUnit, quantity });
-    });
-  }
+  const { items } = yield select(getCart);
+
   try {
     const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/user/recover`;
     console.log(url);
@@ -113,6 +110,10 @@ export function* resetPassword(action) {
         data: { confirmPassword, token, password },
       })
     );
+    if (items) {
+      yield put({ type: MULTIPLE_ADD_TO_CART, items });
+    }
+    yield put({ type: GET_CART });
     yield put(loginSuccess(data));
   } catch (error) {
     console.log(error);
