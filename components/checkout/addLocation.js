@@ -1,27 +1,39 @@
 import React from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import Button from "../ui/buttons";
+import { ADD_LOCATION } from "../../store/saga/actions";
 import { areas } from "../../lib/constants";
 import { AiOutlineHome } from "react-icons/ai";
 import { HiOutlineOfficeBuilding } from "react-icons/hi";
-export default function AddLocation({
-  setNewLocation,
-  setFloor,
-  setAppartment,
-  setStreetAddress,
-  setArea,
-  setPhone,
-  locType,
-  setLocType,
-  newLocation,
-  locationHandler,
-}) {
+import { useDispatch } from "react-redux";
+export default function AddLocation({}) {
+  const dispatch = useDispatch();
+  const [newLocation, setNewLocation] = useState(false);
+  const [floorNo, setFloor] = useState();
+  const [apartmentNo, setAppartment] = useState();
+  const [streetAddress, setStreetAddress] = useState();
+  const [area, setArea] = useState();
+  const [phone, setPhone] = useState();
+  const [locType, setLocType] = useState("");
+  const locationHandler = () => {
+    dispatch({
+      type: ADD_LOCATION,
+      floorNo,
+      apartmentNo,
+      streetAddress,
+      area,
+      phone,
+      locType,
+    });
+  };
+
   const animadtedDiv = {
     initial: {
-      y: "-150%",
+      y: "-170%",
     },
     animate: {
-      y: newLocation ? 0 : "-150%",
+      y: newLocation ? 0 : "-170%",
       originY: "0",
       transition: {
         ease: "easeInOut",
@@ -32,7 +44,7 @@ export default function AddLocation({
   };
   const changeLocType = (loc) => {
     if (locType === loc) {
-      setLocType(null);
+      setLocType("");
     } else {
       setLocType(loc);
     }
@@ -40,10 +52,10 @@ export default function AddLocation({
 
   const parentDiv = {
     initial: {
-      height: "65px",
+      height: "200px",
     },
     animate: {
-      height: newLocation ? "560px" : "65px",
+      height: newLocation ? "560px" : "200px",
       originY: "0",
       transition: {
         ease: "easeInOut",
@@ -84,9 +96,12 @@ export default function AddLocation({
           initial="initial"
           animate="animate"
         >
-          <Button onClick={() => setNewLocation(!newLocation)} type={"primary"}>
+          <div
+            className="w-[200px] cursor-pointer h-[200px] border-dashed border-primary border-2 text-primary font-semibold grid place-items-center"
+            onClick={() => setNewLocation(!newLocation)}
+          >
             Add New Location
-          </Button>
+          </div>
         </motion.div>
         <motion.div
           variants={animadtedDiv}

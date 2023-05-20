@@ -25,15 +25,15 @@ export default function TimeAndDate({ time, setDate, setTime }) {
     setDate(d.toISOString());
   };
   return (
-    <div className="w-[70%]">
-      <div className="w-[80%] leading-relaxed text-[1b1b1b] font-semibold text-[32px] mt-5">
+    <div className="">
+      <div className="w-[80%] leading-relaxed text-[1b1b1b] font-semibold lg:text-[32px] text-[19px] mt-5">
         Choose Your Preferred Date &amp; Time
       </div>
       <select
         name=""
         id=""
         onChange={(e) => changeDate(e.target.value)}
-        className="w-[80%] focus-visible:outline-none mt-10 border-2 rounded-md border-primary py-2 px-4"
+        className="w-[80%] focus-visible:outline-none mt-10 border-2 text-[13px] lg:text-[16px] rounded-md border-primary py-2 px-4"
       >
         <option value="" disabled selected>
           Select Date...
@@ -47,7 +47,7 @@ export default function TimeAndDate({ time, setDate, setTime }) {
       <div className="my-10 flex flex-wrap gap-5">
         {times.map((t) => (
           <div
-            className="w-[145px] transition-all duration-300 cursor-pointer hover:scale-110 rounded-md border-2 border-primary p-2 text-center text-[16px] font-semibold "
+            className="lg:w-[145px] w-[110px] transition-all duration-300 cursor-pointer hover:scale-110 rounded-md border-2 border-primary p-2 text-center lg:text-[16px] text-[13px] font-semibold "
             key={t}
             onClick={() => changeTime(t)}
             style={{

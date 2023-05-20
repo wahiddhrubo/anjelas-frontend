@@ -16,6 +16,7 @@ import {
   UPDATE_CART,
   MULTIPLE_UPDATE_CART,
   REMOVE_ITEM_FROM_CART,
+  DELETE_LOCATION,
 } from "./actions";
 import {
   login,
@@ -25,6 +26,7 @@ import {
   register,
   loadUser,
   addLocation,
+  deleteLocation,
 } from "./handlers/user";
 import {
   addToCart,
@@ -51,4 +53,5 @@ export default function* rootSaga() {
   yield takeLatest(UPDATE_CART, updateItemsInCart);
   yield takeLatest(MULTIPLE_UPDATE_CART, multipleUpdatesToCart);
   yield takeLatest(REMOVE_ITEM_FROM_CART, removeItemFormCart);
+  yield takeLatest(DELETE_LOCATION, deleteLocation);
 }

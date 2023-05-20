@@ -27,14 +27,13 @@ export default function Hero({
   const [showMore, setShowMore] = useState();
   const slicer = showMore ? -1 : 50;
   const dispatch = useDispatch();
-  console.log([featuredImg, ...gallery]);
+
   const sliderGallery = [featuredImg, ...gallery].map((i) => {
     return { url: i.url };
   });
-  console.log(sliderGallery.length);
 
   const [itemNum, setItemNum] = useState(1);
-  console.log(description.split(" ").length);
+
   const addToCartHandler = () => {
     dispatch({
       type: ADD_TO_CART,

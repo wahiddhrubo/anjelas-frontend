@@ -11,8 +11,36 @@ import MobileSignIn from "./layout/mobileSignIn.js";
 import ForgotPassword from "./layout/forgotPassword.js";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
+import { motion } from "framer-motion";
 
 export default function SignUpModal({ isOpen, setIsopen }) {
+  const modalAnim = {
+    initial: {
+      opacity: 0,
+      scale: 0.95,
+    },
+    animate: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        ease: "easeInOut",
+        duration: 0.5,
+      },
+    },
+  };
+  const formAnim = {
+    initial: {
+      opacity: 0,
+    },
+    animate: {
+      opacity: 1,
+      transition: {
+        ease: "easeInOut",
+        duration: 0.5,
+      },
+    },
+  };
+
   const [formState, setFormState] = useState("login");
 
   const { user } = useSelector((state) => state.user);
@@ -36,7 +64,12 @@ export default function SignUpModal({ isOpen, setIsopen }) {
           isOpen={isOpen}
           className="border-0 absolute h-screen flex flex-wrap content-center inset-0 m-auto bg-[#00000099] "
         >
-          <div className={styles.wrapper}>
+          <motion.div
+            variants={modalAnim}
+            animate="animate"
+            initial="initial"
+            className={styles.wrapper}
+          >
             <AiOutlineClose
               onClick={() => {
                 setIsopen(false);
@@ -53,17 +86,41 @@ export default function SignUpModal({ isOpen, setIsopen }) {
               />
             </div>
             {formState === "signUp" ? (
-              <SignUp setFormState={setFormState} />
+              <motion.div
+                initial="initial"
+                animate="animate"
+                variants={formAnim}
+              >
+                <SignUp setFormState={setFormState} />
+              </motion.div>
             ) : formState === "login" ? (
-              <Login setFormState={setFormState} />
+              <motion.div
+                initial="initial"
+                animate="animate"
+                variants={formAnim}
+              >
+                <Login setFormState={setFormState} />
+              </motion.div>
             ) : formState === "mobileSignIn" ? (
-              <MobileSignIn setFormState={setFormState} />
+              <motion.div
+                initial="initial"
+                animate="animate"
+                variants={formAnim}
+              >
+                <MobileSignIn setFormState={setFormState} />
+              </motion.div>
             ) : formState === "forgotPassword" ? (
-              <ForgotPassword setFormState={setFormState} />
+              <motion.div
+                initial="initial"
+                animate="animate"
+                variants={formAnim}
+              >
+                <ForgotPassword setFormState={setFormState} />
+              </motion.div>
             ) : (
               ""
             )}
-          </div>
+          </motion.div>
         </Modal>
       )}
     </>

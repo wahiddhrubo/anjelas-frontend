@@ -24,7 +24,8 @@ export function* addToCart(action) {
   const { id, pricePerUnit, quantity, variant, name, featuredImage } = action;
   const baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/user/cart`;
 
-  const { user } = select(getUser);
+  const { user } = yield select((state) => state.user);
+
   if (user) {
     try {
       const result = yield call(() =>
@@ -54,7 +55,8 @@ export function* multipleAddToCart(action) {
   const { items } = action;
   const baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/user/cart`;
 
-  const { user } = select(getUser);
+  const { user } = yield select(getUser);
+
   for (let item of items) {
     const { id, pricePerUnit, quantity, variant, name, featuredImage } = item;
     if (user) {
@@ -85,7 +87,7 @@ export function* multipleAddToCart(action) {
 export function* updateItemsInCart(action) {
   const { id, quantity, variant } = action;
   const baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/update/cart`;
-  const { user } = select(getUser);
+  const { user } = yield select(getUser);
   if (user) {
     try {
       const result = yield call(() =>
@@ -112,7 +114,7 @@ export function* updateItemsInCart(action) {
 export function* multipleUpdatesToCart(action) {
   const { items } = action;
   const baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/update/cart`;
-  const { user } = select(getUser);
+  const { user } = yield select(getUser);
   for (let item of items) {
     const { id, quantity, variant } = item;
     if (user) {
@@ -135,7 +137,7 @@ export function* multipleUpdatesToCart(action) {
 export function* removeItemFormCart(action) {
   const { id, variant } = action;
   const user = select(getUser);
-  console.log(action);
+
   if (user) {
     try {
       const fetchUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/user/cart/${id}`;

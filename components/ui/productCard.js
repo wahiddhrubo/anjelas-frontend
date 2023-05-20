@@ -19,7 +19,6 @@ export default function ProductCard({
 }) {
   const dispatch = useDispatch();
   const { items: cart } = useSelector(getCart);
-  console.log(cart);
   const addToCartHandler = () => {
     dispatch({
       type: ADD_TO_CART,

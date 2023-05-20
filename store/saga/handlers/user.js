@@ -7,24 +7,24 @@ import {
   loadSuccess,
   logoutSuccess,
 } from "../../slice/user";
-import { GET_CART, MULTIPLE_ADD_TO_CART } from "../actions";
-import { getCart } from "../../selectors";
+import { GET_CART, MULTIPLE_ADD_TO_CART, LOAD_USER } from "../actions";
+import { getCart, getUser } from "../../selectors";
 
 export function* login(action) {
   const { email, password } = action;
   const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/user/login`;
   const { items } = yield select(getCart);
+
   try {
-    console.log(url);
     const { data } = yield call(() =>
       axiosCredentialsCall({ url, method: "post", data: { email, password } })
     );
+    yield put(loginSuccess(data));
     if (items) {
       yield put({ type: MULTIPLE_ADD_TO_CART, items });
     }
 
     yield put({ type: GET_CART });
-    yield put(loginSuccess(data));
   } catch (error) {
     console.log(error);
     yield put(loginFail(error.response.data.message));
@@ -33,20 +33,21 @@ export function* login(action) {
 export function* loadUser(action) {
   try {
     const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/user`;
-    console.log(url);
+
     const { data } = yield call(() =>
       axiosCredentialsCall({ url, method: "get" })
     );
     yield put({ type: GET_CART });
     yield put(loadSuccess(data));
   } catch (error) {
+    console.log(error);
     yield put(loginFail(error.response.data.message));
   }
 }
 export function* logout(action) {
   try {
     const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/logout`;
-    console.log(url);
+
     const { data } = yield call(() =>
       axiosCredentialsCall({ url, method: "get" })
     );
@@ -102,7 +103,7 @@ export function* resetPassword(action) {
 
   try {
     const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/user/recover`;
-    console.log(url);
+
     const { data } = yield call(() =>
       axiosCredentialsCall({
         url,
@@ -123,9 +124,31 @@ export function* resetPassword(action) {
 
 export function* addLocation(action) {
   const { floorNo, apartmentNo, streetAddress, area, phone, locType } = action;
-  const data = { floorNo, apartmentNo, streetAddress, area, phone };
+  const data = {
+    apartmentNo,
+    floorNo,
+    streetAddress,
+    area,
+    phone,
+  };
   const slug = locType ? locType : "";
+  const { user } = yield select(getUser);
+
+  console.log(data);
   try {
+    if (!user.phone) {
+      console.log("working");
+      const dt = { phone };
+      const updateUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/user`;
+      const rslt = yield call(() =>
+        axiosCredentialsCall({
+          url: updateUrl,
+          method: "post",
+          dt,
+        })
+      );
+      console.log(rslt, dt);
+    }
     const fetchUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/user/locations/${slug}`;
     const result = yield call(() =>
       axiosCredentialsCall({
@@ -134,8 +157,29 @@ export function* addLocation(action) {
         data,
       })
     );
-    console.log(result);
+    yield put({ type: LOAD_USER });
   } catch (error) {
-    console.log(error.response.data.message);
+    console.log(error);
+  }
+}
+export function* deleteLocation(action) {
+  const { id, locType } = action;
+  const data = { id, type: locType };
+  console.log(data);
+
+  const { user } = yield select(getUser);
+
+  try {
+    const fetchUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/user/locations/`;
+    const result = yield call(() =>
+      axiosCredentialsCall({
+        url: fetchUrl,
+        method: "delete",
+        data,
+      })
+    );
+    yield put({ type: LOAD_USER });
+  } catch (error) {
+    console.log(error);
   }
 }

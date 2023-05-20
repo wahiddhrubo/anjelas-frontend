@@ -10,10 +10,9 @@ import { updateCartNonUser, removeFromCartNonUser } from "../store/slice/cart";
 import Button from "../components/ui/buttons";
 import Link from "next/link";
 import { REMOVE_ITEM_FROM_CART, UPDATE_CART } from "../store/saga/actions";
+import CartTotal from "../components/ui/cartTotal";
 export default function Cart() {
-  const deliveryFee = 100;
   const { items, price } = useSelector((state) => state.cart);
-  const serviceFee = 0.02 * price;
   const dispatch = useDispatch();
   const [cartNum, setCartNum] = useState([]);
 
@@ -50,7 +49,6 @@ export default function Cart() {
       ]);
     }
   };
-  console.log(items);
   return (
     <div className="w-[80%] mx-auto">
       <table className="w-full mt-20">
@@ -123,33 +121,7 @@ export default function Cart() {
       </div>
       {items && items.length ? (
         <div className="my-20 ">
-          <div className="font-semibold text-[48px] leading-relaxed text-primary">
-            Cart Totals
-          </div>
-          <table className="mt-10 w-1/2">
-            <tr className="">
-              <td className="py-2 font-semibold text-[24px] ">Subtotal</td>
-              <td className="py-2 font-semibold text-primary ">{price}</td>
-            </tr>
-            <tr className="">
-              <td className="py-2 font-semibold ">Delivery Fee</td>
-              <td className="py-2 font-semibold  text-primary ">
-                {deliveryFee}
-              </td>
-            </tr>
-            <tr className="border-b-2 border-primary">
-              <td className="py-2 font-semibold ">Service Fee</td>
-              <td className="py-2 font-semibold  text-primary ">
-                {serviceFee}
-              </td>
-            </tr>
-            <tr className="">
-              <td className="py-2 text-[24px] font-semibold ">Total</td>
-              <td className="py-2 font-semibold text-[20px]  text-primary ">
-                {serviceFee + deliveryFee + price}
-              </td>
-            </tr>
-          </table>
+          <CartTotal />
           <div className="my-10 w-fit ml-auto ">
             <Link href="/checkout">
               <Button type={"primary"}>Proceed To Checkout</Button>

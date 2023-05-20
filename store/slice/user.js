@@ -13,6 +13,7 @@ const userSlice = createSlice({
       console.log(action);
       state.loading = false;
       state.isAuthenticated = true;
+      state.user = action.payload.user;
     },
     loadSuccess: (state, action) => {
       console.log(action);
@@ -29,7 +30,7 @@ const userSlice = createSlice({
       state.error = action.payload;
     },
     logoutSuccess: (state, action) => {
-      state.isAuthenticated = true;
+      state.isAuthenticated = false;
       state.loading = false;
       state.user = null;
     },

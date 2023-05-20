@@ -17,6 +17,13 @@ module.exports = {
           fontWeight: "bold",
         },
       ],
+      "heading-md": [
+        "42px",
+        {
+          lineHeight: "1.25",
+          fontWeight: "bold",
+        },
+      ],
       "body-lg": [
         "22px",
         {
