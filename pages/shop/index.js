@@ -4,15 +4,18 @@ import ProductCard from "../../components/ui/productCard";
 import Filter from "../../components/products/filter";
 import { useSearchParams, usePathname } from "next/navigation";
 import { useRouter } from "next/router";
-
+import Pagination from "../../components/ui/pagination";
+import { useState } from "react";
 export default function Products() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
 
+  const [page, setPage] = useState();
   const keyword = searchParams.get("keyword");
   const categories = searchParams.get("categories");
   const price = searchParams.get("price");
+  const currentPage = searchParams.get("page");
 
   const setQueryFilter = useCallback(
     (name, value) => {
@@ -24,8 +27,7 @@ export default function Products() {
   );
 
   const dispatch = useDispatch();
-  const { items } = useSelector((state) => state.products);
-  console.log(items);
+  const { items, pages } = useSelector((state) => state.products);
   useEffect(() => {
     const prc = price ? price.split("-") : null;
 
@@ -35,8 +37,9 @@ export default function Products() {
       categories,
       minPrice: prc ? prc[0] : null,
       maxPrice: prc ? prc[1] : null,
+      page: currentPage,
     });
-  }, [dispatch, keyword, categories, price]);
+  }, [dispatch, keyword, categories, price, currentPage]);
 
   return (
     <div className="flex  lg:flex-nowrap flex-wrap justify-center mt-20 gap-10">
@@ -55,6 +58,13 @@ export default function Products() {
             variant={i.skus[0].name}
           />
         ))}
+        <div className="w-full text-center">
+          <Pagination
+            totalPages={pages}
+            setPage={setQueryFilter}
+            currentPage={currentPage || 1}
+          />
+        </div>
       </div>
       <Filter
         setQueryFilter={setQueryFilter}

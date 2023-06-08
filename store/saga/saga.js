@@ -1,5 +1,9 @@
 import { takeLatest } from "redux-saga/effects";
-import { fetchProducts, fetchSingleProducts } from "./handlers/products";
+import {
+  fetchLatestProducts,
+  fetchProducts,
+  fetchSingleProducts,
+} from "./handlers/products";
 import {
   PRODUCTS_LOADING,
   LOGOUT,
@@ -17,6 +21,7 @@ import {
   MULTIPLE_UPDATE_CART,
   REMOVE_ITEM_FROM_CART,
   DELETE_LOCATION,
+  LATEST_PRODUCT,
 } from "./actions";
 import {
   login,
@@ -39,6 +44,7 @@ import {
 
 export default function* rootSaga() {
   yield takeLatest(PRODUCTS_LOADING, fetchProducts);
+  yield takeLatest(LATEST_PRODUCT, fetchLatestProducts);
   yield takeLatest(SINGLE_PRODUCTS_LOADING, fetchSingleProducts);
   yield takeLatest(LOGIN, login);
   yield takeLatest(LOGOUT, logout);

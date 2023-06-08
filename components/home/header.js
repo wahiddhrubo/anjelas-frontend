@@ -10,7 +10,7 @@ export default function Header() {
     img: "w-[50vw]  ",
     foodIcon: "absolute bottom-[-10%] ",
     foodIconImg: "",
-    vector: "absolute  right-[-2vw] top-0 ",
+    vector: "absolute  right-0 top-0 ",
     vectorImg: "w-[38vw]",
   };
   return (

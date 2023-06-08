@@ -88,7 +88,7 @@ export default function AddLocation({}) {
         variants={parentDiv}
         initial="initial"
         animate="animate"
-        className="overflow-y-clip  mt-32 mb-16"
+        className="overflow-y-clip  mt-16 mb-16"
       >
         <motion.div
           variants={btn}

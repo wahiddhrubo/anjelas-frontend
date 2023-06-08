@@ -11,6 +11,13 @@ export default function Filter({ setQueryFilter, featuredProducts }) {
   const [srch, setSrch] = useState();
   const [showAllCategories, setShowAllCategories] = useState(false);
   const categoriesNo = !showAllCategories ? -8 : 0;
+
+  const keyHandler = (e) => {
+    if (e.key === "Enter") {
+      setQueryFilter("keyword", srch);
+    }
+  };
+
   return (
     <div className="w-[25%] lg:block hidden  mt-[7.5%]">
       <div>
@@ -18,8 +25,9 @@ export default function Filter({ setQueryFilter, featuredProducts }) {
           <input
             type="text"
             placeholder="Search"
+            onKeyDown={keyHandler}
             onChange={(e) => setSrch(e.target.value)}
-            className="placeholder:font-semibold placeholder:text-black  text-primary outline-none focus-visible:outline-none "
+            className="placeholder:font-semibold placeholder:text-black   outline-none focus-visible:outline-none "
           />
           <BsSearch
             onClick={() => setQueryFilter("keyword", srch)}

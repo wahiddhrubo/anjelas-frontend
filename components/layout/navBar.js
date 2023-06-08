@@ -14,15 +14,21 @@ import { GET_CART, LOAD_USER, LOGOUT } from "../../store/saga/actions.js";
 import { motion } from "framer-motion";
 import { categories } from "../../lib/constants.js";
 import { getUser } from "../../store/selectors.js";
+import UserDropdown from "../ui/userDropdown.js";
+
 export default function Navbar({ menu }) {
   const dispatch = useDispatch();
   const [isOpen, setIsopen] = useState(false);
   const [sidebar, setSidebar] = useState(false);
   const { items, quantity } = useSelector((state) => state.cart);
   const { isAuthenticated, user } = useSelector(getUser);
+  const avatarUrl = `https://api.dicebear.com/6.x/initials/svg?backgroundColor=FE7502&scale=70&textColor=ffffff&seed=${user?.username?.replace(
+    " ",
+    "+"
+  )}`;
   const styles = {
     wrapper:
-      "font-bold px-[100px] hidden  relative z-[10] h-[45px] mt-[32px] content-center lg:flex w-full text-black",
+      "font-bold px-[100px] hidden  relative z-[20] h-[45px] mt-[32px] content-center lg:flex w-full text-black",
     logo: "font-[22px] mr-auto my-auto ",
     menu: "ml-auto flex gap-[32px] my-auto",
     menuItems: " font-[18px] flex gap-[16px] my-auto ",
@@ -85,7 +91,21 @@ export default function Navbar({ menu }) {
           {!isAuthenticated ? (
             <SignUpBtn text="Sign In" onClick={SignUpBtnHandler} />
           ) : (
-            <SignUpBtn text="Log Out" onClick={logoutHandler} />
+            <>
+              <div className="relative group">
+                <UserDropdown />
+                <Link href="/user">
+                  <Image
+                    loader={() => avatarUrl}
+                    src={avatarUrl}
+                    alt="avatar"
+                    className=" cursor-pointer rounded-full"
+                    height={50}
+                    width={50}
+                  />
+                </Link>
+              </div>
+            </>
           )}
         </div>
       </div>

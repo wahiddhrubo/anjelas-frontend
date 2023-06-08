@@ -39,6 +39,18 @@ body {
   padding: 0;
   margin: 0;
   font-family: "Gilroy", sans-serif;
+  --primary: #fe7502;
+}
+
+/* SLIDER CSS */
+.primary .slick-active > .bg > .dot {
+  background-color: #fe7502;
+  width: 12px;
+  height: 12px;
+  border: #fe7502;
+}
+.primary .slick-active > .bg {
+  border-color: #fe7502;
 }
 
 /*MODAL CSS*/

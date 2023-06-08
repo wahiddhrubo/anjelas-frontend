@@ -6,11 +6,27 @@ import Locations from "../components/user/location";
 import Account from "../components/user/info";
 import RequestForm from "../components/user/requestForm";
 import SideBar from "../components/user/sidebar";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 export default function Checkout() {
   const dispatch = useDispatch();
-  const [active, setActive] = useState("info");
+  const router = useRouter();
+  const [active, setActive] = useState("account");
   const { user } = useSelector((state) => state.user);
+
+  const { asPath } = router;
+  const slug = asPath.split("#")[1];
+
+  useEffect(() => {
+    if (slug) {
+      setActive(slug);
+    } else {
+      setActive("info");
+    }
+  }, [slug]);
+
+  console.log(active);
 
   const [isOpen, setIsopen] = useState();
   const [location, setLocation] = useState();
@@ -22,16 +38,16 @@ export default function Checkout() {
           <div className="flex  relative gap-10 flex-wrap">
             <SideBar active={active} setActive={setActive} />
             <div className="lg:w-[70%] ml-auto min-h-screen flex flex-wrap content-center overflow-visible w-full">
-              {active === "My Account" && <Account user={user} />}
-              {active === "Manage Locations" && (
+              {active === "info" && <Account user={user} />}
+              {active === "locations" && (
                 <Locations
                   user={user}
-                  // location={location}
+                  location={location}
                   setLocation={setLocation}
                 />
               )}
 
-              {active === "Request A Dish" && <RequestForm />}
+              {active === "request" && <RequestForm />}
             </div>
           </div>
         </>

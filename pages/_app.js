@@ -5,9 +5,9 @@ import "slick-carousel/slick/slick-theme.css";
 import Navbar from "../components/layout/navBar.js";
 import { Provider, useDispatch } from "react-redux";
 import store from "../store/store";
-import { useEffect } from "react";
-import { LOAD_USER } from "../store/saga/actions";
 import Head from "next/head";
+import ContactIcon from "../components/contactIcon";
+
 function MyApp({ Component, pageProps }) {
   const navMenu = [
     { text: "Packages", link: "/packages" },
@@ -29,6 +29,7 @@ function MyApp({ Component, pageProps }) {
       <div className="lg:px-[100px] px-8 text-body-md static">
         <Component {...pageProps} />
       </div>
+      <ContactIcon />
     </Provider>
   );
 }

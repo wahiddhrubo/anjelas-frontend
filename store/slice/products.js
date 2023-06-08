@@ -11,14 +11,18 @@ const productSlice = createSlice({
     },
     productSuccess: (state, action) => {
       console.log(action);
-      const { items, meta, itemPerPage } = action.payload;
-      const total = meta ? meta.total : 0;
-      const pages = meta ? Math.ceil(meta[0] / itemPerPage) : 0;
+      const { items, total, pages } = action.payload;
 
       state.loading = false;
       state.items = items;
       state.numOfProducts = total;
       state.pages = pages;
+    },
+    latestProductSuccess: (state, action) => {
+      console.log(action);
+      const { items } = action.payload;
+      state.loading = false;
+      state.latestItems = items;
     },
     productFail: (state, action) => {
       console.log(action);
@@ -27,6 +31,10 @@ const productSlice = createSlice({
   },
 });
 
-export const { productFail, productLoading, productSuccess } =
-  productSlice.actions;
+export const {
+  productFail,
+  productLoading,
+  productSuccess,
+  latestProductSuccess,
+} = productSlice.actions;
 export default productSlice.reducer;

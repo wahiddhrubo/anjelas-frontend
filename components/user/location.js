@@ -7,6 +7,7 @@ import Location from "../checkout/location";
 import { motion } from "framer-motion";
 
 export default function Locations({ user, setLocation, location }) {
+  console.log(user);
   const anim = {
     initial: { opacity: 0, x: "-5%" },
     animate: {
@@ -54,8 +55,8 @@ export default function Locations({ user, setLocation, location }) {
             Icon={HiOutlineLocationMarker}
           />
         ))}
+        <AddLocation />
       </div>
-      <AddLocation />
     </motion.div>
   );
 }
