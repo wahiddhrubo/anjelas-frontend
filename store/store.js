@@ -5,6 +5,7 @@ import ProductSlice from "./slice/products";
 import cartSlice from "./slice/cart.js";
 import userSlice from "./slice/user.js";
 import singleProductSlice from "./slice/singleProduct.js";
+import orderSlice from "./slice/order.js";
 
 let sagaMiddleware = createSagaMiddleware();
 const middleware = (getDefaultMiddleware) => [
@@ -18,6 +19,7 @@ const store = configureStore({
     cart: cartSlice,
     singleProduct: singleProductSlice,
     user: userSlice,
+    order: orderSlice,
   },
   middleware,
 });

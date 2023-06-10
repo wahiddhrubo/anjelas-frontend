@@ -23,6 +23,7 @@ export function* fetchProducts(action) {
     maxRating,
     tags,
     page,
+    sortBy,
   } = action;
   const itemPerPage = 8;
   const baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/items`;
@@ -39,7 +40,8 @@ export function* fetchProducts(action) {
   params.set("maxPrice", maxPrice || "");
   params.set("itemPerPage", itemPerPage);
   params.set("page", page);
-  console.log({ page });
+  params.set("sortBy", sortBy);
+  console.log(sortBy);
 
   try {
     const fetchUrl = `${url}?${params}`;
@@ -63,21 +65,18 @@ export function* fetchProducts(action) {
   }
 }
 export function* fetchLatestProducts(action) {
-  const itemPerPage = 8;
   const baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/items`;
   const url = new URL(baseUrl);
   const params = new URLSearchParams(url.search);
-  params.set("sortBy", "latest");
+  params.set("sortBy", "createdAt");
 
   try {
     const fetchUrl = `${url}?${params}`;
     const { data } = yield call(() =>
       axiosCall({ url: fetchUrl, method: "get" })
     );
-    const { data: items, metadata } = data.items[0];
+    const { data: items } = data.items[0];
 
-    const { total } = metadata[0];
-    const pages = Math.ceil(total / itemPerPage);
     yield put(latestProductSuccess({ items }));
   } catch (error) {
     console.log(error);

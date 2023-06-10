@@ -9,7 +9,6 @@ const singleProductSlice = createSlice({
       state.loading = true;
     },
     singleProductSuccess: (state, action) => {
-      console.log(action);
       state.loading = false;
       state.item = action.payload.item;
     },

@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import SignUpModal from "../components/login/signUpModal";
 import Locations from "../components/user/location";
@@ -8,9 +9,11 @@ import RequestForm from "../components/user/requestForm";
 import SideBar from "../components/user/sidebar";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import Orders from "../components/user/order/orders";
 
 export default function Checkout() {
   const dispatch = useDispatch();
+  const searchParams = useSearchParams();
   const router = useRouter();
   const [active, setActive] = useState("account");
   const { user } = useSelector((state) => state.user);
@@ -25,8 +28,6 @@ export default function Checkout() {
       setActive("info");
     }
   }, [slug]);
-
-  console.log(active);
 
   const [isOpen, setIsopen] = useState();
   const [location, setLocation] = useState();
@@ -48,6 +49,7 @@ export default function Checkout() {
               )}
 
               {active === "request" && <RequestForm />}
+              {active === "orders" && <Orders />}
             </div>
           </div>
         </>

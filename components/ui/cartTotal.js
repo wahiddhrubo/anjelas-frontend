@@ -1,9 +1,9 @@
 import React from "react";
-import { deliveryFee, serviceFee } from "../../lib/constants";
+import { deliveryFee, taxRate } from "../../lib/constants";
 import { useSelector } from "react-redux";
 export default function CartTotal() {
   const { price } = useSelector((state) => state.cart);
-  const totalServiceFee = serviceFee * price;
+  const totalServiceFee = taxRate * price;
   return (
     <div className="">
       <div className="font-semibold text-[32px] leading-relaxed text-primary">
@@ -19,7 +19,7 @@ export default function CartTotal() {
           <td className="py-2 font-semibold  text-primary ">{deliveryFee}</td>
         </tr>
         <tr className="border-b-2 border-primary">
-          <td className="py-2 font-semibold ">Service Fee</td>
+          <td className="py-2 font-semibold ">Tax</td>
           <td className="py-2 font-semibold  text-primary ">
             {totalServiceFee}
           </td>

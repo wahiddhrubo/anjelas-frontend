@@ -10,18 +10,15 @@ const userSlice = createSlice({
       state.loading = true;
     },
     loginSuccess: (state, action) => {
-      console.log(action);
       state.loading = false;
       state.isAuthenticated = true;
       state.user = action.payload.user;
     },
     loadSuccess: (state, action) => {
-      console.log(action);
       state.isAuthenticated = true;
       state.user = action.payload.user;
     },
     forgotPasswordSuccess: (state, action) => {
-      console.log(action);
       state.loading = false;
       state.emailSentSuccess = true;
     },

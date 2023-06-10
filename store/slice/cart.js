@@ -16,7 +16,6 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     updateCart: (state, action) => {
-      console.log(action);
       state.items = action.payload.cart.items;
     },
     addToCartNonUser: (state, action) => {
@@ -46,7 +45,6 @@ const cartSlice = createSlice({
     },
     removeFromCartNonUser: (state, action) => {
       const { id, variant } = action.payload;
-      console.log(variant);
       state.items = state.items.filter((i) => {
         return i.id !== id && i.variant !== variant;
       });

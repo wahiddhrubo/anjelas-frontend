@@ -7,7 +7,7 @@ import { Provider, useDispatch } from "react-redux";
 import store from "../store/store";
 import Head from "next/head";
 import ContactIcon from "../components/contactIcon";
-
+import Footer from "../components/layout/footer";
 function MyApp({ Component, pageProps }) {
   const navMenu = [
     { text: "Packages", link: "/packages" },
@@ -29,6 +29,7 @@ function MyApp({ Component, pageProps }) {
       <div className="lg:px-[100px] px-8 text-body-md static">
         <Component {...pageProps} />
       </div>
+      <Footer />
       <ContactIcon />
     </Provider>
   );

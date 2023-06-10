@@ -22,6 +22,7 @@ import {
   REMOVE_ITEM_FROM_CART,
   DELETE_LOCATION,
   LATEST_PRODUCT,
+  GET_ORDERS,
 } from "./actions";
 import {
   login,
@@ -41,6 +42,7 @@ import {
   removeItemFormCart,
   updateItemsInCart,
 } from "./handlers/cart";
+import { fetchOrders } from "./handlers/orders";
 
 export default function* rootSaga() {
   yield takeLatest(PRODUCTS_LOADING, fetchProducts);
@@ -60,4 +62,5 @@ export default function* rootSaga() {
   yield takeLatest(MULTIPLE_UPDATE_CART, multipleUpdatesToCart);
   yield takeLatest(REMOVE_ITEM_FROM_CART, removeItemFormCart);
   yield takeLatest(DELETE_LOCATION, deleteLocation);
+  yield takeLatest(GET_ORDERS, fetchOrders);
 }

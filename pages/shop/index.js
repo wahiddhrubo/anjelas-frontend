@@ -5,17 +5,20 @@ import Filter from "../../components/products/filter";
 import { useSearchParams, usePathname } from "next/navigation";
 import { useRouter } from "next/router";
 import Pagination from "../../components/ui/pagination";
+import Sort from "../../components/products/sort";
 import { useState } from "react";
+
 export default function Products() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
+  const [descending, setDescending] = useState(false);
 
-  const [page, setPage] = useState();
   const keyword = searchParams.get("keyword");
   const categories = searchParams.get("categories");
   const price = searchParams.get("price");
   const currentPage = searchParams.get("page");
+  const sortBy = searchParams.get("sortBy");
 
   const setQueryFilter = useCallback(
     (name, value) => {
@@ -35,17 +38,26 @@ export default function Products() {
       type: "GET_PRODUCTS_LOADING",
       keyword,
       categories,
+      descending,
+      sortBy,
       minPrice: prc ? prc[0] : null,
       maxPrice: prc ? prc[1] : null,
       page: currentPage,
     });
-  }, [dispatch, keyword, categories, price, currentPage]);
+  }, [dispatch, keyword, descending, sortBy, categories, price, currentPage]);
 
   return (
-    <div className="flex  lg:flex-nowrap flex-wrap justify-center mt-20 gap-10">
-      <div className="flex justify-center flex-wrap gap-[5%] gap-y-[5%] lg:w-[68%] w-full ">
-        <div className="w-full  font-semibold text-[32px] mb-5">
-          Our Collections
+    <div className="flex  lg:flex-nowrap flex-wrap justify-between mt-20 ">
+      <div className="flex  flex-wrap justify-between gap-[5%] gap-y-[5%] lg:w-[63%] w-full ">
+        <div className="w-full flex">
+          <div className="w-fit mr-auto font-semibold text-[32px] mb-5">
+            Our Collections
+          </div>
+          <Sort
+            sortBy={sortBy}
+            setDescending={setDescending}
+            setQueryFilter={setQueryFilter}
+          />
         </div>
         {items?.slice(0, 10).map((i) => (
           <ProductCard

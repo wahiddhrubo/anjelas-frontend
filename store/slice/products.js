@@ -10,7 +10,6 @@ const productSlice = createSlice({
       state.loading = true;
     },
     productSuccess: (state, action) => {
-      console.log(action);
       const { items, total, pages } = action.payload;
 
       state.loading = false;
@@ -19,13 +18,11 @@ const productSlice = createSlice({
       state.pages = pages;
     },
     latestProductSuccess: (state, action) => {
-      console.log(action);
       const { items } = action.payload;
       state.loading = false;
       state.latestItems = items;
     },
     productFail: (state, action) => {
-      console.log(action);
       state.loading = false;
     },
   },
