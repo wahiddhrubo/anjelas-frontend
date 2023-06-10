@@ -75,6 +75,7 @@ export default function Filter({ setQueryFilter, featuredProducts }) {
         </div>
         {categories.slice(categoriesNo).map((c, index) => (
           <div
+            key={c}
             onClick={() => setQueryFilter("categories", c)}
             className=" cursor-pointer relative group  w-fit text-black font-semibold my-2  "
           >

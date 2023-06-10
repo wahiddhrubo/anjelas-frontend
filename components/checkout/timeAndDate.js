@@ -40,7 +40,7 @@ export default function TimeAndDate({ time, setDate, setTime }) {
         </option>
 
         {[...Array(5)].map((d, index) => (
-          <option>{getDate(index + 1)}</option>
+          <option key={index}>{getDate(index + 1)}</option>
         ))}
       </select>
 

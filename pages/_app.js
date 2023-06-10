@@ -22,7 +22,7 @@ function MyApp({ Component, pageProps }) {
       <Head>
         <link rel="shortcut icon" href="/favicon.svg" />
 
-        <title>Anjela's Kitchen</title>
+        <title>Anjela&apos;s Kitchen</title>
         <meta name="description" content="Home Food Delivery Store" />
       </Head>
       <Navbar menu={navMenu} />

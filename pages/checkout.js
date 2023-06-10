@@ -141,6 +141,7 @@ export default function Checkout() {
 
                 {user.locations?.map((l) => (
                   <Location
+                    key={l._id}
                     type=""
                     locText={`${l.streetAddress}`}
                     location={location}
@@ -178,6 +179,7 @@ export default function Checkout() {
                 </div>
                 {paymentMethods.map((p) => (
                   <div
+                    key={p.method}
                     className="w-[125px] cursor-pointer text-center capitalize"
                     onClick={() => orderHandler(p.method)}
                   >

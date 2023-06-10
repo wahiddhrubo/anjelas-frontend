@@ -52,6 +52,7 @@ export default function Sort({ setQueryFilter, setDescending }) {
         )}
         {opts.map((o) => (
           <div
+            key={o.name}
             className="my-2  hover:text-primary cursor-pointer "
             onClick={() => sortHandler(o)}
           >

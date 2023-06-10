@@ -82,13 +82,14 @@ export default function Footer() {
         </div>
         <div className="flex gap-16 my-5">
           {linksList.map((lst) => (
-            <div>
+            <div key={lst.title}>
               <div className=" text-[22px] my-2 font-semibold ">
                 {lst.title}
               </div>
               {lst.links.map((l) => (
                 <Link
                   className="text-[18px] hover:text-primary  block my-1"
+                  key={l.link}
                   href={l.link}
                 >
                   {l.name}
@@ -100,6 +101,7 @@ export default function Footer() {
         <div className="flex gap-3 my-8">
           {socials.map((s) => (
             <Link
+              key={s.link}
               href={s.link}
               className={`block  bg-grey-300 hover:bg-primary hover:text-white text-[25px] p-3  w-fit text-black rounded-full`}
             >

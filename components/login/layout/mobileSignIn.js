@@ -61,7 +61,7 @@ export default function MobileSignIn({ setFormState, googleSignIn }) {
           Icon={BsFillTelephoneFill}
         />
         <div className="font-semibold">
-          Don't Have An Account?{" "}
+          Don&apos;t Have An Account?{" "}
           <span
             onClick={() => setFormState("signUp")}
             className=" underline hover:text-primary font-sm font-bold cursor-pointer"

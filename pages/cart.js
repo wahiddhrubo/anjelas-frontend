@@ -68,8 +68,8 @@ export default function Cart() {
           </th>
         </tr>
 
-        {items?.map((i) => (
-          <tr className="border-b-2 border-primary ">
+        {items?.map((i, index) => (
+          <tr key={index} className="border-b-2 border-primary ">
             <td className="py-[25px] flex gap-2 ">
               <span
                 onClick={() => removeItem(i.id, i.item._id, i.variant)}

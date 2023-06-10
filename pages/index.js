@@ -17,7 +17,7 @@ export default function Home() {
   return (
     <div className=" ">
       <Head>
-        <title>Anjela's Kitchen</title>
+        <title>Anjela&apos;s Kitchen</title>
         <meta name="description" content="Home Food Delivery Store" />
       </Head>
       <Header />

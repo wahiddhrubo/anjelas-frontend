@@ -64,6 +64,7 @@ export default function Orders() {
       <div>
         {orders?.map((o) => (
           <motion.div
+            key={o._id}
             variants={anim}
             initial="initial"
             animate="animate"

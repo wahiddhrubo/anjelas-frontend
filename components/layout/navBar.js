@@ -148,6 +148,7 @@ export default function Navbar({ menu }) {
           {menu.map((m) => (
             <Link
               href={m.link}
+              key={m.link}
               className="block my-2 hover:text-primary text-[14px] font-semibold "
             >
               {m.text}
@@ -156,7 +157,10 @@ export default function Navbar({ menu }) {
           <hr className="bg-primary w-3/4 h-0 border-t-2 mt-2 mb-5 border-primary" />
           <div className="font-semibold mb-4 ">Categories</div>
           {categories.map((c, index) => (
-            <div className=" text-[12px] cursor-pointer relative group  w-fit text-black font-semibold my-2  ">
+            <div
+              key={c}
+              className=" text-[12px] cursor-pointer relative group  w-fit text-black font-semibold my-2  "
+            >
               {c}
               <hr className="w-full group-hover:scale-x-100 scale-x-0 transition-all origin-left duration-300 h-[2px] mb-[4px] bg-primary " />
               <hr className="w-full  group-hover:scale-x-100 scale-x-0 transition-all origin-left duration-500 h-[2px]  bg-primary " />
