@@ -49,8 +49,8 @@ export default function Products() {
   return (
     <div className="flex  lg:flex-nowrap flex-wrap justify-between mt-20 ">
       <div className="flex  flex-wrap justify-between gap-[5%] gap-y-[5%] lg:w-[63%] w-full ">
-        <div className="w-full flex">
-          <div className="w-fit mr-auto font-semibold text-[32px] mb-5">
+        <div className="w-full flex flex-wrap">
+          <div className="w-fit mr-auto font-semibold lg:text-[32px] text-[20px] mb-5">
             Our Collections
           </div>
           <Sort

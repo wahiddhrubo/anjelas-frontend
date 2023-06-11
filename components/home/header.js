@@ -4,13 +4,15 @@ export default function Header() {
   const styles = {
     wrapper: "relative overflow-x-clip h-fit z-[10] w-full  flex",
     textbox: "w-[480px] my-[100px] space-y-[24px] mr-auto  ",
-    title: "text-heading-lg text-primary-text",
-    subHeading: "text-body-lg font-bold text-secondary-text",
-    imgDiv: "w-[50vw] ml-auto mt-[-2vw] ",
+    title:
+      "lg:text-heading-lg text-[24px] leading-[1.5] font-semibold text-primary-text",
+    subHeading:
+      "lg:text-body-lg text-[14px] leading-[1.5] font-bold text-secondary-text",
+    imgDiv: "w-[50vw] md:block hidden ml-auto mt-[-2vw] ",
     img: "w-[50vw]  ",
-    foodIcon: "absolute bottom-[-10%] ",
+    foodIcon: "absolute lg:w-[100%] w-[50%] bottom-[0] lg:bottom-[-10%] ",
     foodIconImg: "",
-    vector: "absolute  right-0 top-0 ",
+    vector: "absolute hidden  md:block right-0 top-0 ",
     vectorImg: "w-[38vw]",
   };
   return (

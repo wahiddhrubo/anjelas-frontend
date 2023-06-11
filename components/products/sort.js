@@ -36,15 +36,15 @@ export default function Sort({ setQueryFilter, setDescending }) {
   ].filter((o) => o.name !== current?.name);
 
   return (
-    <div className=" group  w-fit relative h-fit ml-auto ">
-      <div className="flex w-[215px] gap-3 px-4 py-2 border-2 border-black  rounded-md">
+    <div className=" group  w-fit relative h-fit text-[10px] md:text-[16px] ml-auto ">
+      <div className="flex lg:w-[215px] w-[125px]  gap-3 md:px-4 px-2 md:py-2 py-1 border-2 border-black  rounded-md">
         <MdOutlineSort className="text-[25px] my-auto" />{" "}
         {current ? current.name : "Sort By"}
       </div>
       <div className="p-2 group-hover:scale-y-100 scale-y-0 transition-all duration-300 origin-top border-2 w-full bg-white absolute border-black mt-[-1px] z-10 ">
         {current && (
           <div
-            className="my-2  text-primary cursor-pointer "
+            className="md:my-2  text-primary cursor-pointer "
             onClick={() => sortHandler(current)}
           >
             {current.name}
@@ -53,7 +53,7 @@ export default function Sort({ setQueryFilter, setDescending }) {
         {opts.map((o) => (
           <div
             key={o.name}
-            className="my-2  hover:text-primary cursor-pointer "
+            className="md:my-2  hover:text-primary cursor-pointer "
             onClick={() => sortHandler(o)}
           >
             {o.name}

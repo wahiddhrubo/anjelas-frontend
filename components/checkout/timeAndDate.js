@@ -47,7 +47,7 @@ export default function TimeAndDate({ time, setDate, setTime }) {
       <div className="my-10 flex flex-wrap gap-5">
         {times.map((t) => (
           <div
-            className="lg:w-[145px] w-[110px] transition-all duration-300 cursor-pointer hover:scale-110 rounded-md border-2 border-primary p-2 text-center lg:text-[16px] text-[13px] font-semibold "
+            className="md:w-[185px] w-[110px] transition-all duration-300 cursor-pointer hover:scale-110 rounded-md border-2 border-primary p-2 text-center md:text-[16px] text-[9px] font-semibold "
             key={t}
             onClick={() => changeTime(t)}
             style={{

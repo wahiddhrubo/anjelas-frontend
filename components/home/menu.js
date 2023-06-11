@@ -5,7 +5,9 @@ import ShortProductCard from "../ui/shortCard";
 export default function Menu({ items }) {
   return (
     <div className="">
-      <div className=" text-heading-md ">Our Latest Items</div>
+      <div className=" font-semibold text-[24px] lg:text-heading-md ">
+        Our Latest Items
+      </div>
       <div>
         <div>
           <SliderComp>

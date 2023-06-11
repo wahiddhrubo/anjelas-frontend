@@ -49,10 +49,10 @@ export default function SignUpModal({ isOpen, setIsopen }) {
     wrapper:
       "flex bg-white  gap-[104px] w-[80%] rounded-lg z-[100] overflow-hidden shadow-2xl relative mx-auto relative h-[85vh] ",
     close: "absolute top-5 w-[24px] h-[24px] cursor-pointer right-5",
-    imgDiv: "overflow-hidden w-[50%] h-full rounded-r-lg",
+    imgDiv: "overflow-hidden lg:block hidden w-[50%] h-full rounded-r-lg",
     img: "w-[700px] object-center h-full object-cover ",
     loginForm: "h-fit my-auto ",
-    title: "text-heading-lg text-[40px] mb-[40px] ",
+    title: "lg:text-heading-lg text-[40px] mb-[40px] ",
     input:
       "bg-none border-0 w-full my-[16px] focus-visible:outline-0 placeholder:text-secondary-text placeholder:font-semibold placeholder:capitalize  border-b-2 border-black",
     btnDiv: "space-y-[16px] text-center mt-[40px]",

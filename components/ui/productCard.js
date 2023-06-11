@@ -38,7 +38,7 @@ export default function ProductCard({
   const [intPart, remainingPart] = decimalStr(review);
 
   return (
-    <div className="lg:w-[350px] w-[155px] p-2  my-[5%] text-center ">
+    <div className="lg:w-[325px] w-full p-2  my-[5%] text-center ">
       <div className="w-fit mx-auto relative group/div ">
         <div className="absolute w-[80%] h-[80%] grid place-items-center inset-0 rounded-[5px] transition-all origin-top scale-y-0 group-hover/div:scale-y-100 m-auto z-10 bg-white">
           {checkCart(id) ? (
@@ -58,7 +58,7 @@ export default function ProductCard({
           src={img}
           width={350}
           height={350}
-          className="lg:h-[350px] w-[150px] h-[150px] lg:w-[350px] object-cover"
+          className="lg:h-[350px] w-[250px] h-[250px] lg:w-[350px] object-cover"
         />
       </div>
       <div>

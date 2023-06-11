@@ -26,7 +26,7 @@ function MyApp({ Component, pageProps }) {
         <meta name="description" content="Home Food Delivery Store" />
       </Head>
       <Navbar menu={navMenu} />
-      <div className="lg:px-[100px] px-8 text-body-md static">
+      <div className="lg:px-[100px] px-4 text-body-md text-[14px] md:text-[16px] static">
         <Component {...pageProps} />
       </div>
       <Footer />

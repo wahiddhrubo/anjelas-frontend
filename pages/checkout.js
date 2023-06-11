@@ -13,11 +13,13 @@ import CartTotal from "../components/ui/cartTotal";
 import { BiMoney } from "react-icons/bi";
 import Image from "next/image";
 import { checkEmptyField } from "../lib/functions";
+import { getCart } from "../store/selectors";
+import Link from "next/link";
 
 export default function Checkout() {
   const dispatch = useDispatch();
-  const { price } = useSelector((state) => state.cart);
-
+  const { price, items } = useSelector((state) => state.cart);
+  console.log(items);
   const paymentMethods = [
     {
       logo: "/images/bkash.svg",
@@ -92,7 +94,7 @@ export default function Checkout() {
   return (
     <div>
       {isOpen && <SignUpModal isOpen={isOpen} setIsopen={setIsopen} />}
-      {user ? (
+      {user && items.length ? (
         <div className="mb-28">
           <table className="text-[14px] lg:text-body-md w-1/2 mt-20">
             <tr>
@@ -110,10 +112,10 @@ export default function Checkout() {
               </tr>
             )}
           </table>
-          <div className="flex  gap-10 flex-wrap">
+          <div className="flex px-4 gap-10 flex-wrap">
             <div className="lg:w-[65%] w-full">
-              <div className="flex flex-wrap lg:justify-start justify-center w-full gap-x-10 my-5 gap-y-5 ">
-                <div className="w-full font-semibold text-[32px] mt-5">
+              <div className="flex flex-wrap justify-start  w-full gap-x-10 my-5 gap-y-5 ">
+                <div className="w-full font-semibold text-[22px] lg:text-[32px] mt-5">
                   Your Locations
                 </div>
 
@@ -174,13 +176,13 @@ export default function Checkout() {
             <div className="lg:w-1/4 w-3/4">
               <CartTotal />
               <div className="flex justify-center content-center flex-wrap gap-4">
-                <div className=" text-[24px] font-semibold mt-10 mb-5 w-full">
+                <div className=" lg:text-[24px] text-[18px] font-semibold mt-10 lg:mb-5 mb-2 w-full">
                   Pay With
                 </div>
                 {paymentMethods.map((p) => (
                   <div
                     key={p.method}
-                    className="w-[125px] cursor-pointer text-center capitalize"
+                    className="lg:w-[125px] w-[85px] cursor-pointer text-center capitalize"
                     onClick={() => orderHandler(p.method)}
                   >
                     {p.logo ? (
@@ -200,6 +202,19 @@ export default function Checkout() {
               </div>
             </div>
           </div>
+        </div>
+      ) : !items?.length ? (
+        <div className="h-[calc(100vh-100px)] capitalize flex justify-center flex-wrap content-center font-semibold">
+          {" "}
+          Don&apos;t have anything in cart.{" "}
+          <Link
+            href={"/shop"}
+            className="text-primary mx-1 hover:text-black cursor-pointer "
+            onClick={() => setIsopen(true)}
+          >
+            {" "}
+            Shop Now
+          </Link>{" "}
         </div>
       ) : (
         <div className="h-[calc(100vh-100px)] capitalize flex justify-center flex-wrap content-center font-semibold">

@@ -38,7 +38,7 @@ export default function ShortProductCard({
   const [intPart, remainingPart] = decimalStr(review);
 
   return (
-    <div className="lg:w-[285px] w-[150px] p-2   text-center ">
+    <div className="lg:w-[285px] w-[150px] md:w-[185px] p-2   text-center ">
       <div className="w-fit mx-auto relative group/div ">
         <div className="absolute w-[80%] h-[80%] grid place-items-center inset-0 rounded-[5px] transition-all origin-top scale-y-0 group-hover/div:scale-y-100 m-auto z-10 bg-white">
           {checkCart(id) ? (

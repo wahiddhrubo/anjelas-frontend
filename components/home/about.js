@@ -7,21 +7,25 @@ import Image from "next/image";
 export default function About() {
   const styles = {
     wrapper: "",
-    iconBoxDix: "w-[80%] my-[100px] mx-auto flex gap-[52px] shrink ",
+    iconBoxDix:
+      "w-[80%] lg:my-[100px] justify-center mx-auto flex lg:flex-nowrap flex-wrap gap-[52px] shrink ",
     iconBox:
-      "w-1/3 shadow-2xl rounded-[50px] space-y-[12px] p-[25px] text-center ",
+      "lg:w-1/3 w-[250px] shadow-2xl rounded-[50px] space-y-[12px] p-[25px] text-center ",
     icon: "mx-auto",
-    iconName: "text-highlight-lg text-black ",
+    iconName: "lg:text-highlight-lg text-[14px] font-semibold text-black ",
     iconDet: "font-bold text-secondary-text",
-    aboutSection: "relative overflow-y-clip  flex h-[1005px] ",
-    vector: "absolute left-[-105px] w-[350px] ",
+    aboutSection:
+      "relative overflow-y-clip  flex flex-wrap lg:flex-nowrap my-20 lg:h-[1005px] ",
+    vector: "absolute lg:block hidden left-[-105px] w-[350px] ",
     vectorImg: "",
-    aboutImg: "w-[650px] ml-[-50px] my-auto relative z-10  ",
+    aboutImg: "w-[650px] lg:block hidden  ml-[-50px] my-auto relative z-10  ",
     img: "",
-    aboutTextBox: "w-[585px] my-auto space-y-[16px] ml-[25px] ",
+    aboutTextBox:
+      "lg:w-[585px] my-auto space-y-[16px] px-4 lg:px-0 lg:ml-[25px] ",
     aboutHighlight: "text-highlight-lg text-primary",
-    aboutTitle: "text-heading-md text-primary-text",
-    aboutDetails: " text-secondary-text",
+    aboutTitle:
+      "lg:text-heading-md text-[22px] leading-[1.5] font-semibold text-primary-text",
+    aboutDetails: " lg:text-secondary-text  text-[14px] leading-[1.5] ",
   };
   const icons = [
     {
@@ -58,6 +62,15 @@ export default function About() {
         ))}
       </div>
       <div className={styles.aboutSection}>
+        <div className="w-full relative lg:hidden">
+          <Image
+            src="/images/about-vector.png"
+            alt=""
+            width={280}
+            height={600}
+            className="relative left-[-2rem]"
+          />
+        </div>
         <div className={styles.vector}>
           <Image
             src="/images/about-circle-vector.png"
