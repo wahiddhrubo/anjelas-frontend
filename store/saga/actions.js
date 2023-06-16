@@ -20,3 +20,6 @@ export const ADD_TO_CART = "ADD_TO_CART";
 export const MULTIPLE_ADD_TO_CART = "MULTIPLE_ADD_TO_CART";
 
 export const GET_ORDERS = "GET_ORDERS";
+export const CREATE_ORDER = "CREATE_ORDER";
+export const GET_SINGLE_ORDERS = "GET_SINGLE_ORDERS";
+export const POST_REVIEW = "POST_REVIEW";

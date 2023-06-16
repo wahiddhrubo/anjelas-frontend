@@ -2,6 +2,7 @@ import { SignUpBtn } from "../layout/button.js";
 import { MdShoppingCart } from "react-icons/md";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
 
 import SignUpModal from "../login/signUpModal.js";
 import { useDispatch, useSelector } from "react-redux";
@@ -21,7 +22,7 @@ export default function Navbar({ menu }) {
   const [isOpen, setIsopen] = useState(false);
   const [sidebar, setSidebar] = useState(false);
   const { items, quantity } = useSelector((state) => state.cart);
-  const { isAuthenticated, user } = useSelector(getUser);
+  const { isAuthenticated, user, error: userError } = useSelector(getUser);
   const avatarUrl = `https://api.dicebear.com/6.x/initials/svg?backgroundColor=FE7502&scale=70&textColor=ffffff&seed=${user?.username?.replace(
     " ",
     "+"
@@ -51,13 +52,24 @@ export default function Navbar({ menu }) {
   useEffect(() => {
     dispatch(getPriceAndQuantity());
   }, [items]);
+
   useEffect(() => {
     dispatch({ type: LOAD_USER });
   }, [isAuthenticated]);
 
-  const logoutHandler = () => {
-    dispatch({ type: LOGOUT });
-  };
+  useEffect(() => {
+    toast.error(userError, {
+      position: "bottom-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+  }, [userError]);
+
   const SignUpBtnHandler = () => {
     setIsopen(true);
   };

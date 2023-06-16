@@ -35,6 +35,7 @@ export function* addToCart(action) {
           data: { item: id, pricePerUnit, quantity, variant },
         })
       );
+      console.log(result);
       yield put({ type: GET_CART });
     } catch (error) {
       console.log(error);
@@ -68,6 +69,8 @@ export function* multipleAddToCart(action) {
             data: { item: id, pricePerUnit, quantity, variant },
           })
         );
+        console.log(user);
+        yield put({ type: GET_CART });
       } catch (error) {
         console.log(error);
       }

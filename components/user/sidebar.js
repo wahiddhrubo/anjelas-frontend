@@ -6,7 +6,7 @@ import { MdOutlineExitToApp } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { LOGOUT } from "../../store/saga/actions";
 import Link from "next/link";
-export default function SideBar({ active, setActive }) {
+export default function SideBar({ active, orderId }) {
   const dispatch = useDispatch();
 
   const logoutHandler = () => {
@@ -52,8 +52,8 @@ export default function SideBar({ active, setActive }) {
         href={"/user/#orders"}
         className="w-full p-4  flex  transition-colors duration-200 hover:text-primary hover:bg-[#fe750230] rounded-md border-b-2 flex-wrap content-center gap-2  cursor-pointer"
         style={{
-          color: active === "orders" ? "white" : "",
-          backgroundColor: active === "orders" ? "#FE7502" : "",
+          color: active === "orders" || orderId ? "white" : "",
+          backgroundColor: active === "orders" || orderId ? "#FE7502" : "",
         }}
       >
         <TbTruckDelivery className="w-4 h-4 my-auto mx-auto lg:mx-0 " />

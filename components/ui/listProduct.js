@@ -21,7 +21,7 @@ export default function ListProduct({
             #
           </div>
           <Image
-            loader={() => img}
+            alt={name}
             src={img}
             width={100}
             height={100}

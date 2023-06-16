@@ -14,6 +14,7 @@ import CartTotal from "../components/ui/cartTotal";
 export default function Cart() {
   const { items, price } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
+  console.log(items);
   const [cartNum, setCartNum] = useState([]);
 
   const updateCartHandler = () => {
@@ -50,27 +51,30 @@ export default function Cart() {
     }
   };
   return (
-    <div className="w-[80%] mx-auto">
+    <div className="md:w-[80%] mx-auto">
       <table className="w-full mt-20">
         <tr className="py-[25px] border-b-2 border-primary">
-          <th className="text-left w-[155px] text-[24px] text-primary py-[25px] "></th>
-          <th className="text-left text-[24px] text-primary py-[25px] w-[30%] ">
+          <th className="text-left  md:w-[155px] text-[24px] text-primary py-[25px] "></th>
+          <th className="text-left text-[14px] px-1 lg:text-[24px] text-primary py-[25px] w-[30%] ">
             Name
           </th>
-          <th className="text-left text-[24px] text-primary py-[25px]">
+          <th className="text-left text-[14px] px-1 lg:text-[24px] text-primary py-[25px]">
             Price
           </th>
-          <th className="text-left text-[24px] text-primary py-[25px]">
+          <th className="text-left text-[14px] px-1 lg:text-[24px] text-primary py-[25px]">
             Quantity{" "}
           </th>
-          <th className="text-left text-[24px] text-primary py-[25px]">
+          <th className="text-left text-[14px] px-1 lg:text-[24px] text-primary py-[25px]">
             Subtotal{" "}
           </th>
         </tr>
 
         {items?.map((i, index) => (
-          <tr key={index} className="border-b-2 border-primary ">
-            <td className="py-[25px] flex gap-2 ">
+          <tr
+            key={index}
+            className="border-b-2 text-[12px] leading-5 md:text-[16px] border-primary "
+          >
+            <td className="py-[25px] h-fit my-auto flex gap-2 ">
               <span
                 onClick={() => removeItem(i.id, i.item._id, i.variant)}
                 className="my-auto cursor-pointer text-primary "
@@ -78,22 +82,22 @@ export default function Cart() {
                 x
               </span>
               <Image
-                loader={() => i.item.featuredImage.url || i.item.featuredImage}
                 src={i.item.featuredImage.url || i.item.featuredImage}
                 width={120}
                 height={120}
+                className="lg:w-[120px] w-[60%] h-auto"
               />{" "}
             </td>
-            <td className="py-[25px]   font-semibold text-2xl">
+            <td className="py-[25px] font-semibold lg:text-2xl">
               <span className="my-auto ">{i.item.name}</span>
             </td>
-            <td className="py-5">{i.pricePerUnit}</td>
-            <td className="py-5 relative">
+            <td className="py-5 md:text-left text-center">{i.pricePerUnit}</td>
+            <td className="py-5 md:text-left text-center relative">
               <input
                 type="number"
                 defaultValue={i.quantity}
                 onChange={(e) => changeCart(i.id, e.target.value, i.variant)}
-                className="w-[52px] focus-visible:outline-none rounded-[0] mx-auto border-2 p-2 border-primary"
+                className="md:w-[52px] w-[35px] focus-visible:outline-none rounded-[0] mx-auto border-2 md:p-2 p-1 border-primary"
               />
               <div className="absolute inset-y-0 h-fit left-7 my-auto">
                 <MdOutlineKeyboardArrowUp className="text-primary" />
@@ -104,14 +108,16 @@ export default function Cart() {
           </tr>
         ))}
       </table>
-      <div className="flex mt-10 ">
-        <div className="flex gap-10">
-          <input
-            type="text"
-            placeholder="Coupon"
-            className="w-[250px] placeholder:font-semibold placeholder:text-black px-5 border-2 border-primary font-semibold"
-          />
-          <Button type={"primary"}>Apply Coupon</Button>
+      <div className="flex md:flex-nowrap md:flex-row flex-wrap flex-col-reverse gap-5 justify-between mt-10 ">
+        <div className="flex md:w-[75%] gap-10">
+          <div className="flex justify-between w-full">
+            <input
+              type="text"
+              placeholder="Coupon"
+              className="md:w-[250px] w-[220px] placeholder:font-semibold placeholder:text-black px-5 border-2 border-primary font-semibold"
+            />
+            <Button type={"primary"}>Apply Coupon</Button>
+          </div>
         </div>
         <div className="w-fit ml-auto">
           <Button type={"primary"} onClick={updateCartHandler}>

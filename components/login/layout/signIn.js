@@ -30,10 +30,7 @@ export default function SignUpModal({ setFormState, googleSignIn }) {
       <input
         type="text"
         placeholder="Email Address"
-        onChange={(e) => {
-          setEmail(e.target.value);
-          console.log(email);
-        }}
+        onChange={(e) => setEmail(e.target.value)}
         className={styles.input}
       />
       <input

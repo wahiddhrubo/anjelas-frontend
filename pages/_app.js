@@ -2,7 +2,10 @@ import "react-range-slider-input/dist/style.css";
 import "../styles/globals.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import "react-toastify/dist/ReactToastify.css";
+
 import Navbar from "../components/layout/navBar.js";
+import { ToastContainer } from "react-toastify";
 import { Provider, useDispatch } from "react-redux";
 import store from "../store/store";
 import Head from "next/head";
@@ -25,6 +28,7 @@ function MyApp({ Component, pageProps }) {
         <title>Anjela&apos;s Kitchen</title>
         <meta name="description" content="Home Food Delivery Store" />
       </Head>
+      <ToastContainer />
       <Navbar menu={navMenu} />
       <div className="lg:px-[100px] px-4 text-body-md text-[14px] md:text-[16px] static">
         <Component {...pageProps} />

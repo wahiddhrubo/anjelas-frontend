@@ -6,6 +6,7 @@ import {
   forgotPasswordSuccess,
   loadSuccess,
   logoutSuccess,
+  onError,
 } from "../../slice/user";
 import { GET_CART, MULTIPLE_ADD_TO_CART, LOAD_USER } from "../actions";
 import { getCart, getUser } from "../../selectors";
@@ -26,8 +27,8 @@ export function* login(action) {
 
     yield put({ type: GET_CART });
   } catch (error) {
-    console.log(error);
-    yield put(loginFail(error.response.data.message));
+    yield put(onError(error.response.data.message || error.message));
+    console.log(error.response.data.message || error.message);
   }
 }
 export function* loadUser(action) {
@@ -40,8 +41,7 @@ export function* loadUser(action) {
     yield put({ type: GET_CART });
     yield put(loadSuccess(data));
   } catch (error) {
-    console.log(error);
-    yield put(loginFail(error.response.data.message));
+    console.log(error.response.data.message || error.message);
   }
 }
 export function* logout(action) {
@@ -54,7 +54,7 @@ export function* logout(action) {
 
     yield put(logoutSuccess(data));
   } catch (error) {
-    console.log(error);
+    yield put(onError(error.response.data.message || error.message));
   }
 }
 export function* register(action) {
@@ -78,8 +78,9 @@ export function* register(action) {
 
     yield put(loginSuccess(data));
   } catch (error) {
-    console.log(error);
-    yield put(loginFail(error.response.data.message));
+    yield put(onError(error.response.data.message || error.message));
+
+    console.log(error.response.data.message || error.message);
   }
 }
 export function* forgotPassword(action) {
@@ -94,7 +95,7 @@ export function* forgotPassword(action) {
 
     yield put(forgotPasswordSuccess(data));
   } catch (error) {
-    console.log(error);
+    yield put(onError(error.response.data.message || error.message));
   }
 }
 export function* resetPassword(action) {
@@ -117,8 +118,9 @@ export function* resetPassword(action) {
     yield put({ type: GET_CART });
     yield put(loginSuccess(data));
   } catch (error) {
-    console.log(error);
-    yield put(loginFail(error.response.data.message));
+    yield put(onError(error.response.data.message || error.message));
+
+    console.log(error.response.data.message || error.message);
   }
 }
 
@@ -159,7 +161,7 @@ export function* addLocation(action) {
     );
     yield put({ type: LOAD_USER });
   } catch (error) {
-    console.log(error);
+    yield put(onError(error.response.data.message || error.message));
   }
 }
 export function* deleteLocation(action) {
@@ -180,6 +182,6 @@ export function* deleteLocation(action) {
     );
     yield put({ type: LOAD_USER });
   } catch (error) {
-    console.log(error);
+    yield put(onError(error.response.data.message || error.message));
   }
 }

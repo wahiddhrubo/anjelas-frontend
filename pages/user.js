@@ -10,20 +10,23 @@ import SideBar from "../components/user/sidebar";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import Orders from "../components/user/order/orders";
+import SingleOrder from "../components/user/order/singleOrder";
 
 export default function Checkout() {
   const dispatch = useDispatch();
   const searchParams = useSearchParams();
   const router = useRouter();
-  const [active, setActive] = useState("account");
+  const [active, setActive] = useState("");
   const { user } = useSelector((state) => state.user);
-
+  const orderId = searchParams.get("order");
   const { asPath } = router;
   const slug = asPath.split("#")[1];
 
   useEffect(() => {
     if (slug) {
       setActive(slug);
+    } else if (orderId) {
+      setActive("");
     } else {
       setActive("info");
     }
@@ -37,7 +40,7 @@ export default function Checkout() {
       {user ? (
         <>
           <div className="flex  relative gap-10 flex-wrap">
-            <SideBar active={active} setActive={setActive} />
+            <SideBar orderId={orderId} active={active} setActive={setActive} />
             <div className="lg:w-[70%] ml-auto min-h-screen flex flex-wrap content-center overflow-visible w-full">
               {active === "info" && <Account user={user} />}
               {active === "locations" && (
@@ -50,6 +53,7 @@ export default function Checkout() {
 
               {active === "request" && <RequestForm />}
               {active === "orders" && <Orders />}
+              {orderId && <SingleOrder />}
             </div>
           </div>
         </>

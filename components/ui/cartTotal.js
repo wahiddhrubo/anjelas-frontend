@@ -5,7 +5,7 @@ export default function CartTotal() {
   const { price } = useSelector((state) => state.cart);
   const totalServiceFee = taxRate * price;
   return (
-    <div className="text-[14px]">
+    <div className="md:text-[16px] text-[14px]">
       <div className="font-semibold lg:text-[32px] text-[22px] leading-relaxed text-primary">
         Cart Totals
       </div>

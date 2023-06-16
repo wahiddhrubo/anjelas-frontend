@@ -45,7 +45,6 @@ export default function Products() {
       page: currentPage,
     });
   }, [dispatch, keyword, descending, sortBy, categories, price, currentPage]);
-
   return (
     <div className="flex  lg:flex-nowrap flex-wrap justify-between mt-20 ">
       <div className="flex  flex-wrap justify-between gap-[5%] gap-y-[5%] lg:w-[63%] w-full ">

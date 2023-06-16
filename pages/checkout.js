@@ -5,7 +5,7 @@ import SignUpModal from "../components/login/signUpModal";
 import { AiOutlineHome } from "react-icons/ai";
 import { HiOutlineOfficeBuilding } from "react-icons/hi";
 import { HiOutlineLocationMarker } from "react-icons/hi";
-import { ADD_LOCATION } from "../store/saga/actions";
+import { ADD_LOCATION, CREATE_ORDER } from "../store/saga/actions";
 import Location from "../components/checkout/location";
 import AddLocation from "../components/checkout/addLocation";
 import TimeAndDate from "../components/checkout/timeAndDate";
@@ -13,13 +13,12 @@ import CartTotal from "../components/ui/cartTotal";
 import { BiMoney } from "react-icons/bi";
 import Image from "next/image";
 import { checkEmptyField } from "../lib/functions";
-import { getCart } from "../store/selectors";
+import { getCart, getUser } from "../store/selectors";
 import Link from "next/link";
 
 export default function Checkout() {
   const dispatch = useDispatch();
-  const { price, items } = useSelector((state) => state.cart);
-  console.log(items);
+  const { price, items } = useSelector(getCart);
   const paymentMethods = [
     {
       logo: "/images/bkash.svg",
@@ -44,7 +43,7 @@ export default function Checkout() {
     },
   ];
 
-  const { isAuthenticated, user } = useSelector((state) => state.user);
+  const { user } = useSelector(getUser);
   const [newLocation, setNewLocation] = useState(false);
   const [floorNo, setFloor] = useState();
   const [apartmentNo, setAppartment] = useState();
@@ -58,7 +57,8 @@ export default function Checkout() {
   const [location, setLocation] = useState();
 
   const orderHandler = (paymentMethod) => {
-    console.log({
+    dispatch({
+      type: CREATE_ORDER,
       location,
       deliveryCharge: deliveryFee,
       tax: taxRate * price,
@@ -69,6 +69,7 @@ export default function Checkout() {
       deliveryTime: time,
     });
   };
+  console.log(items);
 
   const locationHandler = () => {
     dispatch({
@@ -94,7 +95,7 @@ export default function Checkout() {
   return (
     <div>
       {isOpen && <SignUpModal isOpen={isOpen} setIsopen={setIsopen} />}
-      {user && items.length ? (
+      {user && items?.length ? (
         <div className="mb-28">
           <table className="text-[14px] lg:text-body-md w-1/2 mt-20">
             <tr>

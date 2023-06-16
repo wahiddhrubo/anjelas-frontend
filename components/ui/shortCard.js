@@ -54,8 +54,8 @@ export default function ShortProductCard({
           )}
         </div>
         <Image
-          loader={() => img}
           src={img}
+          alt={name}
           width={350}
           height={350}
           className="lg:h-[350px] w-[150px] h-[150px] lg:w-[350px] object-cover"
