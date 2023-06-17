@@ -66,6 +66,7 @@ export function* fetchProducts(action) {
 }
 export function* fetchLatestProducts(action) {
   const baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/items`;
+  console.log(baseUrl);
   const url = new URL(baseUrl);
   const params = new URLSearchParams(url.search);
   params.set("sortBy", "createdAt");
