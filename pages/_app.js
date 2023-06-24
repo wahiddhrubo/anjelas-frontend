@@ -24,6 +24,7 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <Provider store={store}>
+      <Analytics />
       <Head>
         <link rel="shortcut icon" href="/favicon.svg" />
 
@@ -37,7 +38,6 @@ function MyApp({ Component, pageProps }) {
       </div>
       <Footer />
       <ContactIcon />
-      <Analytics />
     </Provider>
   );
 }
