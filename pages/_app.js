@@ -11,6 +11,8 @@ import store from "../store/store";
 import Head from "next/head";
 import ContactIcon from "../components/contactIcon";
 import Footer from "../components/layout/footer";
+import { Analytics } from "@vercel/analytics/react";
+
 function MyApp({ Component, pageProps }) {
   const navMenu = [
     { text: "Packages", link: "/packages" },
@@ -35,6 +37,7 @@ function MyApp({ Component, pageProps }) {
       </div>
       <Footer />
       <ContactIcon />
+      <Analytics />
     </Provider>
   );
 }
