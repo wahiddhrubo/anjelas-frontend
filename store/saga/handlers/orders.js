@@ -9,6 +9,7 @@ import { put, call, select } from "redux-saga/effects";
 import { axiosCredentialsCall } from "../call";
 
 export function* fetchOrders(action) {
+  yield put(orderLoading());
   const { status } = action;
   try {
     const fetchUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/user/orders/${status}`;
@@ -22,6 +23,7 @@ export function* fetchOrders(action) {
 }
 
 export function* fetchSingleOrder(action) {
+  yield put(orderLoading());
   const { id } = action;
   try {
     const fetchUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/user/orders/order/${id}`;

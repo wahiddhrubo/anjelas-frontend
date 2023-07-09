@@ -5,13 +5,17 @@ import {
   productSuccess,
   productFail,
   latestProductSuccess,
+  productLoader,
 } from "../../slice/products";
 import {
+  singleProductLoading,
   singleProductSuccess,
   singleproductFail,
 } from "../../slice/singleProduct";
 
 export function* fetchProducts(action) {
+  console.log(action);
+  yield put(productLoader());
   const {
     keyword,
     categories,
@@ -65,6 +69,7 @@ export function* fetchProducts(action) {
   }
 }
 export function* fetchLatestProducts(action) {
+  yield put(productLoader());
   const baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/items`;
   console.log(baseUrl);
   const url = new URL(baseUrl);
@@ -85,6 +90,7 @@ export function* fetchLatestProducts(action) {
   }
 }
 export function* fetchSingleProducts(action) {
+  yield put(singleProductLoading());
   const { id } = action;
   const baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/items/${id}`;
 

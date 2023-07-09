@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Button from "../components/ui/buttons";
+import Loader from "../components/loader";
 export default function Orders() {
   const order = {
     items: [

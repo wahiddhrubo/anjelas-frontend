@@ -6,12 +6,11 @@ const productSlice = createSlice({
   name: "products",
   initialState,
   reducers: {
-    productLoading: (state, action) => {
+    productLoader: (state, action) => {
       state.loading = true;
     },
     productSuccess: (state, action) => {
       const { items, total, pages } = action.payload;
-
       state.loading = false;
       state.items = items;
       state.numOfProducts = total;
@@ -30,7 +29,7 @@ const productSlice = createSlice({
 
 export const {
   productFail,
-  productLoading,
+  productLoader,
   productSuccess,
   latestProductSuccess,
 } = productSlice.actions;

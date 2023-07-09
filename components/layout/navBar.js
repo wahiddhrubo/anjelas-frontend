@@ -49,27 +49,6 @@ export default function Navbar({ menu }) {
     },
   };
 
-  useEffect(() => {
-    dispatch(getPriceAndQuantity());
-  }, [items]);
-
-  useEffect(() => {
-    dispatch({ type: LOAD_USER });
-  }, [isAuthenticated]);
-
-  useEffect(() => {
-    toast.error(userError, {
-      position: "bottom-center",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-    });
-  }, [userError]);
-
   const SignUpBtnHandler = () => {
     setIsopen(true);
   };

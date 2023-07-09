@@ -12,7 +12,7 @@ export default function Home() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch({ type: LATEST_PRODUCT });
-  }, []);
+  }, [dispatch]);
   console.log(latestItems);
   return (
     <div className=" ">

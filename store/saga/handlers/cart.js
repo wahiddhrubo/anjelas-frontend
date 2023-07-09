@@ -2,6 +2,7 @@ import { put, call, select } from "redux-saga/effects";
 import { axiosCredentialsCall } from "../call";
 import {
   addToCartNonUser,
+  cartLoading,
   removeFromCartNonUser,
   updateCart,
   updateCartNonUser,
@@ -10,6 +11,7 @@ import { GET_CART } from "../actions";
 import { getUser } from "../../selectors";
 
 export function* fetchCart(action) {
+  yield put(cartLoading());
   try {
     const fetchUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/user/cart`;
     const { data } = yield call(() =>
@@ -21,6 +23,7 @@ export function* fetchCart(action) {
   }
 }
 export function* addToCart(action) {
+  yield put(cartLoading());
   const { id, pricePerUnit, quantity, variant, name, featuredImage } = action;
   const baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/user/cart`;
 
@@ -53,6 +56,7 @@ export function* addToCart(action) {
   }
 }
 export function* multipleAddToCart(action) {
+  yield put(cartLoading());
   const { items } = action;
   const baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/user/cart`;
 
@@ -88,6 +92,7 @@ export function* multipleAddToCart(action) {
   }
 }
 export function* updateItemsInCart(action) {
+  yield put(cartLoading());
   const { id, quantity, variant } = action;
   const baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/update/cart`;
   const { user } = yield select(getUser);
@@ -115,6 +120,7 @@ export function* updateItemsInCart(action) {
   }
 }
 export function* multipleUpdatesToCart(action) {
+  yield put(cartLoading());
   const { items } = action;
   const baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/update/cart`;
   const { user } = yield select(getUser);

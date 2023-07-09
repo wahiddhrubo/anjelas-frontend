@@ -10,6 +10,7 @@ import {
 } from "../../slice/user";
 import { GET_CART, MULTIPLE_ADD_TO_CART, LOAD_USER } from "../actions";
 import { getCart, getUser } from "../../selectors";
+import { data } from "autoprefixer";
 
 export function* login(action) {
   const { email, password } = action;
@@ -17,9 +18,11 @@ export function* login(action) {
   const { items } = yield select(getCart);
 
   try {
-    const { data } = yield call(() =>
+    const result = yield call(() =>
       axiosCredentialsCall({ url, method: "post", data: { email, password } })
     );
+    const { data } = result;
+    console.log(result);
     yield put(loginSuccess(data));
     if (items) {
       yield put({ type: MULTIPLE_ADD_TO_CART, items });

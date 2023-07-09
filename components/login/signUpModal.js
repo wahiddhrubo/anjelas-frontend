@@ -61,6 +61,7 @@ export default function SignUpModal({ isOpen, setIsopen }) {
     <>
       {!user && (
         <Modal
+          ariaHideApp={false}
           isOpen={isOpen}
           className="border-0 absolute h-screen flex flex-wrap content-center inset-0 m-auto bg-[#00000099] "
         >

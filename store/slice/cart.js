@@ -17,6 +17,7 @@ const cartSlice = createSlice({
   reducers: {
     updateCart: (state, action) => {
       state.items = action.payload.cart.items;
+      state.loading = false;
     },
     addToCartNonUser: (state, action) => {
       const { id, variant, quantity } = action.payload;
@@ -31,6 +32,7 @@ const cartSlice = createSlice({
           ? [...state.items, action.payload]
           : [action.payload];
       }
+      state.loading = false;
     },
     updateCartNonUser: (state, action) => {
       const { id, quantity, variant } = action.payload;
@@ -42,12 +44,14 @@ const cartSlice = createSlice({
       } else {
         state.items = state.items.filter((i) => i.id === id);
       }
+      state.loading = false;
     },
     removeFromCartNonUser: (state, action) => {
       const { id, variant } = action.payload;
       state.items = state.items.filter((i) => {
         return i.id !== id && i.variant !== variant;
       });
+      state.loading = false;
     },
     getPriceAndQuantity: (state, action) => {
       state.quantity = state.items?.reduce(
@@ -59,6 +63,9 @@ const cartSlice = createSlice({
         0
       );
     },
+    cartLoading: (state, action) => {
+      state.loading = true;
+    },
   },
 });
 
@@ -68,5 +75,6 @@ export const {
   updateCartNonUser,
   getPriceAndQuantity,
   updateCart,
+  cartLoading,
 } = cartSlice.actions;
 export default cartSlice.reducer;
