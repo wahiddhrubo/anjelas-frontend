@@ -7,12 +7,13 @@ import {
   loadSuccess,
   logoutSuccess,
   onError,
+  userLoading,
 } from "../../slice/user";
 import { GET_CART, MULTIPLE_ADD_TO_CART, LOAD_USER } from "../actions";
 import { getCart, getUser } from "../../selectors";
-import { data } from "autoprefixer";
 
 export function* login(action) {
+  yield put(userLoading());
   const { email, password } = action;
   const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/user/login`;
   const { items } = yield select(getCart);
@@ -22,7 +23,6 @@ export function* login(action) {
       axiosCredentialsCall({ url, method: "post", data: { email, password } })
     );
     const { data } = result;
-    console.log(result);
     yield put(loginSuccess(data));
     if (items) {
       yield put({ type: MULTIPLE_ADD_TO_CART, items });
@@ -48,6 +48,7 @@ export function* loadUser(action) {
   }
 }
 export function* logout(action) {
+  yield put(userLoading());
   try {
     const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/logout`;
 
@@ -61,6 +62,7 @@ export function* logout(action) {
   }
 }
 export function* register(action) {
+  yield put(userLoading());
   const { email, password, username } = action;
   const { items } = yield select(getCart);
 
@@ -87,6 +89,7 @@ export function* register(action) {
   }
 }
 export function* forgotPassword(action) {
+  yield put(userLoading());
   const { email } = action;
 
   try {
@@ -102,6 +105,7 @@ export function* forgotPassword(action) {
   }
 }
 export function* resetPassword(action) {
+  yield put(userLoading());
   const { confirmPassword, token, password } = action;
   const { items } = yield select(getCart);
 
@@ -128,6 +132,7 @@ export function* resetPassword(action) {
 }
 
 export function* addLocation(action) {
+  yield put(userLoading());
   const { floorNo, apartmentNo, streetAddress, area, phone, locType } = action;
   const data = {
     apartmentNo,
@@ -145,14 +150,14 @@ export function* addLocation(action) {
       console.log("working");
       const dt = { phone };
       const updateUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/user`;
-      const rslt = yield call(() =>
-        axiosCredentialsCall({
-          url: updateUrl,
-          method: "post",
-          dt,
-        })
-      );
-      console.log(rslt, dt);
+      console.log(dt);
+      // const rslt = yield call(() =>
+      //   axiosCredentialsCall({
+      //     url: updateUrl,
+      //     method: "post",
+      //     dt,
+      //   })
+      // );
     }
     const fetchUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/user/locations/${slug}`;
     const result = yield call(() =>

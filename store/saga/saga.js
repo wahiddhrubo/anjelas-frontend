@@ -2,6 +2,7 @@ import { takeLatest } from "redux-saga/effects";
 import {
   fetchLatestProducts,
   fetchProducts,
+  fetchSearchedProducts,
   fetchSingleProducts,
 } from "./handlers/products";
 import {
@@ -26,6 +27,7 @@ import {
   POST_REVIEW,
   GET_SINGLE_ORDERS,
   CREATE_ORDER,
+  SEARCHED_PRODUCT,
 } from "./actions";
 import {
   login,
@@ -74,4 +76,5 @@ export default function* rootSaga() {
   yield takeLatest(CREATE_ORDER, createOrder);
   yield takeLatest(POST_REVIEW, postReview);
   yield takeLatest(GET_SINGLE_ORDERS, fetchSingleOrder);
+  yield takeLatest(SEARCHED_PRODUCT, fetchSearchedProducts);
 }

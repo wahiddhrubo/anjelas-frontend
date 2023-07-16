@@ -6,6 +6,8 @@ import {
   productFail,
   latestProductSuccess,
   productLoader,
+  searchLoader,
+  searchProductSuccess,
 } from "../../slice/products";
 import {
   singleProductLoading,
@@ -63,6 +65,29 @@ export function* fetchProducts(action) {
         pages,
       })
     );
+  } catch (error) {
+    console.log(error);
+    yield put(productFail(error));
+  }
+}
+export function* fetchSearchedProducts(action) {
+  yield put(searchLoader());
+
+  const { keyword } = action;
+  const itemPerPage = 100;
+  const baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/items`;
+  const url = new URL(baseUrl);
+  const params = new URLSearchParams(url.search);
+  params.set("keyword", keyword || "");
+  params.set("itemPerPage", itemPerPage);
+
+  try {
+    const fetchUrl = `${url}?${params}`;
+    const { data } = yield call(() =>
+      axiosCall({ url: fetchUrl, method: "get" })
+    );
+    const { data: items } = data.items[0];
+    yield put(searchProductSuccess({ items }));
   } catch (error) {
     console.log(error);
     yield put(productFail(error));

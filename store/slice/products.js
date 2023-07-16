@@ -9,6 +9,9 @@ const productSlice = createSlice({
     productLoader: (state, action) => {
       state.loading = true;
     },
+    searchLoader: (state, action) => {
+      state.searchLoading = true;
+    },
     productSuccess: (state, action) => {
       const { items, total, pages } = action.payload;
       state.loading = false;
@@ -21,6 +24,11 @@ const productSlice = createSlice({
       state.loading = false;
       state.latestItems = items;
     },
+    searchProductSuccess: (state, action) => {
+      const { items } = action.payload;
+      state.searchLoading = false;
+      state.searchItems = items;
+    },
     productFail: (state, action) => {
       state.loading = false;
     },
@@ -32,5 +40,7 @@ export const {
   productLoader,
   productSuccess,
   latestProductSuccess,
+  searchLoader,
+  searchProductSuccess,
 } = productSlice.actions;
 export default productSlice.reducer;

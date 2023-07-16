@@ -7,7 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { Provider, useDispatch } from "react-redux";
 import store from "../store/store";
 import { Analytics } from "@vercel/analytics/react";
-import Layout from "../components/layout";
+import Layout from "../components/layout/layout";
 function MyApp({ Component, pageProps }) {
   const navMenu = [
     { text: "Packages", link: "/packages" },

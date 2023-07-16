@@ -10,7 +10,7 @@ export const CtaBtn = ({ text, onClick }) => {
 };
 export const SignUpBtn = ({ text, onClick }) => {
   const styles = {
-    btn: "font-bold cursor-pointer bg-white rounded-[10px] py-[8px] px-[35px] text-bold font-[18px] text-black ",
+    btn: "font-bold cursor-pointer bg-white rounded-[10px] py-[8px] lg:px-[35px] px-[24px] text-bold text- text-black ",
   };
   return (
     <div onClick={onClick || null} className={styles.btn}>

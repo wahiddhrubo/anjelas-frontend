@@ -6,7 +6,7 @@ const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    loginLoading: (state, action) => {
+    userLoading: (state, action) => {
       state.loading = true;
     },
     loginSuccess: (state, action) => {
@@ -15,6 +15,7 @@ const userSlice = createSlice({
       state.user = action.payload.user;
     },
     loadSuccess: (state, action) => {
+      state.loading = false;
       state.isAuthenticated = true;
       state.user = action.payload.user;
     },
@@ -37,7 +38,7 @@ const userSlice = createSlice({
 
 export const {
   loadSuccess,
-  loginLoading,
+  userLoading,
   loginSuccess,
   logoutSuccess,
   forgotPasswordSuccess,

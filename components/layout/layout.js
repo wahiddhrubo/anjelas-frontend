@@ -7,17 +7,21 @@ import {
   getProducts,
   getSingleProduct,
   getOrders,
-} from "../store/selectors";
-import Loader from "./loader";
-import Navbar from "./layout/navBar.js";
+} from "../../store/selectors";
+import Loader from "../loader";
+import Navbar from "../layout/navBar.js";
 import { ToastContainer, toast } from "react-toastify";
 import Head from "next/head";
-import ContactIcon from "./contactIcon";
-import Footer from "./layout/footer";
-import { getPriceAndQuantity } from "../store/slice/cart";
-import { LOAD_USER } from "../store/saga/actions";
+import ContactIcon from "../contactIcon";
+import Footer from "../layout/footer";
+import { getPriceAndQuantity } from "../../store/slice/cart";
+import { LOAD_USER } from "../../store/saga/actions";
+import { useState } from "react";
+import SearchDiv from "./searchDiv";
 
 export default function Layout({ children }) {
+  const [searchMode, setSearchMode] = useState(false);
+
   const navMenu = [
     { text: "Packages", link: "/packages" },
     { text: "Offers", link: "/offers" },
@@ -46,13 +50,6 @@ export default function Layout({ children }) {
     loadingProducts ||
     loadingSingleProduct ||
     loadingOrders;
-  console.log({
-    loadingCart,
-    loadingUser,
-    loadingProducts,
-    loadingSingleProduct,
-    loadingOrders,
-  });
 
   useEffect(() => {
     dispatch({ type: LOAD_USER });
@@ -89,8 +86,21 @@ export default function Layout({ children }) {
       )}
 
       <>
-        <Navbar menu={navMenu} />
-        <div className="lg:px-[100px] px-4 text-body-md text-[14px] md:text-[16px] static">
+        <Navbar
+          menu={navMenu}
+          setSearchMode={setSearchMode}
+          searchMode={searchMode}
+        />
+        {searchMode && (
+          <div className="lg:px-[100px] px-4 text-body-md text-[14px] md:text-[16px] static">
+            <SearchDiv />
+          </div>
+        )}
+
+        <div
+          style={{ display: searchMode ? "none" : "" }}
+          className="lg:px-[100px] px-4 text-body-md text-[14px] md:text-[16px] static"
+        >
           {children}
         </div>
         <Footer />
