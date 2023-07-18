@@ -8,9 +8,15 @@ import Image from "next/image.js";
 import { getUser } from "../../../store/selectors.js";
 import UserDropdown from "../../ui/userDropdown.js";
 import SearchBar from "./searchBar.js";
-
+import { useRouter } from "next/router.js";
+import Button from "../../ui/buttons.js";
 export default function LgNav({ setIsopen, menu, searchMode, setSearchMode }) {
   const { items, quantity } = useSelector((state) => state.cart);
+  const router = useRouter();
+  const { route } = router;
+  const navPage = ["about-us"];
+  const navWhiteMode = navPage.includes(route.replace("/", ""));
+
   const { isAuthenticated, user, error: userError } = useSelector(getUser);
   const avatarUrl = `https://api.dicebear.com/6.x/initials/svg?backgroundColor=FE7502&scale=70&textColor=ffffff&seed=${user?.username?.replace(
     " ",
@@ -33,7 +39,10 @@ export default function LgNav({ setIsopen, menu, searchMode, setSearchMode }) {
   return (
     <div>
       {" "}
-      <div className={styles.wrapper}>
+      <div
+        style={{ color: navWhiteMode ? "#ffffffc7" : "" }}
+        className={styles.wrapper}
+      >
         <div className={styles.logo}>
           <Link href={"/"}>
             <Image src="/images/logo.svg" width={150} height={80} />
@@ -58,7 +67,11 @@ export default function LgNav({ setIsopen, menu, searchMode, setSearchMode }) {
             </div>
           </Link>
           {!isAuthenticated ? (
-            <SignUpBtn text="Sign In" onClick={SignUpBtnHandler} />
+            <>
+              <Button type={"register"} onClick={SignUpBtnHandler}>
+                Sign In
+              </Button>
+            </>
           ) : (
             <>
               <div className="relative group">

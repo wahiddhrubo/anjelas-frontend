@@ -18,9 +18,14 @@ import { getPriceAndQuantity } from "../../store/slice/cart";
 import { LOAD_USER } from "../../store/saga/actions";
 import { useState } from "react";
 import SearchDiv from "./searchDiv";
+import { useRouter } from "next/router";
 
 export default function Layout({ children }) {
   const [searchMode, setSearchMode] = useState(false);
+  const router = useRouter();
+  const { route } = router;
+  const navPage = ["about-us"];
+  const navWhiteMode = navPage.includes(route.replace("/", ""));
 
   const navMenu = [
     { text: "Packages", link: "/packages" },
@@ -36,6 +41,7 @@ export default function Layout({ children }) {
     isAuthenticated,
     error: userError,
   } = useSelector(getUser);
+
   const { loading: loadingProducts } = useSelector(getProducts);
   const { loading: loadingSingleProduct } = useSelector(getSingleProduct);
   const { loading: loadingOrders } = useSelector(getOrders);

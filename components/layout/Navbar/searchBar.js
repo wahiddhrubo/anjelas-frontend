@@ -35,7 +35,7 @@ export default function SearchBar({ searchMode, setSearchMode }) {
 
   return (
     <>
-      <div className=" md:hidden ml-4 cursor-pointer flex justify-end items-center  h-full">
+      <div className=" md:hidden ml-4  cursor-pointer flex justify-end items-center  h-full">
         <AiOutlineSearch
           onClick={searchHandler}
           className="w-[25px] h-[25px]"
@@ -44,7 +44,7 @@ export default function SearchBar({ searchMode, setSearchMode }) {
           variants={searchAnim}
           animate="animate"
           initial="initial"
-          className="absolute justify-between flex inset-x-[5%] h-full p-4 bg-gray-200 rounded-md w-[90%] "
+          className="absolute mt-5 justify-between flex inset-x-[5%] h-full p-4 bg-gray-200 rounded-md w-[90%] "
         >
           <input
             value={keyword}
