@@ -3,7 +3,7 @@ import React from "react";
 import { AiOutlineHourglass } from "react-icons/ai";
 import { BsPin } from "react-icons/bs";
 import { TbMedal } from "react-icons/tb";
-import { Inter, Cookie, Montserrat } from "@next/font/google";
+import { Cookie, Montserrat } from "@next/font/google";
 
 const cookie = Cookie({ weight: "400", style: ["normal"], subsets: ["latin"] });
 const montserrat = Montserrat({
@@ -50,15 +50,19 @@ export default function Discover() {
   return (
     <div className="w-[90%] mx-auto ">
       <div className="grid md:grid-cols-3 grid-cols-1 gap-10 mx-auto my-16">
-        {fea.map((f) => (
-          <div className="text-center">
+        {fea.map((f, index) => (
+          <div key={index} className="text-center">
             <div className="w-28 h-28 mx-auto rounded-full grid place-items-center border-2 border-primary">
               {f.icon}
             </div>
             <div className={` text-black text-body-lg font-semibold my-6 `}>
               {f.title}
             </div>
-            <div className={`${montserrat.className}`}>{f.description}</div>
+            <div
+              className={`${montserrat.className} md:text-[16px] text-[14px]`}
+            >
+              {f.description}
+            </div>
           </div>
         ))}
       </div>
@@ -95,7 +99,7 @@ export default function Discover() {
             We are committed to using the finest ingredients, supporting local
             suppliers, and showcasing culinary innovation. With a dedicated team
             passionate about delivering excellence, we strive to create
-            memorable moments that exceed our guests' expectations.
+            memorable moments that exceed our guests&apos; expectations.
             <br />
             <br />
             Our mission is to become a cherished part of our community, where

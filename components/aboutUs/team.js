@@ -57,13 +57,13 @@ export default function Team() {
               <br />
               Her dedication to quality, attention to detail, and commitment to
               customer satisfaction make her an invaluable asset to our culinary
-              team. Chef Anjela's culinary journey began at an early age, honing
-              her skills through years of experimentation, self-learning, and a
-              passion for discovering new flavors.
+              team. Chef Anjela&apos;s culinary journey began at an early age,
+              honing her skills through years of experimentation, self-learning,
+              and a passion for discovering new flavors.
             </div>
             <div className="grid grid-cols-2 mt-5 gap-x-10 w-[60%] ">
-              {socialHandler.map((s) => (
-                <div className="capitalize  leading-8">
+              {socialHandler.map((s, index) => (
+                <div key={index} className="capitalize  leading-8">
                   <Link href={s.link}>{s.name}</Link>
                 </div>
               ))}
