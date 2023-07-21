@@ -3,7 +3,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { BsInstagram, BsWhatsapp } from "react-icons/bs";
 import { FaFacebookMessenger } from "react-icons/fa";
+import { useRouter } from "next/router";
 export default function Footer() {
+  const router = useRouter();
+  const { route } = router;
+  const noFooterPages = ["contact-us"];
+  const footerDisplay = !noFooterPages.includes(route.replace("/", ""));
+
   const socials = [
     {
       link: "wa.me/+8801963322783",
@@ -27,7 +33,7 @@ export default function Footer() {
       links: [
         {
           name: "Contact us",
-          link: "/contact",
+          link: "/contact-us",
         },
         {
           name: "FAQ",
@@ -63,7 +69,10 @@ export default function Footer() {
     },
   ];
   return (
-    <div className="lg:h-[500px] pb-2 mt-[100px] relative w-full">
+    <div
+      style={{ display: footerDisplay ? "" : "none" }}
+      className="lg:h-[500px] pb-2 mt-[100px] relative w-full"
+    >
       <Image
         src={"/images/footer-bg.png"}
         width={400}

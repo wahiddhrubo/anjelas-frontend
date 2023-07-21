@@ -57,12 +57,12 @@ export function* createOrder(action) {
     total,
     coupon,
     discount,
-    paymentMethod,
     deliveryDate,
     deliveryTime,
   };
+  const method = paymentMethod || "";
   try {
-    const fetchUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/order`;
+    const fetchUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/order/${method}`;
     const result = yield call(() =>
       axiosCredentialsCall({ url: fetchUrl, method: "post", data })
     );

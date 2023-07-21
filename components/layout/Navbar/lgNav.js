@@ -15,13 +15,19 @@ export default function LgNav({ setIsopen, menu, searchMode, setSearchMode }) {
   const router = useRouter();
   const { route } = router;
   const navPage = ["about-us"];
+  const whiteLogoPages = ["packages"];
+  const whiteButtonPages = ["", "packages", "about-us"];
   const navWhiteMode = navPage.includes(route.replace("/", ""));
+  const whiteButton = whiteButtonPages.includes(route.replace("/", ""));
+  const whiteLogo = whiteLogoPages.includes(route.replace("/", ""));
 
   const { isAuthenticated, user, error: userError } = useSelector(getUser);
-  const avatarUrl = `https://api.dicebear.com/6.x/initials/svg?backgroundColor=FE7502&scale=70&textColor=ffffff&seed=${user?.username?.replace(
-    " ",
-    "+"
-  )}`;
+
+  const avatarUrl = `https://api.dicebear.com/6.x/initials/svg?backgroundColor=${
+    whiteButton ? "FFFFFF" : "FE7502"
+  }&scale=70&textColor=${
+    whiteButton ? "FE7502" : "FFFFFF"
+  }&seed=${user?.username?.replace(" ", "+")}`;
   const styles = {
     wrapper:
       "font-bold lg:px-[100px] px-8 hidden  relative z-[20] h-[45px] mt-[32px] content-center md:flex w-full text-black",
@@ -40,12 +46,18 @@ export default function LgNav({ setIsopen, menu, searchMode, setSearchMode }) {
     <div>
       {" "}
       <div
-        style={{ color: navWhiteMode ? "#ffffffc7" : "" }}
+        style={{
+          color: navWhiteMode ? "#ffffffc7" : "",
+        }}
         className={styles.wrapper}
       >
         <div className={styles.logo}>
           <Link href={"/"}>
-            <Image src="/images/logo.svg" width={150} height={80} />
+            <Image
+              src={whiteLogo ? "/images/logo-light.svg" : "/images/logo.svg"}
+              width={150}
+              height={80}
+            />
           </Link>
         </div>
         <div className={styles.menu}>
@@ -68,7 +80,14 @@ export default function LgNav({ setIsopen, menu, searchMode, setSearchMode }) {
           </Link>
           {!isAuthenticated ? (
             <>
-              <Button type={"register"} onClick={SignUpBtnHandler}>
+              <Button
+                type={
+                  whiteLogo || navWhiteMode || whiteButton
+                    ? "register"
+                    : "register-light"
+                }
+                onClick={SignUpBtnHandler}
+              >
                 Sign In
               </Button>
             </>

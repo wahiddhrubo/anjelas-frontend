@@ -42,6 +42,20 @@ export default function Button({ className, children, onClick, type, link }) {
           <span class="absolute inset-0 border-4 border-white "></span>
         </Link>
       )}
+      {type === "register-light" && (
+        <Link
+          href={link ? link : "#_"}
+          onClick={() => onClick()}
+          class="relative  items-center justify-start inline-block px-8 py-3 overflow-hidden font-bold  group"
+        >
+          <span class="w-36 h-36 rotate-45 translate-x-12 -translate-y-2 absolute left-0 top-0 bg-primary opacity-[3%]"></span>
+          <span class="absolute top-0 left-0 w-48 h-48 -mt-1 transition-all duration-500 ease-in-out rotate-45 -translate-x-56 -translate-y-24 bg-primary opacity-100 group-hover:-translate-x-6"></span>
+          <span class="relative w-full text-left text-primary transition-colors duration-200 ease-in-out group-hover:text-white">
+            {children}
+          </span>
+          <span class="absolute inset-0 border-4 border-primary "></span>
+        </Link>
+      )}
     </>
   );
 }

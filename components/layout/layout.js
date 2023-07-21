@@ -22,17 +22,13 @@ import { useRouter } from "next/router";
 
 export default function Layout({ children }) {
   const [searchMode, setSearchMode] = useState(false);
-  const router = useRouter();
-  const { route } = router;
-  const navPage = ["about-us"];
-  const navWhiteMode = navPage.includes(route.replace("/", ""));
 
   const navMenu = [
     { text: "Packages", link: "/packages" },
     { text: "Offers", link: "/offers" },
     { text: "Shop", link: "/shop" },
     { text: "Catering", link: "/catering" },
-    { text: "About Us", link: "/about-Us" },
+    { text: "About Us", link: "/about-us" },
   ];
   const dispatch = useDispatch();
   const { loading: loadingCart, items, quantity } = useSelector(getCart);
