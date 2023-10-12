@@ -63,7 +63,7 @@ export default function Checkout() {
       deliveryCharge: deliveryFee,
       tax: taxRate * price,
       subTotal: price,
-      total: price + taxRate * price + deliveryFee,
+      total: parseInt(price + taxRate * price + deliveryFee),
       paymentMethod,
       deliveryDate,
       deliveryTime: time,
@@ -88,7 +88,7 @@ export default function Checkout() {
     deliveryCharge: deliveryFee,
     tax: taxRate * price,
     subTotal: price,
-    total: price + taxRate * price + deliveryFee,
+    total: parseInt(price + taxRate * price + deliveryFee),
     deliveryDate,
     deliveryTime: time,
   });

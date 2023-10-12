@@ -34,6 +34,14 @@ export function* login(action) {
     console.log(error.response.data.message || error.message);
   }
 }
+export function* googleSignUp(action) {
+  yield put(userLoading());
+  window.open(
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/auth/google`,
+    "_self"
+  );
+}
+
 export function* loadUser(action) {
   try {
     const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/user`;

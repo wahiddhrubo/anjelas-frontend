@@ -7,6 +7,7 @@ import {
   getProducts,
   getSingleProduct,
   getOrders,
+  getCoupon,
 } from "../../store/selectors";
 import Loader from "../loader";
 import Navbar from "../layout/navBar.js";
@@ -41,6 +42,11 @@ export default function Layout({ children }) {
   const { loading: loadingProducts } = useSelector(getProducts);
   const { loading: loadingSingleProduct } = useSelector(getSingleProduct);
   const { loading: loadingOrders } = useSelector(getOrders);
+  const {
+    loading: loadingCoupon,
+    sucess: couponSucess,
+    error: couponError,
+  } = useSelector(getCoupon);
 
   useEffect(() => {
     dispatch(getPriceAndQuantity());
@@ -51,12 +57,42 @@ export default function Layout({ children }) {
     loadingUser ||
     loadingProducts ||
     loadingSingleProduct ||
-    loadingOrders;
+    loadingOrders ||
+    loadingCoupon;
+  const d = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
+  const today = new Date();
+  console.log(today < d);
 
   useEffect(() => {
     dispatch({ type: LOAD_USER });
   }, [isAuthenticated]);
 
+  useEffect(() => {
+    if (couponError) {
+      toast.error(couponError, {
+        position: "bottom-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+    }
+    if (couponSucess) {
+      toast.success(couponSucess, {
+        position: "bottom-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+    }
+  }, [couponSucess, couponError]);
   useEffect(() => {
     toast.error(userError, {
       position: "bottom-center",
@@ -101,7 +137,7 @@ export default function Layout({ children }) {
 
         <div
           style={{ display: searchMode ? "none" : "" }}
-          className="lg:px-[100px] px-4 text-body-md text-[14px] md:text-[16px] static"
+          className="lg:px-[100px] bg-white text-black px-4 text-body-md text-[14px] md:text-[16px] static"
         >
           {children}
         </div>

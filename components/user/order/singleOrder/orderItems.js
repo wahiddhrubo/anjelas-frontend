@@ -8,6 +8,7 @@ export default function OrderItems({
   item,
   setReviewModalOpen,
   setReviewItem,
+  status,
 }) {
   const reviewModalHandler = () => {
     setReviewModalOpen(true);
@@ -38,11 +39,19 @@ export default function OrderItems({
               (x{item.quantity})
             </span>
           </div>
-          <div className="w-fit ml-auto">
-            <Button onClick={reviewModalHandler} type={"review"}>
-              Leave A Review
-            </Button>
-          </div>
+          {status === "delivered" ? (
+            <div className="w-fit ml-auto">
+              <Button onClick={reviewModalHandler} type={"review"}>
+                Leave A Review
+              </Button>
+            </div>
+          ) : (
+            <div className="w-fit ml-auto">
+              <Button onClick={reviewModalHandler} type={"disabled"}>
+                Leave A Review
+              </Button>
+            </div>
+          )}
         </div>
       </div>
     </>

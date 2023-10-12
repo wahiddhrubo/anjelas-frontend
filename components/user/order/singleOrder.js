@@ -63,6 +63,7 @@ export default function SingleOrder() {
           {order.items.map((i) => (
             <OrderItems
               key={i._id}
+              status={order.status}
               setReviewItem={setReviewItem}
               setReviewModalOpen={setReviewModalOpen}
               item={i}
@@ -70,7 +71,7 @@ export default function SingleOrder() {
           ))}
           <div
             onClick={addItemsToCart}
-            className=" cursor-pointer w-full text-center bg-[#fe75024f] text-primary my-5 rounded  py-8 font-semibold"
+            className=" cursor-pointer w-full text-center bg-[#fe75021f] text-primary my-5 rounded  py-8 font-semibold"
           >
             Place A New Order With Same Items
           </div>

@@ -28,6 +28,14 @@ export default function Button({ className, children, onClick, type, link }) {
           <span class="relative">{children}</span>
         </Link>
       )}
+      {type === "disabled" && (
+        <Link
+          href={"#_"}
+          class="relative inline-flex items-center px-8 py-[2px] overflow-hidden   text-gray-600 text-[14px] font-semibold border-2 border-gray-600 rounded  hover"
+        >
+          <span class="relative">{children}</span>
+        </Link>
+      )}
       {type === "register" && (
         <Link
           href={link ? link : "#_"}

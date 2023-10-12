@@ -9,9 +9,10 @@ import Login from "./layout/signIn.js";
 import SignUp from "./layout/signUp.js";
 import MobileSignIn from "./layout/mobileSignIn.js";
 import ForgotPassword from "./layout/forgotPassword.js";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
+import { GOOGLE_SIGN_IN } from "../../store/saga/actions.js";
 
 export default function SignUpModal({ isOpen, setIsopen }) {
   const modalAnim = {
@@ -42,7 +43,7 @@ export default function SignUpModal({ isOpen, setIsopen }) {
   };
 
   const [formState, setFormState] = useState("login");
-
+  const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
 
   const styles = {
@@ -56,6 +57,9 @@ export default function SignUpModal({ isOpen, setIsopen }) {
     input:
       "bg-none border-0 w-full my-[16px] focus-visible:outline-0 placeholder:text-secondary-text placeholder:font-semibold placeholder:capitalize  border-b-2 border-black",
     btnDiv: "space-y-[16px] text-center mt-[40px]",
+  };
+  const googleSignInHandler = () => {
+    dispatch({ type: GOOGLE_SIGN_IN });
   };
   return (
     <>
@@ -92,7 +96,10 @@ export default function SignUpModal({ isOpen, setIsopen }) {
                 animate="animate"
                 variants={formAnim}
               >
-                <SignUp setFormState={setFormState} />
+                <SignUp
+                  setFormState={setFormState}
+                  googleSignIn={googleSignInHandler}
+                />
               </motion.div>
             ) : formState === "login" ? (
               <motion.div
@@ -100,7 +107,10 @@ export default function SignUpModal({ isOpen, setIsopen }) {
                 animate="animate"
                 variants={formAnim}
               >
-                <Login setFormState={setFormState} />
+                <Login
+                  setFormState={setFormState}
+                  googleSignIn={googleSignInHandler}
+                />
               </motion.div>
             ) : formState === "mobileSignIn" ? (
               <motion.div
@@ -108,7 +118,10 @@ export default function SignUpModal({ isOpen, setIsopen }) {
                 animate="animate"
                 variants={formAnim}
               >
-                <MobileSignIn setFormState={setFormState} />
+                <MobileSignIn
+                  setFormState={setFormState}
+                  googleSignIn={googleSignInHandler}
+                />
               </motion.div>
             ) : formState === "forgotPassword" ? (
               <motion.div
@@ -116,7 +129,10 @@ export default function SignUpModal({ isOpen, setIsopen }) {
                 animate="animate"
                 variants={formAnim}
               >
-                <ForgotPassword setFormState={setFormState} />
+                <ForgotPassword
+                  setFormState={setFormState}
+                  googleSignIn={googleSignInHandler}
+                />
               </motion.div>
             ) : (
               ""

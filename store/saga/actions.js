@@ -4,6 +4,7 @@ export const SEARCHED_PRODUCT = "GET_SEARCHED_PRODUCT";
 export const SINGLE_PRODUCTS_LOADING = "GET_SINGLE_PRODUCTS_LOADING";
 
 export const LOGIN = "LOGIN";
+export const GOOGLE_SIGN_IN = "GOOGLE_SIGN_IN";
 export const LOGOUT = "LOGOUT";
 export const LOAD_USER = "LOAD_USER";
 export const FORGOT_PASSWORD = "FORGOT_PASSWORD";
@@ -24,3 +25,5 @@ export const GET_ORDERS = "GET_ORDERS";
 export const CREATE_ORDER = "CREATE_ORDER";
 export const GET_SINGLE_ORDERS = "GET_SINGLE_ORDERS";
 export const POST_REVIEW = "POST_REVIEW";
+
+export const GET_COUPON = "GET_COUPON";

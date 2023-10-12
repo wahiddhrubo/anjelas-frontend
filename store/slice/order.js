@@ -18,9 +18,11 @@ const orderSlice = createSlice({
       state.loading = false;
     },
     updateOrders: (state, action) => {
+      state.loading = false;
       state.orders = action.payload.orders;
     },
     getSingleOrder: (state, action) => {
+      state.loading = false;
       state.order = action.payload.order;
     },
   },

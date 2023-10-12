@@ -28,6 +28,8 @@ import {
   GET_SINGLE_ORDERS,
   CREATE_ORDER,
   SEARCHED_PRODUCT,
+  GET_COUPON,
+  GOOGLE_SIGN_IN,
 } from "./actions";
 import {
   login,
@@ -38,6 +40,7 @@ import {
   loadUser,
   addLocation,
   deleteLocation,
+  googleSignUp,
 } from "./handlers/user";
 import {
   addToCart,
@@ -53,12 +56,14 @@ import {
   fetchSingleOrder,
   postReview,
 } from "./handlers/orders";
+import { fetchCoupon } from "./handlers/coupon";
 
 export default function* rootSaga() {
   yield takeLatest(PRODUCTS_LOADING, fetchProducts);
   yield takeLatest(LATEST_PRODUCT, fetchLatestProducts);
   yield takeLatest(SINGLE_PRODUCTS_LOADING, fetchSingleProducts);
   yield takeLatest(LOGIN, login);
+  yield takeLatest(GOOGLE_SIGN_IN, googleSignUp);
   yield takeLatest(LOGOUT, logout);
   yield takeLatest(FORGOT_PASSWORD, forgotPassword);
   yield takeLatest(RESET_PASSWORD, resetPassword);
@@ -77,4 +82,5 @@ export default function* rootSaga() {
   yield takeLatest(POST_REVIEW, postReview);
   yield takeLatest(GET_SINGLE_ORDERS, fetchSingleOrder);
   yield takeLatest(SEARCHED_PRODUCT, fetchSearchedProducts);
+  yield takeLatest(GET_COUPON, fetchCoupon);
 }

@@ -1,8 +1,10 @@
 import React from "react";
 import { deliveryFee, taxRate } from "../../lib/constants";
 import { useSelector } from "react-redux";
+import { getCoupon } from "../../store/selectors";
 export default function CartTotal() {
   const { price } = useSelector((state) => state.cart);
+  const { total, discount } = useSelector(getCoupon);
   const totalServiceFee = taxRate * price;
   return (
     <div className="md:text-[16px] text-[14px]">
@@ -22,18 +24,26 @@ export default function CartTotal() {
             {deliveryFee}
           </td>
         </tr>
-        <tr className="border-b-2 border-primary">
+        <tr className="">
           <td className=" md:py-2 font-semibold ">Tax</td>
           <td className=" md:py-2 font-semibold  text-primary ">
             {totalServiceFee}
           </td>
         </tr>
-        <tr className="">
+        {discount && (
+          <tr className="">
+            <td className=" md:py-2 font-semibold ">Discount</td>
+            <td className=" md:py-2 font-semibold  text-primary ">
+              - {discount}
+            </td>
+          </tr>
+        )}
+        <tr className="border-t-2 border-primary">
           <td className=" md:py-2 lg:text-[24px] text-[18px] font-semibold ">
             Total
           </td>
           <td className=" md:py-2 font-semibold lg:text-[20px] text-[18px]  text-primary ">
-            {totalServiceFee + deliveryFee + price}
+            {parseInt(total) || parseInt(totalServiceFee + deliveryFee + price)}
           </td>
         </tr>
       </table>

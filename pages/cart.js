@@ -9,14 +9,18 @@ import { useState } from "react";
 import { updateCartNonUser, removeFromCartNonUser } from "../store/slice/cart";
 import Button from "../components/ui/buttons";
 import Link from "next/link";
-import { REMOVE_ITEM_FROM_CART, UPDATE_CART } from "../store/saga/actions";
+import {
+  GET_COUPON,
+  REMOVE_ITEM_FROM_CART,
+  UPDATE_CART,
+} from "../store/saga/actions";
 import CartTotal from "../components/ui/cartTotal";
+import { deliveryFee, taxRate } from "../lib/constants";
 export default function Cart() {
   const { items, price } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
-  console.log(items);
   const [cartNum, setCartNum] = useState([]);
-
+  const [code, setCode] = useState("");
   const updateCartHandler = () => {
     cartNum.forEach((c) => {
       console.log(c);
@@ -49,6 +53,11 @@ export default function Cart() {
         { id: id, variant, quantity: parseInt(quantity) },
       ]);
     }
+  };
+
+  const couponHandler = () => {
+    const totalAmount = price * taxRate + price + deliveryFee;
+    dispatch({ type: GET_COUPON, totalAmount, deliveryFee, code });
   };
   return (
     <div className="md:w-[80%] mx-auto">
@@ -114,9 +123,12 @@ export default function Cart() {
             <input
               type="text"
               placeholder="Coupon"
+              onChange={(e) => setCode(e.target.value)}
               className="md:w-[250px] w-[220px] placeholder:font-semibold placeholder:text-black px-5 border-2 border-primary font-semibold"
             />
-            <Button type={"primary"}>Apply Coupon</Button>
+            <Button type={"primary"} onClick={couponHandler}>
+              Apply Coupon
+            </Button>
           </div>
         </div>
         <div className="w-fit ml-auto">
