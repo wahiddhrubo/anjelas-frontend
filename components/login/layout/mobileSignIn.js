@@ -14,13 +14,8 @@ export default function MobileSignIn({ setFormState, googleSignIn }) {
   };
 
   const styles = {
-    wrapper:
-      "flex bg-white  gap-[104px] w-[80%] rounded-lg z-[100] overflow-hidden shadow-2xl relative mx-auto relative h-[85vh] ",
-    close: "absolute top-5 w-[24px] h-[24px] cursor-pointer right-5",
-    imgDiv: "overflow-hidden w-[50%] h-full rounded-r-lg",
-    img: "w-[700px] object-center h-full object-cover ",
-    loginForm: "h-fit my-auto ",
-    title: "text-heading-lg text-[40px] mb-[40px] ",
+    loginForm: "h-fit m-auto w-[70%] ",
+    title: "lg:text-[32px] font-semibold text-[24px] mb-[40px] ",
     inputSm:
       "bg-[#efffff] text-center border-0 w-[20%] my-[16px] focus-visible:outline-0  font-semibold   border-b-2 border-black",
     inputMd:

@@ -123,7 +123,7 @@ export default function Layout({ children }) {
         </div>
       )}
 
-      <>
+      <div className="max-w-[1400px] mx-auto">
         <Navbar
           menu={navMenu}
           setSearchMode={setSearchMode}
@@ -143,7 +143,7 @@ export default function Layout({ children }) {
         </div>
         <Footer />
         <ContactIcon />
-      </>
+      </div>
     </div>
   );
 }

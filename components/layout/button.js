@@ -30,7 +30,7 @@ export const ShopBtn = ({ text, onClick }) => {
 };
 export const FormBtn = ({ text, onClick, Icon }) => {
   const styles = {
-    btn: "cursor-pointer  flex flex-wrap content-center justify-center bg-black rounded-[10px] py-[10px] text-center w-full font-bold font-[18px] text-white ",
+    btn: "cursor-pointer  flex flex-wrap content-center justify-center bg-black rounded-[4px] py-[10px] text-center w-full font-bold font-[18px] text-white ",
     icon: "inline w-[24px] h-[22px] mr-2",
   };
   return (
@@ -42,10 +42,27 @@ export const FormBtn = ({ text, onClick, Icon }) => {
 };
 export const FormPrimaryBtn = ({ text, onClick }) => {
   const styles = {
-    btn: " cursor-pointer bg-primary rounded-[10px] py-[10px] text-center w-full font-semibold font-[18px] text-white ",
+    btn: " cursor-pointer bg-primary rounded-[4px] py-[10px] text-center w-full font-semibold font-[18px] text-white ",
   };
   return (
     <div onClick={onClick || null} className={styles.btn}>
+      {text}
+    </div>
+  );
+};
+export const GoogleBtn = ({ text, onClick, Icon }) => {
+  const styles = {
+    icon: "inline w-[24px] h-[22px] mr-2",
+  };
+  return (
+    <div
+      onClick={onClick || null}
+      className={
+        " cursor-pointer bg-blue-500 rounded-[4px] py-[10px] text-center w-full font-semibold  text-white "
+      }
+    >
+      {Icon && <Icon className={styles.icon} />}
+
       {text}
     </div>
   );

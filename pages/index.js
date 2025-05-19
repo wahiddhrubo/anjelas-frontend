@@ -15,14 +15,16 @@ export default function Home() {
   }, [dispatch]);
   console.log(latestItems);
   return (
-    <div className=" ">
+    <div className=" mx-auto  ">
       <Head>
         <title>Anjela&apos;s Kitchen</title>
         <meta name="description" content="Home Food Delivery Store" />
       </Head>
-      <Header />
-      <About />
-      <Menu items={latestItems} />
+      <div className=" mx-auto">
+        <Header />
+        <About />
+        <Menu items={latestItems} />
+      </div>
     </div>
   );
 }

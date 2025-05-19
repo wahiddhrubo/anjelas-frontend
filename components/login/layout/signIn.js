@@ -1,4 +1,4 @@
-import { FormBtn, FormPrimaryBtn } from "../../layout/button.js";
+import { FormBtn, FormPrimaryBtn, GoogleBtn } from "../../layout/button.js";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import { useState } from "react";
 import { AiOutlineGoogle } from "react-icons/ai";
@@ -14,11 +14,12 @@ export default function SignUpModal({ setFormState, googleSignIn }) {
   };
 
   const styles = {
-    loginForm: "h-fit px-4 my-auto ",
-    title: "lg:text-heading-lg text-[24px] font-semibold my-5 lg:mb-[40px] ",
+    loginForm: "h-fit w-[80%] mx-[auto] my-auto ",
+    title: "lg:text-[32px] text-[24px] font-semibold my-5 lg:mb-[40px] ",
     input:
       "bg-none border-0 w-full lg:my-[16px] my-4 focus-visible:outline-0 placeholder:text-secondary-text placeholder:font-semibold placeholder:capitalize  border-b-2 border-black",
-    btnDiv: "lg:space-y-[16px] text-center mt-[20px] lg:mt-[40px]",
+    btnDiv:
+      "lg:space-y-[16px] space-y-[16px]  text-center mt-[20px] lg:mt-[40px]",
   };
   return (
     <div className={styles.loginForm}>
@@ -49,16 +50,16 @@ export default function SignUpModal({ setFormState, googleSignIn }) {
       </div>
       <div className={styles.btnDiv}>
         <FormPrimaryBtn text="Login" onClick={loginHandler} />
-        <FormBtn
+        <GoogleBtn
           onClick={googleSignIn}
-          text="Log in or Sign Up With Google"
+          text="Sign In With Google"
           Icon={AiOutlineGoogle}
         />
         <FormBtn
           onClick={() => {
             setFormState("mobileSignIn");
           }}
-          text="Log in or Sign Up With Phone"
+          text="Log in Sign Up With Phone"
           Icon={BsFillTelephoneFill}
         />
         <div className="font-semibold">

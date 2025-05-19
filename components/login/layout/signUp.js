@@ -1,4 +1,4 @@
-import { FormBtn, FormPrimaryBtn } from "../../layout/button.js";
+import { FormBtn, FormPrimaryBtn, GoogleBtn } from "../../layout/button.js";
 import Image from "next/image";
 import { AiOutlineClose, AiOutlineGoogle } from "react-icons/ai";
 import { BsFillTelephoneFill } from "react-icons/bs";
@@ -18,8 +18,8 @@ export default function SignUp({ setFormState, googleSignIn }) {
   };
 
   const styles = {
-    loginForm: "h-fit my-auto pr-[100px] w-fit ",
-    title: "text-heading-lg text-[40px] mb-[40px] ",
+    loginForm: "h-fit mx-auto w-[70%] ml-auto  w-fit ",
+    title: "lg:text-[32px] font-semibold text-[40px] mb-[40px] ",
     input:
       "bg-none border-0 w-full my-[16px] focus-visible:outline-0 placeholder:text-secondary-text placeholder:font-semibold placeholder:capitalize  border-b-2 border-black",
     btnDiv: "space-y-[16px] text-center mt-[40px]",
@@ -58,7 +58,7 @@ export default function SignUp({ setFormState, googleSignIn }) {
 
       <div className={styles.btnDiv}>
         <FormPrimaryBtn text="Sign Up" onClick={registrationHandler} />
-        <FormBtn
+        <GoogleBtn
           onClick={googleSignIn}
           text="Log in or Sign Up With Google"
           Icon={AiOutlineGoogle}

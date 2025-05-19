@@ -48,8 +48,8 @@ export default function SignUpModal({ isOpen, setIsopen }) {
 
   const styles = {
     wrapper:
-      "flex bg-white  gap-[104px] w-[80%] rounded-lg z-[100] overflow-hidden shadow-2xl relative mx-auto relative h-[85vh] ",
-    close: "absolute top-5 w-[24px] h-[24px] cursor-pointer right-5",
+      "flex bg-white  w-[80%]  justify-between rounded-lg z-[100] overflow-hidden shadow-2xl relative mx-auto relative h-[85vh] ",
+    close: "absolute  z-[100] top-5 w-[24px] h-[24px] cursor-pointer right-5",
     imgDiv: "overflow-hidden lg:block hidden w-[50%] h-full rounded-r-lg",
     img: "w-[700px] object-center h-full object-cover ",
     loginForm: "h-fit my-auto ",
@@ -95,6 +95,7 @@ export default function SignUpModal({ isOpen, setIsopen }) {
                 initial="initial"
                 animate="animate"
                 variants={formAnim}
+                className="w-[50%]"
               >
                 <SignUp
                   setFormState={setFormState}
@@ -106,6 +107,7 @@ export default function SignUpModal({ isOpen, setIsopen }) {
                 initial="initial"
                 animate="animate"
                 variants={formAnim}
+                className="w-[50%]"
               >
                 <Login
                   setFormState={setFormState}
@@ -117,6 +119,7 @@ export default function SignUpModal({ isOpen, setIsopen }) {
                 initial="initial"
                 animate="animate"
                 variants={formAnim}
+                className="w-[50%] flex"
               >
                 <MobileSignIn
                   setFormState={setFormState}
@@ -128,6 +131,7 @@ export default function SignUpModal({ isOpen, setIsopen }) {
                 initial="initial"
                 animate="animate"
                 variants={formAnim}
+                className="w-[50%]"
               >
                 <ForgotPassword
                   setFormState={setFormState}

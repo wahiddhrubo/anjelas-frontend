@@ -16,7 +16,7 @@ export default function About() {
     iconDet: "font-bold text-secondary-text",
     aboutSection:
       "relative overflow-y-clip  flex flex-wrap lg:flex-nowrap my-20 lg:h-[1005px] ",
-    vector: "absolute lg:block hidden left-[-105px] w-[350px] ",
+    vector: "absolute lg:block hidden left-[-100px] w-[350px] ",
     vectorImg: "",
     aboutImg: "w-[650px] lg:block hidden  ml-[-50px] my-auto relative z-10  ",
     img: "",
