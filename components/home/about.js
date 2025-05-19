@@ -37,18 +37,25 @@ export default function About() {
       icon: "/images/location.png",
       details: "Get Location",
       name: "West Kazipara",
+      link: "https://maps.app.goo.gl/HYfyRn2kQTPWhgNk9",
     },
     {
       icon: "/images/phone.png",
       details: "Call Onlne",
       name: "+880 1963 - 322783",
+      link: "tel:+8801963-322783",
     },
   ];
   return (
     <div className={styles.wrapper}>
       <div className={styles.iconBoxDix}>
         {icons.map((i, index) => (
-          <div key={index} className={styles.iconBox}>
+          <Link
+            href={i.link || "/"}
+            target={i.link ? "_blank" : ""}
+            key={index}
+            className={styles.iconBox}
+          >
             <Image
               src={i.icon}
               alt=""
@@ -58,7 +65,7 @@ export default function About() {
             />
             <div className={styles.iconName}>{i.name}</div>
             <div className={styles.iconDet}>{i.details}</div>
-          </div>
+          </Link>
         ))}
       </div>
       <div className={styles.aboutSection}>
