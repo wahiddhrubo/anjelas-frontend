@@ -38,7 +38,8 @@ export default function Hero({
     dispatch({
       type: ADD_TO_CART,
       id,
-      item: { name, featuredImage: featuredImg },
+      name,
+      featuredImage: featuredImg,
       pricePerUnit: sku.price,
       variant: sku.name,
       quantity: parseInt(itemNum),
@@ -50,7 +51,7 @@ export default function Hero({
     <div className="flex flex-wrap gap-[68px]">
       {sliderGallery.length > 1 && <SliderComp gallery={sliderGallery} />}
       {sliderGallery.length === 1 && (
-        <div className="lg:w-[45%] my-auto h-full grid place-items-center ">
+        <div className="lg:w-[45%] w-full my-auto h-full grid place-items-center ">
           {" "}
           <Image
             loader={() => featuredImg.url}

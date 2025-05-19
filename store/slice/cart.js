@@ -21,6 +21,7 @@ const cartSlice = createSlice({
     },
     addToCartNonUser: (state, action) => {
       const { id, variant, quantity } = action.payload;
+      console.log(id, variant, quantity);
       const match = state.items?.findIndex(
         (i) => i.id === id && i.variant === variant
       );

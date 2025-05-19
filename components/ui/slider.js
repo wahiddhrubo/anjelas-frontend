@@ -41,7 +41,7 @@ export default function SliderComp({ gallery }) {
   };
 
   return (
-    <div className="w-[45%] relative">
+    <div className="lg:w-[45%] w-full relative">
       <Slider {...settings}>
         {gallery.map((i, index) => (
           <div key={i._id}>

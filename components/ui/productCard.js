@@ -58,7 +58,7 @@ export default function ProductCard({
           alt={name}
           width={350}
           height={350}
-          className="lg:h-[350px] w-[250px] h-[250px] lg:w-[350px] object-cover"
+          className="lg:h-[350px] w-[150px] rounded-md h-[150px] lg:w-[350px] object-cover"
         />
       </div>
       <div>

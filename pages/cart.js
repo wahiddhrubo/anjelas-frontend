@@ -124,7 +124,7 @@ export default function Cart() {
               type="text"
               placeholder="Coupon"
               onChange={(e) => setCode(e.target.value)}
-              className="md:w-[250px] w-[220px] placeholder:font-semibold placeholder:text-black px-5 border-2 border-primary font-semibold"
+              className="md:w-[250px] text-[12px] w-[150px] placeholder:font-semibold placeholder:text-black px-5 border-2 border-primary font-semibold"
             />
             <Button type={"primary"} onClick={couponHandler}>
               Apply Coupon

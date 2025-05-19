@@ -17,7 +17,7 @@ export default function SearchDiv() {
           <Loader />
         </div>
       ) : (
-        <div className="grid md:grid-cols-3 grid-cols-1 gap-y-10 my-16  justify-between">
+        <div className="grid md:grid-cols-3 grid-cols-2 gap-y-10 my-16  justify-between">
           {searchItems.map((item) => (
             <ProductCard
               key={item._id}

@@ -5,7 +5,7 @@ import { getCoupon } from "../../store/selectors";
 export default function CartTotal() {
   const { price } = useSelector((state) => state.cart);
   const { total, discount } = useSelector(getCoupon);
-  const totalServiceFee = taxRate * price;
+  const totalServiceFee = Math.round(taxRate * price * 100) / 100;
   return (
     <div className="md:text-[16px] text-[14px]">
       <div className="font-semibold lg:text-[32px] text-[22px] leading-relaxed text-primary">

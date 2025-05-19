@@ -38,7 +38,6 @@ export function* addToCart(action) {
           data: { item: id, pricePerUnit, quantity, variant },
         })
       );
-      console.log(result);
       yield put({ type: GET_CART });
     } catch (error) {
       console.log(error);
@@ -145,7 +144,7 @@ export function* multipleUpdatesToCart(action) {
 
 export function* removeItemFormCart(action) {
   const { id, variant } = action;
-  const user = select(getUser);
+  const { user } = select(getUser);
 
   if (user) {
     try {
