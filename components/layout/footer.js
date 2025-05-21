@@ -61,10 +61,6 @@ export default function Footer() {
           name: "Packages",
           link: "/packages",
         },
-        {
-          name: "Events",
-          link: "/events",
-        },
       ],
     },
   ];

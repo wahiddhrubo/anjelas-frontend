@@ -8,12 +8,19 @@ import { Provider, useDispatch } from "react-redux";
 import store from "../store/store";
 import { Analytics } from "@vercel/analytics/react";
 import Layout from "../components/layout/layout";
+import { PrimeReactProvider } from "primereact/api";
+import "primereact/resources/themes/lara-light-cyan/theme.css";
+import "primereact/resources/themes/saga-blue/theme.css";
+import "primereact/resources/primereact.min.css";
+
 function MyApp({ Component, pageProps }) {
   return (
     <Provider store={store}>
       <Analytics />
       <Layout>
-        <Component {...pageProps} />
+        <PrimeReactProvider>
+          <Component {...pageProps} />
+        </PrimeReactProvider>
       </Layout>
     </Provider>
   );

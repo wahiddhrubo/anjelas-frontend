@@ -23,16 +23,18 @@ import { useRouter } from "next/router";
 
 export default function Layout({ children }) {
   const [searchMode, setSearchMode] = useState(false);
+  const route = useRouter();
+
+  const navless_page = ["/catering", "/contact-us"].includes(route.pathname);
 
   const navMenu = [
     { text: "Packages", link: "/packages" },
-    { text: "Offers", link: "/offers" },
     { text: "Shop", link: "/shop" },
     { text: "Catering", link: "/catering" },
     { text: "About Us", link: "/about-us" },
   ];
   const dispatch = useDispatch();
-  const { loading: loadingCart, items, quantity } = useSelector(getCart);
+  const { items, quantity } = useSelector(getCart);
   const {
     loading: loadingUser,
     isAuthenticated,
@@ -53,7 +55,6 @@ export default function Layout({ children }) {
   }, [items]);
 
   const loading =
-    loadingCart ||
     loadingUser ||
     loadingProducts ||
     loadingSingleProduct ||
@@ -124,15 +125,19 @@ export default function Layout({ children }) {
       )}
 
       <div className="max-w-[1400px] mx-auto">
-        <Navbar
-          menu={navMenu}
-          setSearchMode={setSearchMode}
-          searchMode={searchMode}
-        />
-        {searchMode && (
-          <div className="lg:px-[100px] px-4 text-body-md text-[14px] md:text-[16px] static">
-            <SearchDiv />
-          </div>
+        {!navless_page && (
+          <>
+            <Navbar
+              menu={navMenu}
+              setSearchMode={setSearchMode}
+              searchMode={searchMode}
+            />
+            {searchMode && (
+              <div className="lg:px-[100px] px-4 text-body-md text-[14px] md:text-[16px] static">
+                <SearchDiv />
+              </div>
+            )}
+          </>
         )}
 
         <div
@@ -141,8 +146,12 @@ export default function Layout({ children }) {
         >
           {children}
         </div>
-        <Footer />
-        <ContactIcon />
+        {!navless_page && (
+          <>
+            <Footer />
+            <ContactIcon />
+          </>
+        )}
       </div>
     </div>
   );

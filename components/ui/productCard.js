@@ -43,9 +43,7 @@ export default function ProductCard({
         <div className="absolute w-[80%] h-[80%] grid place-items-center inset-0 rounded-[5px] transition-all origin-top scale-y-0 group-hover/div:scale-y-100 m-auto z-10 bg-white">
           {checkCart(id) ? (
             <Link href="/cart">
-              <Button type="primary" onClick={addToCartHandler}>
-                View Cart
-              </Button>
+              <Button type="primary">View Cart</Button>
             </Link>
           ) : (
             <Button type="primary" onClick={addToCartHandler}>

@@ -90,15 +90,19 @@ export default function Cart() {
               >
                 x
               </span>
-              <Image
-                src={i.item.featuredImage.url || i.item.featuredImage}
-                width={120}
-                height={120}
-                className="lg:w-[120px] w-[60%] h-auto"
-              />{" "}
+              <Link href={`/shop/${i.id || i.item._id}`}>
+                <Image
+                  src={i.item.featuredImage.url || i.item.featuredImage}
+                  width={120}
+                  height={120}
+                  className="lg:w-[120px] lg:h-[120px] object-cover rounded-md w-[80px] h-[80px]  "
+                />{" "}
+              </Link>
             </td>
             <td className="py-[25px] font-semibold lg:text-2xl">
-              <span className="my-auto ">{i.item.name}</span>
+              <Link href={`/shop/${i.id || i.item._id}`}>
+                <span className="my-auto ">{i.item.name}</span>
+              </Link>
             </td>
             <td className="py-5 md:text-left text-center">{i.pricePerUnit}</td>
             <td className="py-5 md:text-left text-center relative">

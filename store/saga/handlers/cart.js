@@ -144,7 +144,8 @@ export function* multipleUpdatesToCart(action) {
 
 export function* removeItemFormCart(action) {
   const { id, variant } = action;
-  const { user } = select(getUser);
+  const { user } = yield select(getUser);
+  console.log(user);
 
   if (user) {
     try {
@@ -152,6 +153,7 @@ export function* removeItemFormCart(action) {
       const { data } = yield call(() =>
         axiosCredentialsCall({ url: fetchUrl, method: "delete" })
       );
+      console.log("data", data);
       yield put({ type: GET_CART });
     } catch (error) {
       console.log(error);

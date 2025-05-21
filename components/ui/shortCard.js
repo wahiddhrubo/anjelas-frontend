@@ -7,6 +7,7 @@ import Link from "next/link";
 import Button from "./buttons";
 import { getCart } from "../../store/selectors";
 import { ADD_TO_CART } from "../../store/saga/actions";
+import Loader from "../loader";
 
 export default function ShortProductCard({
   img,
@@ -18,7 +19,7 @@ export default function ShortProductCard({
   variant,
 }) {
   const dispatch = useDispatch();
-  const { items: cart } = useSelector(getCart);
+  const { items: cart, loading } = useSelector(getCart);
   const addToCartHandler = () => {
     dispatch({
       type: ADD_TO_CART,
@@ -41,14 +42,22 @@ export default function ShortProductCard({
     <div className="lg:w-[285px] w-[150px] md:w-[185px] p-2   text-center ">
       <div className="w-fit mx-auto relative group/div ">
         <div className="absolute w-[80%] h-[80%] grid place-items-center inset-0 rounded-[5px] transition-all origin-top scale-y-0 group-hover/div:scale-y-100 m-auto z-10 bg-white">
-          {checkCart(id) ? (
-            <Link href="/cart">
-              <Button type="primary">View Cart</Button>
-            </Link>
+          {loading ? (
+            <div className="p-5">
+              <Loader />
+            </div>
           ) : (
-            <Button type="primary" onClick={addToCartHandler}>
-              Add To Cart
-            </Button>
+            <>
+              {checkCart(id) ? (
+                <Link href="/cart">
+                  <Button type="primary">View Cart</Button>
+                </Link>
+              ) : (
+                <Button type="primary" onClick={addToCartHandler}>
+                  Add To Cart
+                </Button>
+              )}
+            </>
           )}
         </div>
         <Image

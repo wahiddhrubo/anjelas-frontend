@@ -50,8 +50,8 @@ export default function SignUpModal({ isOpen, setIsopen }) {
     wrapper:
       "flex bg-white  w-[80%]  justify-between rounded-lg z-[100] overflow-hidden shadow-2xl relative mx-auto relative h-[85vh] ",
     close: "absolute  z-[100] top-5 w-[24px] h-[24px] cursor-pointer right-5",
-    imgDiv: "overflow-hidden lg:block hidden w-[50%] h-full rounded-r-lg",
-    img: "w-[700px] object-center h-full object-cover ",
+    imgDiv: "overflow-hidden md:block hidden w-[50%] h-full rounded-r-lg",
+    img: "w-full object-center h-full object-cover ",
     loginForm: "h-fit my-auto ",
     title: "lg:text-heading-lg text-[40px] mb-[40px] ",
     input:
@@ -95,7 +95,7 @@ export default function SignUpModal({ isOpen, setIsopen }) {
                 initial="initial"
                 animate="animate"
                 variants={formAnim}
-                className="w-[50%]"
+                className="md:w-[50%] w-full flex"
               >
                 <SignUp
                   setFormState={setFormState}
@@ -107,7 +107,7 @@ export default function SignUpModal({ isOpen, setIsopen }) {
                 initial="initial"
                 animate="animate"
                 variants={formAnim}
-                className="w-[50%]"
+                className="md:w-[50%] flex w-full"
               >
                 <Login
                   setFormState={setFormState}
@@ -119,7 +119,7 @@ export default function SignUpModal({ isOpen, setIsopen }) {
                 initial="initial"
                 animate="animate"
                 variants={formAnim}
-                className="w-[50%] flex"
+                className="md:w-[50%] flex w-full"
               >
                 <MobileSignIn
                   setFormState={setFormState}

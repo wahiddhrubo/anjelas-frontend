@@ -18,11 +18,11 @@ export default function SignUp({ setFormState, googleSignIn }) {
   };
 
   const styles = {
-    loginForm: "h-fit mx-auto w-[70%] ml-auto  w-fit ",
-    title: "lg:text-[32px] font-semibold text-[40px] mb-[40px] ",
+    loginForm: "h-fit  w-[70%] m-auto  py-20 md:py-0 ",
+    title: "lg:text-[32px] font-semibold text-[24px] mb-[40px] ",
     input:
       "bg-none border-0 w-full my-[16px] focus-visible:outline-0 placeholder:text-secondary-text placeholder:font-semibold placeholder:capitalize  border-b-2 border-black",
-    btnDiv: "space-y-[16px] text-center mt-[40px]",
+    btnDiv: "space-y-[16px] text-[12px] md:text-[16px] text-center mt-[40px]",
   };
   return (
     <div className={styles.loginForm}>

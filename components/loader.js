@@ -5,7 +5,7 @@ import animationData from "../utils/loader.json";
 export default function Loader() {
   return (
     <div className=" ">
-      <Lottie animationData={animationData} />
+      <Lottie width={50} animationData={animationData} />
     </div>
   );
 }
