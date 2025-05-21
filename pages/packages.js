@@ -2,6 +2,7 @@ import Image from "next/image";
 import React from "react";
 import Button from "../components/ui/buttons";
 import { Cookie } from "@next/font/google";
+import Link from "next/link";
 const cookie = Cookie({ weight: "400", style: ["normal"], subsets: ["latin"] });
 
 export default function Packages() {
@@ -31,19 +32,19 @@ export default function Packages() {
   ];
   return (
     <div className="">
-      <div className=" h-screen">
-        <div className="absolute top-0 h-screen inset-x-0">
+      <div className="md:relative  lg:h-[750px] md:h-[50vh] h-[30vh]">
+        <div className="absolute md:w-fit md:top-[-100px] top-0 lg:h-screen lg:inset-x-[-100px] md:inset-x-[-15px] inset-x-0 w-screen">
           <div
             style={{ backgroundImage: 'url("/images/packages-bg.svg")' }}
-            className="relative flex  text-center justify-center items-center h-[50vw] bg-contain bg-no-repeat"
+            className="relative flex w-screen max-w-[1400px] bg-cover bg-bottom  text-center justify-center items-center md:h-[50vh] lg:h-[750px] h-[25vh]  bg-no-repeat"
           >
-            <div className="text-heading-lg  font-semibold text-white">
+            <div className="text-[24px] text-black md:text-[64px]  font-semibold ">
               Packages
             </div>
           </div>
         </div>
       </div>
-      <div className="text-center mt-16 mb-10">
+      <div className="text-center lg:mt-16 mb-10">
         <div className={`${cookie.className} text-heading-lg text-primary`}>
           Choose Your
         </div>
@@ -72,15 +73,22 @@ export default function Packages() {
                   <li key={f}>{f}</li>
                 ))}
               </div>
-              <Button type={p.featured ? "register" : "register-light"}>
+
+              <Button
+                link={{
+                  pathname: "/package-details",
+                  query: p,
+                }}
+                type={p.featured ? "register" : "register-light"}
+              >
                 Order Now
               </Button>
-              <div
+              {/* <div
                 className="font-semibold w-fit mx-auto hover:text-black cursor-pointer"
                 style={{ color: p.featured ? "white" : "#FE7502" }}
               >
                 See Menu
-              </div>
+              </div> */}
             </div>
           ))}
         </div>

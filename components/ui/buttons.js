@@ -20,7 +20,7 @@ export default function Button({ className, children, onClick, type, link }) {
       {type === "review" && (
         <Link
           href={link ? link : "#_"}
-          onClick={() => onClick()}
+          onClick={onClick}
           class="relative inline-flex items-center px-8 py-[2px] overflow-hidden   text-primary text-[14px] font-semibold border-2 border-primary rounded hover:text-white group hover:bg-gray-50"
         >
           <span class="absolute left-0 block w-full h-0 transition-all bg-primary opacity-100 group-hover:h-full top-1/2 group-hover:top-0 duration-400 ease"></span>
@@ -39,7 +39,7 @@ export default function Button({ className, children, onClick, type, link }) {
       {type === "register" && (
         <Link
           href={link ? link : "#_"}
-          onClick={() => onClick()}
+          onClick={onClick}
           class="relative  items-center justify-start inline-block px-8 py-3 overflow-hidden font-bold  group"
         >
           <span class="w-36 h-36 rotate-45 translate-x-12 -translate-y-2 absolute left-0 top-0 bg-white opacity-[3%]"></span>
@@ -53,7 +53,7 @@ export default function Button({ className, children, onClick, type, link }) {
       {type === "register-light" && (
         <Link
           href={link ? link : "#_"}
-          onClick={() => onClick()}
+          onClick={onClick}
           class="relative  items-center justify-start inline-block px-8 py-3 overflow-hidden font-bold  group"
         >
           <span class="w-36 h-36 rotate-45 translate-x-12 -translate-y-2 absolute left-0 top-0 bg-primary opacity-[3%]"></span>

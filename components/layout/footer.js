@@ -12,17 +12,17 @@ export default function Footer() {
 
   const socials = [
     {
-      link: "wa.me/+8801963322783",
+      link: "https://wa.me/+8801963322783",
       icon: <BsWhatsapp />,
       color: "#25D366",
     },
     {
-      link: "facebook.com",
+      link: "https://facebook.com",
       icon: <FaFacebookMessenger />,
       color: "#3b5998",
     },
     {
-      link: "instragram.com",
+      link: "https://instragram.com",
       icon: <BsInstagram />,
       color: "#d62976",
     },

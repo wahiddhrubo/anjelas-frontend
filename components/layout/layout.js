@@ -25,7 +25,11 @@ export default function Layout({ children }) {
   const [searchMode, setSearchMode] = useState(false);
   const route = useRouter();
 
-  const navless_page = ["/catering", "/contact-us"].includes(route.pathname);
+  const navless_page = [
+    "/catering",
+    "/contact-us",
+    "/package-details",
+  ].includes(route.pathname);
 
   const navMenu = [
     { text: "Packages", link: "/packages" },
