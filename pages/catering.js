@@ -112,7 +112,10 @@ export default function Catering() {
           />
 
           {selectedItems?.map((item) => (
-            <div className="flex max-w-[650px] w-fit  my-16 flex-col  md:flex-row md:w-full md:my-5 gap-5 content-center">
+            <div
+              key={item._id}
+              className="flex max-w-[650px] w-fit  my-16 flex-col  md:flex-row md:w-full md:my-5 gap-5 content-center"
+            >
               <Image
                 src={item.featuredImage.url}
                 className="rounded-md w-[100px] mx-auto md:mx-0 h-[80px] object-cover"

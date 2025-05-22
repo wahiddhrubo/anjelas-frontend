@@ -132,7 +132,10 @@ export default function Catering() {
           />
 
           {selectedItems?.map((item) => (
-            <div className="flex max-w-[650px] mr-auto w-full  my-16  md:flex-row md:w-full md:my-5 gap-5 content-center">
+            <div
+              key={item.name}
+              className="flex max-w-[650px] mr-auto w-full  my-16  md:flex-row md:w-full md:my-5 gap-5 content-center"
+            >
               <MdOutlineFoodBank className="text-primary text-[32px] my-auto" />
               <div className="mr-auto capitalize md:text-left h-fit text-[16px]">
                 {item.name} Package
